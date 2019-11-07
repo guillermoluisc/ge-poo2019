@@ -5,6 +5,7 @@
  */
 package ar.edu.unnoba.poo2019.webapp.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,10 +25,11 @@ public class Invite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    
+    @Column
     private User user;
+    @Column
     private Event event;
-
+    
     public Invite(long id, User user, Event event) {
         this.id = id;
         this.user = user;

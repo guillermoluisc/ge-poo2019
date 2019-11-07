@@ -5,11 +5,13 @@
  */
 package ar.edu.unnoba.poo2019.webapp.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,18 +25,23 @@ cardNumber: String
  */
 @Entity
 @Table(name="payments")
-public class Payment {
+public class Payment implements Serializable {
     
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+  
+    @ManyToOne
     private Registration registration;
+    @Column
     private String card;
     
     @Column(name="card_number")
     private String cardNumber;
+
+    public Payment() {
+    }
 
     public Payment(long id, Registration registration, String card, String cardNumber) {
         this.id = id;

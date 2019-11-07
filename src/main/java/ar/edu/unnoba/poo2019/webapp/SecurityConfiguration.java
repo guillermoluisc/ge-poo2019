@@ -6,42 +6,48 @@
 package ar.edu.unnoba.poo2019.webapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
  * @author guillermo
  */
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     
 @Autowired
-private UserDetailService userDetailService;
+private UserDetailsService userDetailsService;
 
 
 
 @Override
-protected void configure(AutenticationManagerBuilder auth) throws Exeption {
-    auth.userDetailService(userDetailService);
+protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService);
     
 }
 
 @Override
-protected void configure(HttpSecurity http) throw Exeption {
-    http.authorizeRequest()
+protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
             .antMatchers("/","/login","/logout").permitAll()
-            .and().form.Login();
-    http.authorizeRequest()
+            .and().formLogin();
+    http.authorizeRequests()
             .antMatchers("/*?")
-            .acces("hasRole('ROLE_USER')");
+            .access("hasRole('ROLE_USER')");
   
  
     
 }
 @Bean
-public PasswordEncore getPasswordEncoder(){
+public PasswordEncoder getPasswordEncoder(){
     /**encriptado para que no se guarde plana*/
-    return new BCrypPasswordEncore();
+    return new BCryptPasswordEncoder();
 }
 }

@@ -23,11 +23,12 @@ public class Registration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    
+    @Column
     private User user;
+    @Column
     private Event event;
     
-     @Column(name="created_at")
+    @Column(name="created_at")
     private Date createdAt;
 
     public Registration(long id, User user, Event event, Date createdAt) {

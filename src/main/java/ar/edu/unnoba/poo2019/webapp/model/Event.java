@@ -23,7 +23,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+    @Column
     private User owner;
     
     @Column(name="event_date")
@@ -34,8 +34,10 @@ public class Event {
     
     @Column(name="end_registration")
     private Date endRegistration;
+    @Column
     
     private int capacity;
+    @Column
     private float cost;
     
     @Column(name="private_event")
@@ -57,6 +59,11 @@ public class Event {
 
     public Event (){
     }
+    
+    
+    
+    
+    
     
     
     public long getId() {
