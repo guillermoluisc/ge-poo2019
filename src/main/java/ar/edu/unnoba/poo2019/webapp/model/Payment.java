@@ -27,19 +27,21 @@ cardNumber: String
 @Table(name="payments")
 public class Payment implements Serializable {
     
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
   
     @ManyToOne
     private Registration registration;
+    
     @Column
     private String card;
     
     @Column(name="card_number")
     private String cardNumber;
 
+    
+    
     public Payment() {
     }
 

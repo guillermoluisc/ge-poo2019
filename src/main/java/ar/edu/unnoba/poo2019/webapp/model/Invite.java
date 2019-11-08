@@ -21,14 +21,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name="invites")
 public class Invite {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
     @Column
     private User user;
+    
     @Column
     private Event event;
+    
+    
     
     public Invite(long id, User user, Event event) {
         this.id = id;

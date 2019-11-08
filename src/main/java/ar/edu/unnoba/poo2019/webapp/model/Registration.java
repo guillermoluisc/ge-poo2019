@@ -19,18 +19,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name="registrations")
 public class Registration {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    @Column
+    @Column(name="web_user")
     private User user;
+    
     @Column
     private Event event;
     
     @Column(name="created_at")
     private Date createdAt;
 
+    
+    
     public Registration(long id, User user, Event event, Date createdAt) {
         this.id = id;
         this.user = user;
@@ -40,9 +44,6 @@ public class Registration {
 
     public Registration() {
     }
-
-     
-     
      
      
     public long getId() {

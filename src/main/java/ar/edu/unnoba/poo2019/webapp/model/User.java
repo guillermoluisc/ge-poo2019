@@ -29,6 +29,7 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column
     private String email;
     
@@ -37,6 +38,7 @@ public class User implements UserDetails{
     
     @Column(name ="last_name")
     private String lastName;
+    
     @Column
     private String password;
 
@@ -53,7 +55,8 @@ public class User implements UserDetails{
         this.password = password;
     }
     
-    public User(){}
+    public User(){
+    }
     
      /**fin de constructor*/
 
@@ -64,7 +67,6 @@ public class User implements UserDetails{
     public void setId(Long id) {
         this.id = id;
     }
-    
     
 
     public String getEmail() {
