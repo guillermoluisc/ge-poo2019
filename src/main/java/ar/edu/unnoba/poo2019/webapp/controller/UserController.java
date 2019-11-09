@@ -32,7 +32,7 @@ public class UserController {
     private UserService userService;
     
     @GetMapping
-    public String users(Model model){
+    public String index(Model model){
         List<User> users = userService.users();
         model.addAttribute("users", users);
         return "users/index";
