@@ -13,8 +13,8 @@ and open the template in the editor.
     <body>
         <div>New user</div>
         <form action="#" th:action="@{/users}" th:object="${user}" method="post">
-            <input type="text" th:field="*{email}" />
-            <input type="password" th:field="*{password}" />
+            Email:<input type="text" th:field="*{email}" />
+            Password:<input type="password" th:field="*{password}" />
             <button type="submit" name="newUser">Create</button>
         </form>
     </body>
