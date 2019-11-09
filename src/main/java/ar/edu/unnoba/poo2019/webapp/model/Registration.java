@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,10 +25,10 @@ public class Registration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    @Column(name="web_user")
+    @ManyToOne
     private User user;
     
-    @Column
+    @ManyToOne
     private Event event;
     
     @Column(name="created_at")
