@@ -40,11 +40,9 @@ protected void configure(HttpSecurity http) throws Exception {
             .and().formLogin();
     http.authorizeRequests()
             .antMatchers("/*?")
-            .access("hasRole('ROLE_USER')");
-  
- 
-    
+            .access("hasRole('ROLE_USER')");    
 }
+
 @Bean
 public PasswordEncoder getPasswordEncoder(){
     /**encriptado para que no se guarde plana*/

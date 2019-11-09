@@ -55,6 +55,11 @@ public class UserServiceImp implements UserService, UserDetailsService{
         return userRepository.findByEmail(username).get(0);
         
             }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
     
     
     

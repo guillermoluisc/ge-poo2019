@@ -50,6 +50,12 @@ public class UserController {
         return "redirect:/users";
     }
     
+     @GetMapping("/{id}/delete")
+    public String delete(@PathVariable ("id") Long id){
+        userService.delete(id);
+        return "redirect:/users";
+    }
+    
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model, Authentication authentication){
         User sessionUser = (User)authentication.getPrincipal();
