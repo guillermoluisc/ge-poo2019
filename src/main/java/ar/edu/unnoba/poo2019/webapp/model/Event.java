@@ -31,11 +31,11 @@ public class Event {
     @Column(name="event_date")
     private Date eventDate;
     
-    @Column(name="start_registration")
-    private Date startRegistration;
+    @Column(name="start_registrations")
+    private Date startRegistrations;
     
-    @Column(name="end_registration")
-    private Date endRegistration;
+    @Column(name="end_registrations")
+    private Date endRegistrations;
     
     @Column
     private int capacity;
@@ -53,8 +53,8 @@ public class Event {
         this.id = id;
         this.owner = owner;
         this.eventDate = eventDate;
-        this.startRegistration = startRegistrations;
-        this.endRegistration = endRegistrations;
+        this.startRegistrations = startRegistrations;
+        this.endRegistrations = endRegistrations;
         this.capacity = capacity;
         this.cost = cost;
         this.privateEvent = privateEvent;
@@ -91,19 +91,19 @@ public class Event {
     }
 
     public Date getStartRegistrations() {
-        return startRegistration;
+        return startRegistrations;
     }
 
     public void setStartRegistrations(Date startRegistrations) {
-        this.startRegistration = startRegistrations;
+        this.startRegistrations = startRegistrations;
     }
 
     public Date getEndRegistrations() {
-        return endRegistration;
+        return endRegistrations;
     }
 
     public void setEndRegistrations(Date endRegistrations) {
-        this.endRegistration = endRegistrations;
+        this.endRegistrations = endRegistrations;
     }
 
     public int getCapacity() {

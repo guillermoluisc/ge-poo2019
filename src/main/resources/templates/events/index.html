@@ -4,13 +4,48 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Events</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="container-fluid">
+            <h1 >Event List</h1>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Event Date</th>
+                        <th>Start Registrations</th>
+                        <th>End Registrations</th>
+                        <th>Capacity</th>
+                        <th>Cost</th>
+                        <th>Private Event</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="event : ${events}">
+                        <td th:text="${event.owner}"></td>
+                        <td th:text="${event.eventDate}"></td>
+                        <td th:text="${event.startRegistrations}"></td>
+                        <td th:text="${event.endRegistrations}"></td>
+                        <td th:text="${event.capacity}"></td>
+                        <td th:text="${event.cost}"></td>
+                        <td th:text="${event.privateEvent}"></td>
+                        <td><a class="badge" th:href="@{/events/{id}/edit(id=${event.id})}">Edit</a></td>
+                        <td><a class="badge" th:href="@{/events/{id}/delete(id=${event.id})}">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="badge badge-primary" th:href="@{/events/new}">New Event</a>
+        </div>
+        
+        <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
     </body>
 </html>
