@@ -13,9 +13,12 @@ and open the template in the editor.
     <body>
         <div>New event</div>
         <form action="#" th:action="@{/events}" th:object="${event}" method="post">
-            Event Date:<input type="Date" th:field="*{eventDate}" />
-            Cost:<input type="float" th:field="*{cost}" />
-            Capacity:<input type="int" th:field="*{capacity}" />
+            Event Date:<input type="date" th:field="*{eventDate}" /> <br>
+            Start Registrations:<input type="date" th:field="*{startRegistrations}" /> <br>
+            End Registrations:<input type="date" th:field="*{endRegistrations}" /> <br>
+            Capacity:<input type="text" th:field="*{capacity}" /> <br>
+            Cost:<input type="text" th:field="*{cost}" /> <br>
+            Private Event:<input type="checkbox" th:field="*{privateEvent}" />
             <button type="submit" name="newEvent">Create</button>
         </form>
     </body>
