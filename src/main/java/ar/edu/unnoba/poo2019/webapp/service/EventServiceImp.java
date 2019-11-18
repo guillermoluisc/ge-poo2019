@@ -40,11 +40,13 @@ public class EventServiceImp implements EventService{
     @Override
     public Event update(Long id, Event event) {
         Event e = eventRepository.findById(id).get();
+        e.setEventName(event.getEventName());
         e.setCapacity(event.getCapacity());
         e.setCost(event.getCost());
         e.setStartRegistrations(event.getStartRegistrations());
         e.setEndRegistrations(event.getEndRegistrations());
         e.setEventDate(event.getEventDate());
+        e.setPrivateEvent(event.isPrivateEvent());
         return eventRepository.save(e);
         
     }

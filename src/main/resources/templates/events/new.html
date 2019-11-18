@@ -13,6 +13,7 @@ and open the template in the editor.
     <body>
         <div>New event</div>
         <form action="#" th:action="@{/events}" th:object="${event}" method="post">
+            Event Name:<input type="text" th:field="*{eventName}" /> <br>
             Event Date:<input type="date" th:field="*{eventDate}" /> <br>
             Start Registrations:<input type="date" th:field="*{startRegistrations}" /> <br>
             End Registrations:<input type="date" th:field="*{endRegistrations}" /> <br>

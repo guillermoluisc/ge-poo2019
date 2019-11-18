@@ -58,21 +58,14 @@ public class EventController {
         return "redirect:/events";
     }
     
-    //@GetMapping("/{id}/edit")
+    @GetMapping("/{id}/edit")           //(pregunta)    la parte de autenticacion va?
+    public String edit(@PathVariable Long id, Model model){
+        Event event = eventService.find(id);
+        model.addAttribute("event", event);
+        return "events/edit";
+    }
     
-    //(pregunta)    la parte de autenticacion va?
-    
-   /** public String edit(@PathVariable Long id, Model model, Authentication authentication){
-       / Event sessionUser = (User)authentication.getPrincipal();
-        sessionUser.getEmail();
-        Event user = userService.find(id);
-        model.addAttribute("user", user);
-        return "users/edit";
-         }
-         */
-
    
-    
     @PostMapping("/{id}/update")
     public String update(@PathVariable Long id,@ModelAttribute Event event){
         eventService.update(id,event);

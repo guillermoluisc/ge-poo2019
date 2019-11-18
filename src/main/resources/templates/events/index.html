@@ -19,6 +19,7 @@ and open the template in the editor.
                 <thead>
                     <tr>
                         <th>Owner</th>
+                        <th>Event Name</th>
                         <th>Event Date</th>
                         <th>Start Registrations</th>
                         <th>End Registrations</th>
@@ -32,6 +33,7 @@ and open the template in the editor.
                 <tbody>
                     <tr th:each="event : ${events}">
                         <td th:text="${event.owner}"></td>
+                        <td th:text="${event.eventName}"></td>
                         <td th:text="${event.eventDate}"></td>
                         <td th:text="${event.startRegistrations}"></td>
                         <td th:text="${event.endRegistrations}"></td>

@@ -25,6 +25,9 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+    @Column(name="event_name")
+    private String eventName;
+    
     @ManyToOne
     private User owner;
     
@@ -49,8 +52,10 @@ public class Event {
     
     
     
-    public Event(long id, User owner, Date eventDate, Date startRegistrations, Date endRegistrations, int capacity, float cost, boolean privateEvent) {
+    
+    public Event(long id, String eventName, User owner, Date eventDate, Date startRegistrations, Date endRegistrations, int capacity, float cost, boolean privateEvent) {
         this.id = id;
+        this.eventName = eventName;
         this.owner = owner;
         this.eventDate = eventDate;
         this.startRegistrations = startRegistrations;
@@ -62,9 +67,16 @@ public class Event {
 
     public Event (){
     }
+
     
     
-    
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
     
     public long getId() {
         return id;

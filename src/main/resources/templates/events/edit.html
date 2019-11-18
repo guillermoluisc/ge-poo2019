@@ -4,13 +4,23 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Edit Event</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div>Edit Event</div>
+        <form action="#" th:action="@{/events/{id}/update(id=${event.id})}" th:object="${event}" method="post">
+            Event Name:<input type="text" th:field="*{eventName}" /> <br>
+            Event Date:<input type="date" th:field="*{eventDate}" /> <br>
+            Start Registrations:<input type="date" th:field="*{startRegistrations}" /> <br>
+            End Registrations:<input type="date" th:field="*{endRegistrations}" /> <br>
+            Capacity:<input type="text" th:field="*{capacity}" /> <br>
+            Cost:<input type="text" th:field="*{cost}" /> <br>
+            Private Event:<input type="checkbox" th:field="*{privateEvent}" />
+            <button type="submit" name="edit_event">Update</button>
+        </form>
     </body>
 </html>
