@@ -58,7 +58,7 @@ public class EventController {
         return "redirect:/events";
     }
     
-    @GetMapping("/{id}/edit")           //(pregunta)    la parte de autenticacion va?
+    @GetMapping("/{id}/edit")     //(pregunta)    la parte de autenticacion va?
     public String edit(@PathVariable Long id, Model model){
         Event event = eventService.find(id);
         model.addAttribute("event", event);

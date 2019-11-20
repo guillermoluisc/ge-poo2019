@@ -7,7 +7,6 @@ package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.repository.EventRepository;
-import ar.edu.unnoba.poo2019.webapp.repository.UserRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,14 +46,13 @@ public class EventServiceImp implements EventService{
         e.setEndRegistrations(event.getEndRegistrations());
         e.setEventDate(event.getEventDate());
         e.setPrivateEvent(event.isPrivateEvent());
-        return eventRepository.save(e);
-        
+        e.setLugar(event.getLugar());
+        return eventRepository.save(e);  
     }
 
     @Override
     public void delete(Long id) {
-        eventRepository.deleteById(id);
-        
+        eventRepository.deleteById(id);    
     }
     
 }

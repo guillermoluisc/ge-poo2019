@@ -48,12 +48,12 @@ public class Event {
     
     @Column(name="private_event")
     private boolean privateEvent;
-
+    
+    @Column
+    private String lugar;
     
     
-    
-    
-    public Event(long id, String eventName, User owner, Date eventDate, Date startRegistrations, Date endRegistrations, int capacity, float cost, boolean privateEvent) {
+    public Event(long id, String eventName, User owner, Date eventDate, Date startRegistrations, Date endRegistrations, int capacity, float cost, boolean privateEvent, String lugar) {
         this.id = id;
         this.eventName = eventName;
         this.owner = owner;
@@ -63,6 +63,7 @@ public class Event {
         this.capacity = capacity;
         this.cost = cost;
         this.privateEvent = privateEvent;
+        this.lugar = lugar;
     }
 
     public Event (){
@@ -140,6 +141,14 @@ public class Event {
 
     public void setPrivateEvent(boolean privateEvent) {
         this.privateEvent = privateEvent;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
    
     
