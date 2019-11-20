@@ -71,6 +71,22 @@ public class Event {
 
     
     
+    public boolean isFree(){
+        return cost == 0;
+    }
+    
+    public boolean isAvailableQuota(){  // Retorna si hay cupo disponible
+        return getAvailability() > 0;
+    }
+    
+    public int getAvailability(){   // Retorna la cantidad de cupos disponibles
+        return capacity - getRegistrations().length;
+    }
+    
+    public ArrayList<Registration> getRegistrations(){
+        
+    }
+    
     public String getEventName() {
         return eventName;
     }

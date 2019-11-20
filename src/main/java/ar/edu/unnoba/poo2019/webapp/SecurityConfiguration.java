@@ -35,10 +35,11 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
             .antMatchers("/","/login","/logout").permitAll()
-            .and().formLogin();
+            .and()
+            .formLogin().defaultSuccessUrl("/users");
     http.authorizeRequests()
             .antMatchers("/*?")
-            .access("hasRole('ROLE_USER')"); 
+            .access("hasRole('ROLE_USER')");
 }
 
 @Bean
