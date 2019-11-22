@@ -7,11 +7,13 @@ package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author jpgm
  */
+@Service
 public interface UserService {
     
     public List<User> users();

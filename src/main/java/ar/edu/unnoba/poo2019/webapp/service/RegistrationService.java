@@ -7,11 +7,13 @@ package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author root
  */
+@Service
 public interface RegistrationService {
     
     public List<Registration> registrations();

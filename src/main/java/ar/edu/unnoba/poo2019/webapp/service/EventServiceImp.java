@@ -19,6 +19,9 @@ import org.springframework.stereotype.Service;
 public class EventServiceImp implements EventService{
     
     @Autowired
+    private SessionService sessionService;
+    
+    @Autowired
     private EventRepository eventRepository;
     
     @Override
@@ -28,6 +31,7 @@ public class EventServiceImp implements EventService{
 
     @Override
     public Event create(Event event) {
+        event.setOwner(sessionService.getCurrentUser()); // Guardo el usuario actual.
         return eventRepository.save(event);
     }
 

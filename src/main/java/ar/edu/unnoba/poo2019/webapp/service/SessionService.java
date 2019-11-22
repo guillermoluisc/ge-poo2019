@@ -5,8 +5,7 @@
  */
 package ar.edu.unnoba.poo2019.webapp.service;
 
-import ar.edu.unnoba.poo2019.webapp.model.Event;
-import java.util.List;
+import ar.edu.unnoba.poo2019.webapp.model.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,16 +13,8 @@ import org.springframework.stereotype.Service;
  * @author root
  */
 @Service
-public interface EventService {
+public interface SessionService {
     
-    public List<Event> events();
-    
-    public Event create(Event event);
-    
-    public Event find(Long id);
-    
-    public Event update(Long id,Event event);
-
-    public void delete(Long id);
+    public User getCurrentUser(); // Devuelve el usuario de la sesion.
     
 }
