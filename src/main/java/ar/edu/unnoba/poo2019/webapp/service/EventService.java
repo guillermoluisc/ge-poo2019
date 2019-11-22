@@ -18,6 +18,8 @@ public interface EventService {
     
     public List<Event> events();
     
+    public List<Event> findEventsByOwnerId(long ownerId);
+    
     public Event create(Event event);
     
     public Event find(Long id);

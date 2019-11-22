@@ -7,6 +7,7 @@ package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
+import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,11 +34,21 @@ public class EventController {
     @Autowired
     private EventService eventService;
     
-     @GetMapping
+    @Autowired
+    private SessionService sessionService;
+    
+    @GetMapping
     public String index(Model model){
         List<Event> events = eventService.events();
         model.addAttribute("events", events);
         return "events/index";
+    }
+    
+    @GetMapping("/myEvents")
+    public String myEvents(Model model){
+        List<Event> events = eventService.findEventsByOwnerId(sessionService.getCurrentUser().getId());
+        model.addAttribute("events", events);
+        return "events/myEvents";
     }
     
     @GetMapping("/new")
@@ -70,6 +81,12 @@ public class EventController {
     public String update(@PathVariable Long id,@ModelAttribute Event event){
         eventService.update(id,event);
         return "redirect:/events";
+    }
+    
+    @GetMapping("/{id}/registrate")
+    public String registrate(){
+        
+        return "events/registrate";
     }
     
     // Ver si se puede poner en AppConfiguration o si se puede hacer otra cosa

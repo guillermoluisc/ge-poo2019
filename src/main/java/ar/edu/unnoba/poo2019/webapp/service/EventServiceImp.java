@@ -58,5 +58,10 @@ public class EventServiceImp implements EventService{
     public void delete(Long id) {
         eventRepository.deleteById(id);    
     }
+
+    @Override
+    public List<Event> findEventsByOwnerId(long ownerId) {
+        return eventRepository.findEventsByOwnerId(ownerId);
+    }
     
 }
