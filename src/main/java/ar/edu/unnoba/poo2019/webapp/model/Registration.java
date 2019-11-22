@@ -6,12 +6,16 @@
 package ar.edu.unnoba.poo2019.webapp.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,14 +29,19 @@ public class Registration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
     private Event event;
     
     @Column(name="created_at")
     private Date createdAt;
+    
+    @OneToMany(mappedBy = "registration")
+    private List<Payment> payments;
 
     
     
@@ -45,7 +54,12 @@ public class Registration {
 
     public Registration() {
     }
-     
+
+    
+    
+    public List<Payment> getPayments() {
+        return payments;
+    }
      
     public long getId() {
         return id;

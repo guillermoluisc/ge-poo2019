@@ -7,11 +7,13 @@ package ar.edu.unnoba.poo2019.webapp.model;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -41,6 +43,15 @@ public class User implements UserDetails{
     
     @Column
     private String password;
+    
+    @OneToMany(mappedBy = "owner")
+    private List<Event> events;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Invite> invites;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Registration> registrations;
 
     /** Terminan los atributos*/
     
@@ -57,8 +68,21 @@ public class User implements UserDetails{
     
     public User(){
     }
+
+
+    /**fin de constructor*/
     
-     /**fin de constructor*/
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public List<Invite> getInvites() {
+        return invites;
+    }
+
+    public List<Registration> getRegistrations() {
+        return registrations;
+    }
 
     public Long getId() {
         return id;

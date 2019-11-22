@@ -8,13 +8,14 @@ package ar.edu.unnoba.poo2019.webapp.repository;
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author root
  */
+@Repository
 public interface RegistrationRepository extends JpaRepository<Registration, Long>{
     
-    public List<Registration> findByEventId(long id);
     
 }

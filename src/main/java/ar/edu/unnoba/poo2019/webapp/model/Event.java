@@ -6,12 +6,16 @@
 package ar.edu.unnoba.poo2019.webapp.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,7 +32,8 @@ public class Event {
     @Column(name="event_name")
     private String eventName;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
     private User owner;
     
     @Column(name="event_date")
@@ -51,6 +56,9 @@ public class Event {
     
     @Column
     private String lugar;
+    
+    @OneToMany(mappedBy = "event")
+    private List<Registration> registrations;
     
     
     public Event(long id, String eventName, User owner, Date eventDate, Date startRegistrations, Date endRegistrations, int capacity, float cost, boolean privateEvent, String lugar) {
@@ -80,11 +88,11 @@ public class Event {
     }
     
     public int getAvailability(){   // Retorna la cantidad de cupos disponibles
-        return capacity - getRegistrations().length;
+        return capacity - getRegistrations().size();
     }
     
-    public ArrayList<Registration> getRegistrations(){
-        
+    public List<Registration> getRegistrations(){
+        return registrations;
     }
     
     public String getEventName() {
