@@ -5,7 +5,9 @@
  */
 package ar.edu.unnoba.poo2019.webapp.repository;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
+import ar.edu.unnoba.poo2019.webapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface InviteRepository extends JpaRepository<Invite, Long> {
+
+    public Invite findByUserAndEvent(User user, Event event);
     
 }

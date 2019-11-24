@@ -6,6 +6,7 @@
 package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
+import ar.edu.unnoba.poo2019.webapp.model.User;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public interface RegistrationService {
     
     public List<Registration> registrations();
     
-    public Registration create(Registration registration);
+    public void create(Long eventId, User user) throws Exception;
     
     public Registration find(Long id);
     

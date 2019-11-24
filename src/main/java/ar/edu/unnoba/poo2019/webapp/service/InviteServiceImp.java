@@ -5,7 +5,9 @@
  */
 package ar.edu.unnoba.poo2019.webapp.service;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
+import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.repository.InviteRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,12 @@ public class InviteServiceImp implements InviteService {
     public void delete(Long id) {
     inviteRepository.deleteById(id);
     
+    }
+
+    @Override
+    public Invite findByUserAndEvent(User user, Event event) {
+        return inviteRepository.findByUserAndEvent(user, event);
+        
     }
     
 }

@@ -5,7 +5,9 @@
  */
 package ar.edu.unnoba.poo2019.webapp.service;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
+import ar.edu.unnoba.poo2019.webapp.model.User;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,8 @@ public interface InviteService {
     public Invite update(Long id,Invite invite);
 
     public void delete(Long id);
+    
+    public Invite findByUserAndEvent(User user, Event event);
+             
     
 }

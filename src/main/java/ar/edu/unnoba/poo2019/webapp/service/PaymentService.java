@@ -5,7 +5,9 @@
  */
 package ar.edu.unnoba.poo2019.webapp.service;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Payment;
+import ar.edu.unnoba.poo2019.webapp.model.User;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,8 @@ public interface PaymentService {
     
     public List<Payment> users();
     
-    public Payment create(Payment payment);
+    public Payment create(Long eventId, User user) throws Exception;
+    public Payment findByEventAndUser(Event event, User user);
     
     public Payment find(Long id);
     

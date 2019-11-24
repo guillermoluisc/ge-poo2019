@@ -45,6 +45,6 @@ protected void configure(HttpSecurity http) throws Exception {
 @Bean
 public PasswordEncoder getPasswordEncoder(){
     /**encriptado para que no se guarde plana*/
-    return new BCryptPasswordEncoder();
+   return new BCryptPasswordEncoder();
 }
 }

@@ -5,7 +5,10 @@
  */
 package ar.edu.unnoba.poo2019.webapp.repository;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Payment;
+import ar.edu.unnoba.poo2019.webapp.model.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +18,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
-    
+     public List<Payment> findByEventAndUser(Event event, User user);
 }

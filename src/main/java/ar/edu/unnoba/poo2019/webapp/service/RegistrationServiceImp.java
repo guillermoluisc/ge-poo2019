@@ -5,9 +5,14 @@
  */
 package ar.edu.unnoba.poo2019.webapp.service;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
+import ar.edu.unnoba.poo2019.webapp.model.User;
+import ar.edu.unnoba.poo2019.webapp.repository.EventRepository;
 import ar.edu.unnoba.poo2019.webapp.repository.RegistrationRepository;
+import ar.edu.unnoba.poo2019.webapp.service.validation.registration.RegistrationValidator;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +25,30 @@ public class RegistrationServiceImp implements RegistrationService{
     
     @Autowired
     private RegistrationRepository registrationRepository;
+    
+    @Autowired
+    private EventRepository eventRepository;
+    
+        @Autowired
+    private RegistrationValidator validator;
 
     @Override
     public List<Registration> registrations() {
         return registrationRepository.findAll();
+        
     }
+    
 
+    @Transactional
     @Override
-    public Registration create(Registration registration) {
-        return registrationRepository.save(registration);
+    public void create(Long eventId, User user) throws Exception{
+        Event e = eventRepository.getOne(eventId);
+        Registration reg = new Registration();
+        reg.setEvent(e);
+        reg.setUser(user);
+        
+        validator.validate(reg);
+        registrationRepository.save(reg);
     }
 
     @Override
@@ -45,5 +65,6 @@ public class RegistrationServiceImp implements RegistrationService{
     public void delete(Long id) {
         registrationRepository.deleteById(id);
     }
+
     
 }

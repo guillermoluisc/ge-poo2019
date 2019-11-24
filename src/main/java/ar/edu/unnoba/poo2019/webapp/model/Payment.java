@@ -29,16 +29,21 @@ cardNumber: String
 @Table(name="payments")
 public class Payment implements Serializable {
     
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
   
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "registration_id")
-    private Registration registration;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User owner;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="event_id")
+    private Event event;
     
     @Column
-    private String card;
+    private String cardName;
     
     @Column(name="card_number")
     private String cardNumber;
@@ -48,10 +53,11 @@ public class Payment implements Serializable {
     public Payment() {
     }
 
-    public Payment(long id, Registration registration, String card, String cardNumber) {
+    public Payment(long id, User user, Event event, String cardName, String cardNumber) {
         this.id = id;
-        this.registration = registration;
-        this.card = card;
+       this.event=event;
+       this.owner=user;
+        this.cardName = this.cardName;
         this.cardNumber = cardNumber;
     }
 
@@ -63,20 +69,30 @@ public class Payment implements Serializable {
         this.id = id;
     }
 
-    public Registration getRegistration() {
-        return registration;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setRegistration(Registration registration) {
-        this.registration = registration;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
-    public String getCard() {
-        return card;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setCard(String card) {
-        this.card = card;
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+   
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String card) {
+        this.cardName = card;
     }
 
     public String getCardNumber() {
