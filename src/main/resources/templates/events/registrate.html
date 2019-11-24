@@ -4,13 +4,50 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
+        <title>Registrate</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
-        <div>Registrate</div>
+        <div class="container-fluid">
+            <h1 >Registrate</h1>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Event Date</th>
+                        <th>Start Registrations</th>
+                        <th>End Registrations</th>
+                        <th>Lugar</th>
+                        <th>Capacity</th>
+                        <th>Availability</th>
+                        <th>Cost</th>
+                        <th>Private Event</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${event.eventName}"></td>
+                        <td th:text="${event.eventDate}"></td>
+                        <td th:text="${event.startRegistrations}"></td>
+                        <td th:text="${event.endRegistrations}"></td>
+                        <td th:text="${event.lugar}"></td>
+                        <td th:text="${event.capacity}"></td>
+                        <td th:text="${event.getAvailability()}"></td>
+                        <td th:text="${event.cost}"></td>
+                        <td th:text="${event.privateEvent}"></td>
+                        <td><a class="badge" th:href="@{/events/{id}/confirmRegistration(id=${event.id})}">Confirm Registration</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
     </body>
 </html>
+

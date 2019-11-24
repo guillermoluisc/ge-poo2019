@@ -36,9 +36,9 @@ protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
             .antMatchers("/","/login","/logout").permitAll()
             .and()
-            .formLogin().defaultSuccessUrl("/users");
+            .formLogin().defaultSuccessUrl("/events");
     http.authorizeRequests()
-            .antMatchers("/*?")
+            .antMatchers("/*?","/*?/*?")
             .access("hasRole('ROLE_USER')");
 }
 

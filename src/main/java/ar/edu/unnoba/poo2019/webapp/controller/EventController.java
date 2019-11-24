@@ -84,8 +84,9 @@ public class EventController {
     }
     
     @GetMapping("/{id}/registrate")
-    public String registrate(){
-        
+    public String registrate(@PathVariable Long id, Model model){
+        Event e = eventService.find(id);
+        model.addAttribute("event", e);
         return "events/registrate";
     }
     
