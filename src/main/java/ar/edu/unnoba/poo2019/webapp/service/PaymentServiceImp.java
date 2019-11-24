@@ -23,27 +23,31 @@ public class PaymentServiceImp implements PaymentService {
     
     @Override
     public List<Payment> users() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return paymentRepository.findAll();
     }
 
     @Override
     public Payment create(Payment payment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return paymentRepository.save(payment);     
     }
 
     @Override
     public Payment find(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return paymentRepository.findById(id).get();
     }
 
     @Override
     public Payment update(Long id, Payment payment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Payment p=paymentRepository.findById(id).get();
+        p.setCard(payment.getCard());
+        p.setCardNumber((payment.getCardNumber()));
+        p.setRegistration(payment.getRegistration());
+        return paymentRepository.save(p);
     }
 
     @Override
     public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        paymentRepository.deleteById(id);
     }
     
 }

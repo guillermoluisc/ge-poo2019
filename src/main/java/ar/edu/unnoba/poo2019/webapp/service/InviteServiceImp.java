@@ -23,27 +23,31 @@ public class InviteServiceImp implements InviteService {
     
     @Override
     public List<Invite> invites() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        return inviteRepository.findAll();
+                }
 
     @Override
     public Invite create(Invite invite) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return inviteRepository.save(invite);
     }
 
     @Override
     public Invite find(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return inviteRepository.findById(id).get();
     }
 
     @Override
     public Invite update(Long id, Invite invite) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Invite i=inviteRepository.findById(id).get();
+        i.setEvent(invite.getEvent());
+        i.setUser(invite.getUser());
+        return inviteRepository.save(i);
     }
 
     @Override
     public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    inviteRepository.deleteById(id);
+    
     }
     
 }
