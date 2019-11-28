@@ -83,7 +83,7 @@ public class EventController {
         return "redirect:/events/myEvents";
     }
     
-    @GetMapping("/{id}/registrate")
+    @GetMapping("/{id}/registrate") // Pasarlo a registrations.
     public String registrate(@PathVariable Long id, Model model){ // Ver si pasar el id o el evento desde la pagina de eventos
         Event e = eventService.find(id);
         model.addAttribute("event", e);
