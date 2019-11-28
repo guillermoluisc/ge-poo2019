@@ -6,6 +6,7 @@ target/
 
 ### Esto lo agregue yo ###
 application.properties
+*.properties
 
 ### STS ###
 .apt_generated
