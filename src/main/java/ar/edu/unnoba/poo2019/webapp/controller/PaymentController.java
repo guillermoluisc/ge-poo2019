@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author guillermo
  */
    @Controller
-@RequestMapping("/payment")
+@RequestMapping("/payments")
 public class PaymentController {
     
     
@@ -37,7 +37,7 @@ public class PaymentController {
     @GetMapping("/new")
     public String paymentNew(Model model){
         model.addAttribute("payment", new Payment());
-        return "payment/new";
+        return "payments/new";
     }
     
     @PostMapping

@@ -39,9 +39,6 @@ public class Registration {
     
     @Column(name="created_at")
     private Date createdAt;
-    
-    @OneToMany(mappedBy = "registration")
-    private List<Payment> payments;
 
     
     
@@ -56,10 +53,6 @@ public class Registration {
     }
 
     
-    
-    public List<Payment> getPayments() {
-        return payments;
-    }
      
     public long getId() {
         return id;

@@ -61,7 +61,7 @@ public class PaymentServiceImp implements PaymentService {
     }
     @Override
     public Payment findByEventAndUser(Event event, User user) {
-        List<Payment> payments = paymentRepository.findByEventAndUser(event,user);
+        List<Payment> payments = paymentRepository.findByEventAndOwner(event,user);
         if(payments.isEmpty())
             return null;
         else

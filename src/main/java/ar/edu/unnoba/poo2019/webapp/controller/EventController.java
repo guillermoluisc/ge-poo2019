@@ -60,16 +60,16 @@ public class EventController {
     @PostMapping
     public String create(@ModelAttribute Event event){
         eventService.create(event);
-        return "redirect:/events";
+        return "redirect:/events/myEvents";
     }
     
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable ("id") Long id){
         eventService.delete(id);
-        return "redirect:/events";
+        return "redirect:/events/myEvents";
     }
     
-    @GetMapping("/{id}/edit")     //(pregunta)    la parte de autenticacion va?
+    @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model){
         Event event = eventService.find(id);
         model.addAttribute("event", event);
@@ -80,11 +80,11 @@ public class EventController {
     @PostMapping("/{id}/update")
     public String update(@PathVariable Long id,@ModelAttribute Event event){
         eventService.update(id,event);
-        return "redirect:/events";
+        return "redirect:/events/myEvents";
     }
     
     @GetMapping("/{id}/registrate")
-    public String registrate(@PathVariable Long id, Model model){
+    public String registrate(@PathVariable Long id, Model model){ // Ver si pasar el id o el evento desde la pagina de eventos
         Event e = eventService.find(id);
         model.addAttribute("event", e);
         return "events/registrate";
