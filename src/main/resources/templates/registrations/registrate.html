@@ -41,7 +41,7 @@ and open the template in the editor.
                         <td th:text="${event.getAvailability()}"></td>
                         <td th:text="${event.cost}"></td>
                         <td th:text="${event.privateEvent}"></td>
-                        <td><a class="badge" th:href="@{/events/{id}/confirmRegistration(id=${event.id})}">Confirm Registration</a></td>
+                        <td><a class="badge" th:href="@{/registrations/{id}/confirmRegistration(id=${event.id})}">Confirm Registration</a></td>
                     </tr>
                 </tbody>
             </table>

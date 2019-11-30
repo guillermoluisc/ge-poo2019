@@ -83,12 +83,7 @@ public class EventController {
         return "redirect:/events/myEvents";
     }
     
-    @GetMapping("/{id}/registrate") // Pasarlo a registrations.
-    public String registrate(@PathVariable Long id, Model model){ // Ver si pasar el id o el evento desde la pagina de eventos
-        Event e = eventService.find(id);
-        model.addAttribute("event", e);
-        return "events/registrate";
-    }
+    
     
     // Ver si se puede poner en AppConfiguration o si se puede hacer otra cosa
     @InitBinder
