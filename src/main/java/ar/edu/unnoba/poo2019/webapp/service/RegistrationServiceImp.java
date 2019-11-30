@@ -11,10 +11,12 @@ import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.repository.EventRepository;
 import ar.edu.unnoba.poo2019.webapp.repository.RegistrationRepository;
 import ar.edu.unnoba.poo2019.webapp.service.validation.registration.RegistrationValidator;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  *
@@ -46,7 +48,8 @@ public class RegistrationServiceImp implements RegistrationService{
         Registration reg = new Registration();
         reg.setEvent(e);
         reg.setUser(user);
-        
+        Date today = new Date();
+        reg.setCreatedAt(today);
         validator.validate(reg);
         registrationRepository.save(reg);
     }

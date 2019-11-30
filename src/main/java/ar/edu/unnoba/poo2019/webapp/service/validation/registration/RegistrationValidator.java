@@ -23,7 +23,10 @@ public class RegistrationValidator implements IRegistrationValidator{
         Date today = new Date();
         if(today.compareTo(registration.getEvent().getStartRegistrations())<0
                 || today.compareTo(registration.getEvent().getEndRegistrations())>0){
-            throw new Exception();
+            throw new Exception("La fecha para inscribirse no esta correcta");
+        }
+        if(registration.getEvent().getAvailability() < 1){
+            throw new Exception("No hay cupo");
         }
     }
     
