@@ -5,7 +5,9 @@
  */
 package ar.edu.unnoba.poo2019.webapp.repository;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
+import ar.edu.unnoba.poo2019.webapp.model.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RegistrationRepository extends JpaRepository<Registration, Long>{
+
+    public List<Registration> findByEventAndUser(Event event, User user);
     
     
 }

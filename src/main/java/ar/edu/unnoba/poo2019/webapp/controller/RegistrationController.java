@@ -6,6 +6,7 @@
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
+import ar.edu.unnoba.poo2019.webapp.model.Payment;
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
@@ -51,12 +52,15 @@ public class RegistrationController {
     
     @GetMapping("/{id}/confirmRegistration")
     public String confirmRegistration(@PathVariable Long id, Model model) throws Exception{
-       
         Event e = eventService.find(id);
+        User u = sessionService.getCurrentUser();
         if(e.getCost() > 0){
-            return "payments/new";
+            Payment pay = new Payment();
+            pay.setEvent(e);
+            pay.setOwner(u);
+            model.addAttribute("payment", pay);
+            return "redirect:/payments/new";
         }else{ 
-            User u = sessionService.getCurrentUser();
             registrationService.create(id, u);
             return "registrations/confirmedRegistration";
         }

@@ -71,17 +71,17 @@ public class PaymentServiceImp implements PaymentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Payment create(Long eventId, User user) throws Exception{
+        System.out.println("create paymentService");
         Event event = eventService.find(eventId);
         Payment p = new Payment();
-        if(event.getCost() > 0 &&
-                this.findByEventAndUser(event, user)==null){
+        if(event.getCost() > 0 && this.findByEventAndUser(event, user)==null){
             p.setEvent(event);
             p.setOwner(user);
             p = paymentRepository.save(p);
             registrationService.create(p.getEvent().getId(),p.getOwner());   
             return p;
         }else{
-            throw new Exception("Error");
+            throw new Exception("Error, el evento es gratis o ya se pago por el evento");
         }
         
     }

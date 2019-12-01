@@ -35,15 +35,17 @@ public class PaymentController {
     }*/
     
     @GetMapping("/new")
-    public String paymentNew(Model model){
-        model.addAttribute("payment", new Payment());
+    public String paymentNew(@ModelAttribute Payment payment, Model model){
+        System.out.println("GetMapping /new paymentController");
+        model.addAttribute("payment", payment);
         return "payments/new";
     }
     
     @PostMapping
-    public String create(@ModelAttribute Payment payment) throws Exception{
+    public String create(@ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
+        System.out.println("create paymentController " + payment);
         paymentService.create(payment.getEvent().getId(),payment.getOwner());
-        return "redirect:/users";
+        return "redirect:/registrations/confirmedRegistrations";
     }
     
     /*@GetMapping("/{id}/delete")

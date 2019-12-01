@@ -34,7 +34,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 @Override
 protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-            .antMatchers("/","/login","/logout").permitAll()
+            .antMatchers("/","/login","/logout","/users/new","/users").permitAll()
             .and()
             .formLogin().defaultSuccessUrl("/events");
     http.authorizeRequests()

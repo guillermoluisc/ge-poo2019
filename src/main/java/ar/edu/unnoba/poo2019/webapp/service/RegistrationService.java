@@ -5,6 +5,7 @@
  */
 package ar.edu.unnoba.poo2019.webapp.service;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import java.util.List;
@@ -26,4 +27,6 @@ public interface RegistrationService {
     public Registration update(Long id,Registration registration);
 
     public void delete(Long id);
+    
+    public Registration findByEventAndUser(Event event, User user);
 }

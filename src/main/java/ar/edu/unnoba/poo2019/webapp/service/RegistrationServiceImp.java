@@ -69,5 +69,14 @@ public class RegistrationServiceImp implements RegistrationService{
         registrationRepository.deleteById(id);
     }
 
+    @Override
+    public Registration findByEventAndUser(Event event, User user) {
+        List<Registration> registrations = registrationRepository.findByEventAndUser(event,user);
+        if(registrations.isEmpty())
+            return null;
+        else
+            return registrations.get(0);
+    }
+
     
 }
