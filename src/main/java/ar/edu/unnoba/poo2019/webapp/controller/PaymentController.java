@@ -60,7 +60,6 @@ public class PaymentController {
         return "payments/new";
     }
     
-<<<<<<< HEAD
     @PostMapping("/{id}")
     public String create(@PathVariable Long id, @ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
         User u = sessionService.getCurrentUser();
@@ -69,16 +68,6 @@ public class PaymentController {
         payment.setEvent(e);
         paymentService.create(payment);
         return "registrations/confirmedRegistration";
-=======
-    @PostMapping
-    public String create(@ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
-        System.out.println("create paymentController event:" + payment.getEvent());
-        System.out.println("create paymentController owner:" + payment.getOwner());
-        System.out.println("create paymentController event:" + payment.getCardName());
-        System.out.println("create paymentController owner:" + payment.getCardNumber());
-        paymentService.create(payment.getEvent().getId(),payment.getOwner());
-        return "redirect:/registrations/confirmedRegistrations";
->>>>>>> f69326eaf93c7e4d0971efd3ac5adea686393fb7
     }
     
     /*@GetMapping("/{id}/delete")
@@ -105,4 +94,3 @@ public class PaymentController {
 }
 
     
-
