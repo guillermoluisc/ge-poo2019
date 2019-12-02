@@ -43,7 +43,10 @@ public class PaymentController {
     
     @PostMapping
     public String create(@ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
-        System.out.println("create paymentController " + payment);
+        System.out.println("create paymentController event:" + payment.getEvent());
+        System.out.println("create paymentController owner:" + payment.getOwner());
+        System.out.println("create paymentController event:" + payment.getCardName());
+        System.out.println("create paymentController owner:" + payment.getCardNumber());
         paymentService.create(payment.getEvent().getId(),payment.getOwner());
         return "redirect:/registrations/confirmedRegistrations";
     }
