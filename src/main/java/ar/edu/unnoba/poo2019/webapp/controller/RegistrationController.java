@@ -54,12 +54,10 @@ public class RegistrationController {
     public String confirmRegistration(@PathVariable Long id, Model model) throws Exception{
         Event e = eventService.find(id);
         User u = sessionService.getCurrentUser();
+        System.out.println(u.getEmail());
         if(e.getCost() > 0){
-            Payment pay = new Payment();
-            pay.setEvent(e);
-            pay.setOwner(u);
-            model.addAttribute("payment", pay);
-            return "redirect:/payments/new";
+            
+            return "redirect:/payments/{id}";
         }else{ 
             registrationService.create(id, u);
             return "registrations/confirmedRegistration";

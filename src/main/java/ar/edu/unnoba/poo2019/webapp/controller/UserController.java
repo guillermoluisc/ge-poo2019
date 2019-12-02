@@ -9,6 +9,7 @@ import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -46,10 +47,36 @@ public class UserController {
     
     @PostMapping
     public String create(@ModelAttribute User user){
-        userService.create(user);
-        return "redirect:/users";
+        if(isValid(user.getEmail()) && existe(user.getEmail())==false)
+        {
+            userService.create(user);
+            return "redirect:/users";
+        }
+        
+        return "redirect:/users/new";
     }
     
+     public static boolean isValid(String email) 
+    { 
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
+                            "[a-zA-Z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$"; 
+                              
+        Pattern pat = Pattern.compile(emailRegex); 
+        if (email == null) 
+            return false; 
+        return pat.matcher(email).matches(); 
+    } 
+    
+     public  boolean existe (String email){
+         
+         return userService.findByEmail(email).get(0) != null;
+         
+         
+     }
+     
+     
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable ("id") Long id){
         userService.delete(id);

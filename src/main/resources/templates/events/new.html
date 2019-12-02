@@ -22,6 +22,10 @@ and open the template in the editor.
             Cost:<input type="text" th:field="*{cost}" /> <br>
             Private Event:<input type="checkbox" th:field="*{privateEvent}" />
             <button type="submit" name="newEvent">Create</button>
+           
+           <!-- <a class="badge" th:href="@{/registrations/{id}/logOut(id=${event.id})}">LogOut</a>
+            <button type="submit" name="logOut">Create</button>-->
+            
         </form>
     </body>
 </html>

@@ -25,4 +25,6 @@ public interface UserService {
     public User update(Long id,User user);
 
     public void delete(Long id);
+    
+    public List<User> findByEmail(String email);
 }

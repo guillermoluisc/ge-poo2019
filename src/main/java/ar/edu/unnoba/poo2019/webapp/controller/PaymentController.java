@@ -5,13 +5,20 @@
  */
 package ar.edu.unnoba.poo2019.webapp.controller;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Payment;
+import ar.edu.unnoba.poo2019.webapp.model.User;
+import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import ar.edu.unnoba.poo2019.webapp.service.PaymentService;
+import ar.edu.unnoba.poo2019.webapp.service.SessionService;
+import ar.edu.unnoba.poo2019.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,7 +32,17 @@ public class PaymentController {
     
     
     @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private EventService eventService;
+     @Autowired
+    private SessionService sessionService;
+    
+            
+       @Autowired
     private PaymentService paymentService;
+    
     
    /* @GetMapping
     public String index(Model model){
@@ -34,18 +51,23 @@ public class PaymentController {
         return "users/index";
     }*/
     
-    @GetMapping("/new")
-    public String paymentNew(@ModelAttribute Payment payment, Model model){
+    @GetMapping("/{id}")
+    public String paymentNew(Model model,@PathVariable Long id){
         System.out.println("GetMapping /new paymentController");
-        model.addAttribute("payment", payment);
+        model.addAttribute("event",eventService.find(id));
+        
+        model.addAttribute("payment", new Payment());
         return "payments/new";
     }
     
-    @PostMapping
-    public String create(@ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
-        System.out.println("create paymentController " + payment);
-        paymentService.create(payment.getEvent().getId(),payment.getOwner());
-        return "redirect:/registrations/confirmedRegistrations";
+    @PostMapping("/{id}")
+    public String create(@PathVariable Long id, @ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
+        User u = sessionService.getCurrentUser();
+        Event e=eventService.find(id);
+        payment.setOwner(u);
+        payment.setEvent(e);
+        paymentService.create(payment);
+        return "registrations/confirmedRegistration";
     }
     
     /*@GetMapping("/{id}/delete")

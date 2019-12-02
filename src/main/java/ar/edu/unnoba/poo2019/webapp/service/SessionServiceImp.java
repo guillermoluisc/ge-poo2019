@@ -32,5 +32,5 @@ public class SessionServiceImp implements SessionService{
         User u = (User) this.userRepository.findByEmail(userDetail.getUsername()).get(0);
         return u;
     }
-    
+     
 }

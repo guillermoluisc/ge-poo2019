@@ -20,7 +20,7 @@ public interface PaymentService {
     
     public List<Payment> users();
     
-    public Payment create(Long eventId, User user) throws Exception;
+    public Payment create(Payment payment) throws Exception;
     
     public Payment findByEventAndUser(Event event, User user);
     

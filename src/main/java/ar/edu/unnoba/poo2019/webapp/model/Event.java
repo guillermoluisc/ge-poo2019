@@ -27,8 +27,13 @@ import javax.persistence.Table;
 @Table(name="events")
 
 @NamedQuery(name = "Event.findEventsByOwnerId",
-        query = "SELECT e FROM Event e Where e.owner.id =: ownerId "
+        query = "SELECT e FROM Event e Where e.owner.id =: ownerId"
+        
 )
+@NamedQuery(name = "Event.findAllEvents",
+        query = "SELECT e FROM Event e ORDER BY e.eventDate ASC"
+)
+
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

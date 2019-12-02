@@ -5,6 +5,7 @@
  */
 package ar.edu.unnoba.poo2019.webapp.model;
 
+import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,6 +54,7 @@ public class User implements UserDetails{
     
     @OneToMany(mappedBy = "user")
     private List<Registration> registrations;
+    
 
     /** Terminan los atributos*/
     

@@ -37,9 +37,11 @@ protected void configure(HttpSecurity http) throws Exception {
             .antMatchers("/","/login","/logout","/users/new","/users").permitAll()
             .and()
             .formLogin().defaultSuccessUrl("/events");
+            
     http.authorizeRequests()
             .antMatchers("/*?","/*?/*?")
             .access("hasRole('ROLE_USER')");
+   
 }
 
 @Bean
