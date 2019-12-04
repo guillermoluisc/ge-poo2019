@@ -89,7 +89,7 @@ public class EventController {
     @PostMapping("/{id}/update")
     public String update(@PathVariable Long id,@ModelAttribute Event event) throws Exception{
         Long userId = eventService.find(id).getOwner().getId();
-        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){
+        if(Objects.equals(sessionService.getCurrentUser().getId(), userId)){
             eventService.update(id,event);
             return "redirect:/events/myEvents";
         }
@@ -97,10 +97,13 @@ public class EventController {
     }
     
     @GetMapping("/{id}/eventDetails")
-    public String detail(@PathVariable Long id,Model model){
+    public String detail(@PathVariable Long id,Model model) throws Exception{
         Event event = eventService.find(id);
-        model.addAttribute("event", event); 
-        return "events/eventDetails";
+        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){
+            model.addAttribute("event", event); 
+            return "events/eventDetails";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
     
     

@@ -6,21 +6,15 @@
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
-import ar.edu.unnoba.poo2019.webapp.model.Payment;
-import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import ar.edu.unnoba.poo2019.webapp.service.RegistrationService;
 import ar.edu.unnoba.poo2019.webapp.service.SessionService;
-import ar.edu.unnoba.poo2019.webapp.service.UserService;
-import ar.edu.unnoba.poo2019.webapp.service.validation.registration.IRegistrationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -36,9 +30,6 @@ public class RegistrationController {
     
     @Autowired
     private RegistrationService registrationService;
-    
-    @Autowired
-    private IRegistrationValidator registrationValidator;
     
     @Autowired
     private EventService eventService;

@@ -29,7 +29,6 @@ cardNumber: String
 @Table(name="payments")
 public class Payment implements Serializable {
     
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -85,8 +84,6 @@ public class Payment implements Serializable {
         this.event = event;
     }
 
-   
-
     public String getCardName() {
         return cardName;
     }
@@ -102,8 +99,5 @@ public class Payment implements Serializable {
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
-    
-    
-    
-    
+        
 }

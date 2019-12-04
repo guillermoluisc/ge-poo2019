@@ -54,7 +54,6 @@ public class PaymentController {
     public String paymentNew(Model model,@PathVariable Long id){
         System.out.println("GetMapping /new paymentController");
         model.addAttribute("event",eventService.find(id));
-        
         model.addAttribute("payment", new Payment());
         return "payments/new";
     }

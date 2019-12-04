@@ -184,8 +184,5 @@ public class Event {
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }
-   
-    
-    
     
 }

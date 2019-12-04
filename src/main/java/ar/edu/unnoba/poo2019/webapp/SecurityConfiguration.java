@@ -24,31 +24,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     
-@Autowired
-private UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-@Override
-protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService);
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
     
-}
+    }
 
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-            .antMatchers("/","/login","/logout","/users/new","/users").permitAll()
-            .and()
-            .formLogin().defaultSuccessUrl("/events");
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/","/login","/logout","/users/new","/users").permitAll()
+                .and()
+                .formLogin().defaultSuccessUrl("/events");
             
-    http.authorizeRequests()
-            .antMatchers("/*?","/*?/*?")
-            .access("hasRole('ROLE_USER')");
-   
-}
+        http.authorizeRequests()
+                .antMatchers("/*?","/*?/*?")
+                .access("hasRole('ROLE_USER')");
+    }
 
-@Bean
-public PasswordEncoder getPasswordEncoder(){
-    /**encriptado para que no se guarde plana*/
-   return new BCryptPasswordEncoder();
-}
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        /**encriptado para que no se guarde plana*/
+        return new BCryptPasswordEncoder();
+    }
 }
