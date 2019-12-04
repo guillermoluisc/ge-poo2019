@@ -12,5 +12,8 @@ and open the template in the editor.
     </head>
     <body>
         <div>My Invites</div>
+        <form action="#" th:action="@{/invites/{id}(id=${invite.id})}" th:object="${invite}" method="post">
+            <button type="submit" name="newInvite">Create</button>
+        </form>
     </body>
 </html>

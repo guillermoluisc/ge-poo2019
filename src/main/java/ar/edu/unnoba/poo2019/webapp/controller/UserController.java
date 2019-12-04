@@ -47,7 +47,7 @@ public class UserController {
     
     @PostMapping
     public String create(@ModelAttribute User user){
-        if(isValid(user.getEmail()) && existe(user.getEmail())==false)
+        if(isValid(user.getEmail()) && existe(user.getEmail())==false) //pasar a la capa de servicio el existe
         {
             userService.create(user);
             return "redirect:/users";
@@ -71,10 +71,9 @@ public class UserController {
     
      public  boolean existe (String email){
          
-         return userService.findByEmail(email).get(0) != null;
+         return !userService.findByEmail(email).isEmpty();
          
-         
-     }
+    }
      
      
     @GetMapping("/{id}/delete")

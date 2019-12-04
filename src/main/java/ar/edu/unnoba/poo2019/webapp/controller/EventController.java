@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/*1*/
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
@@ -81,6 +83,13 @@ public class EventController {
     public String update(@PathVariable Long id,@ModelAttribute Event event){
         eventService.update(id,event);
         return "redirect:/events/myEvents";
+    }
+    
+    @GetMapping("/{id}/eventDetails")
+    public String detail(@PathVariable Long id,Model model){
+        Event event = eventService.find(id);
+        model.addAttribute("event", event); 
+        return "events/eventDetails";
     }
     
     

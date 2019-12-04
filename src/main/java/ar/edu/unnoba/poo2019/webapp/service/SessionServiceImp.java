@@ -28,7 +28,7 @@ public class SessionServiceImp implements SessionService{
         Authentication auth = SecurityContextHolder
             .getContext()
             .getAuthentication();
-        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal(); //castear directamente de "user" ya implementa la interface.
         User u = (User) this.userRepository.findByEmail(userDetail.getUsername()).get(0);
         return u;
     }
