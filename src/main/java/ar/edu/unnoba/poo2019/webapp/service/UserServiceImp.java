@@ -24,6 +24,9 @@ public class UserServiceImp implements UserService, UserDetailsService{
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<User> users() {
@@ -43,17 +46,17 @@ public class UserServiceImp implements UserService, UserDetailsService{
 
     @Override
     public User update(Long id, User user) {
-        User u = userRepository.findById(id).get();
-        u.setFirstName(user.getFirstName());
-        u.setLastName(user.getLastName());
-        return userRepository.save(u);
-    }
-
+            User u = userRepository.findById(id).get();
+            u.setFirstName(user.getFirstName());
+            u.setLastName(user.getLastName());
+            return userRepository.save(u);
+        }
+        
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username).get(0);
         
-            }
+    }
 
     @Override
     public void delete(Long id) {
@@ -63,6 +66,11 @@ public class UserServiceImp implements UserService, UserDetailsService{
     @Override
     public List<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean existe(String email) {
+        return !userService.findByEmail(email).isEmpty();
     }
     
     

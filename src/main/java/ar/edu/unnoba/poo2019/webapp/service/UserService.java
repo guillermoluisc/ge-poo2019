@@ -27,4 +27,7 @@ public interface UserService {
     public void delete(Long id);
     
     public List<User> findByEmail(String email);
+    
+    public boolean existe (String email);
+    
 }

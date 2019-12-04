@@ -6,9 +6,10 @@
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.User;
+import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import ar.edu.unnoba.poo2019.webapp.service.UserService;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +28,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+    
+    
+    @Autowired
+    private SessionService sessionService;
     
     @Autowired
     private UserService userService;
@@ -47,17 +51,15 @@ public class UserController {
     
     @PostMapping
     public String create(@ModelAttribute User user){
-        if(isValid(user.getEmail()) && existe(user.getEmail())==false) //pasar a la capa de servicio el existe
+        if(isValid(user.getEmail()) && userService.existe(user.getEmail())==false)
         {
             userService.create(user);
-            return "redirect:/users";
+            return "redirect:/login";
         }
-        
         return "redirect:/users/new";
     }
     
-     public static boolean isValid(String email) 
-    { 
+    public static boolean isValid(String email){ 
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ 
                             "[a-zA-Z0-9_+&*-]+)*@" + 
                             "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
@@ -69,32 +71,34 @@ public class UserController {
         return pat.matcher(email).matches(); 
     } 
     
-     public  boolean existe (String email){
-         
-         return !userService.findByEmail(email).isEmpty();
-         
-    }
-     
-     
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable ("id") Long id){
-        userService.delete(id);
-        return "redirect:/users";
+    public String delete(@PathVariable ("id") Long id) throws Exception{
+        if(Objects.equals(sessionService.getCurrentUser().getId(), id)){
+            userService.delete(id);
+            return "redirect:/users";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
     
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable Long id, Model model, Authentication authentication){
-        User sessionUser = (User)authentication.getPrincipal();
-        sessionUser.getEmail();
-        User user = userService.find(id);
-        model.addAttribute("user", user);
-        return "users/edit";
+    public String edit(@PathVariable Long id, Model model, Authentication authentication) throws Exception{
+        if(Objects.equals(sessionService.getCurrentUser().getId(), id)){
+            User sessionUser = (User)authentication.getPrincipal();
+            sessionUser.getEmail();
+            User user = userService.find(id);
+            model.addAttribute("user", user);
+            return "users/edit";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
     
     @PostMapping("/{id}/update")
-    public String update(@PathVariable Long id,@ModelAttribute User user){
-        userService.update(id,user);
-        return "redirect:/users";
+    public String update(@PathVariable Long id,@ModelAttribute User user) throws Exception{
+        if(Objects.equals(sessionService.getCurrentUser().getId(), id)){
+            userService.update(id,user);
+            return "redirect:/users";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
     
 }

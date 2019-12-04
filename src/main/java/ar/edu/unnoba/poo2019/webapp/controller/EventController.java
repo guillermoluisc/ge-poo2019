@@ -13,6 +13,7 @@ import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -66,23 +67,33 @@ public class EventController {
     }
     
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable ("id") Long id){
-        eventService.delete(id);
-        return "redirect:/events/myEvents";
+    public String delete(@PathVariable ("id") Long id) throws Exception {
+        if(Objects.equals(sessionService.getCurrentUser().getId(), id)){
+            eventService.delete(id);
+            return "redirect:/events/myEvents";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
     
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable Long id, Model model){
+    public String edit(@PathVariable Long id, Model model) throws Exception{
         Event event = eventService.find(id);
-        model.addAttribute("event", event);
-        return "events/edit";
+        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){
+            model.addAttribute("event", event);
+            return "events/edit";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
     
    
     @PostMapping("/{id}/update")
-    public String update(@PathVariable Long id,@ModelAttribute Event event){
-        eventService.update(id,event);
-        return "redirect:/events/myEvents";
+    public String update(@PathVariable Long id,@ModelAttribute Event event) throws Exception{
+        Long userId = eventService.find(id).getOwner().getId();
+        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){
+            eventService.update(id,event);
+            return "redirect:/events/myEvents";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
     
     @GetMapping("/{id}/eventDetails")

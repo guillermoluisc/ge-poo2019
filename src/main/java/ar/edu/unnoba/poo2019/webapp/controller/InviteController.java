@@ -6,7 +6,6 @@
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
-import ar.edu.unnoba.poo2019.webapp.model.Payment;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import ar.edu.unnoba.poo2019.webapp.service.UserService;
