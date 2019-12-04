@@ -5,6 +5,7 @@
  */
 package ar.edu.unnoba.poo2019.webapp.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -27,11 +28,16 @@ import javax.persistence.Table;
 @Table(name="events")
 
 @NamedQuery(name = "Event.findEventsByOwnerId",
-        query = "SELECT e FROM Event e Where e.owner.id =: ownerId"
+        query = "SELECT e FROM Event e WHERE e.owner.id =: ownerId"
         
 )
+
 @NamedQuery(name = "Event.findAllEvents",
         query = "SELECT e FROM Event e ORDER BY e.eventDate ASC"
+)
+
+@NamedQuery(name = "Event.findRegistrationsByEventId",  // Esto es para cambiar la coleccion por consulta, preguntar
+        query = "SELECT r FROM Registration r WHERE r.event.id =: eventId"
 )
 
 public class Event {
@@ -68,7 +74,7 @@ public class Event {
     private String lugar;
     
     @OneToMany(mappedBy = "event")
-    private List<Registration> registrations;
+    private List<Registration> registrations = new ArrayList<Registration>();
     
     
     public Event(long id, String eventName, User owner, Date eventDate, Date startRegistrations, Date endRegistrations, int capacity, float cost, boolean privateEvent, String lugar) {
@@ -99,6 +105,10 @@ public class Event {
     
     public int getAvailability(){   // Retorna la cantidad de cupos disponibles
         return capacity - getRegistrations().size();
+    }
+    
+    public boolean hasRegistrations(){  // Retorna si el evento tiene registraciones
+        return !getRegistrations().isEmpty();
     }
     
     public List<Registration> getRegistrations(){
@@ -183,6 +193,10 @@ public class Event {
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
+    }
+
+    public int cantidadRegistrations() {
+        return getRegistrations().size();
     }
     
 }

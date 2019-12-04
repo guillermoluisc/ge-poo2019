@@ -9,11 +9,13 @@ and open the template in the editor.
         <title>Event Details</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
-        <div>Event Details</div>
-        
-         <table class="table table-dark">
+        <div class="container-fluid">
+            <h1 >Event Details</h1>
+            <table class="table table-dark">
                 <thead>
                     <tr>
                         <th>Event Name</th>
@@ -21,9 +23,9 @@ and open the template in the editor.
                         <th>Start Registrations</th>
                         <th>End Registrations</th>
                         <th>Lugar</th>
-                        <th>Available</th>
+                        <th>Capacity</th>
                         <th>Private Event</th>
-                        <th>Free</th>
+                        <th>Cost</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -42,8 +44,8 @@ and open the template in the editor.
                         
                     </tr>
                 </tbody>
-        </table>
-        
-        
+            </table>
+        </div>
+        <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
     </body>
 </html>

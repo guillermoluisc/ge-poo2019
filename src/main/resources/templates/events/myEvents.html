@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
         <div class="container-fluid">
@@ -39,15 +39,12 @@ and open the template in the editor.
                         <td th:text="${event.isAvailableQuota()}"></td>
                         <td th:text="${event.privateEvent}"></td>
                         <td th:text="${event.isFree()}"></td>
-                        <td><br> <a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
+                        <td><a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
                     </tr>
                 </tbody>
             </table>
             <a class="badge badge-primary" th:href="@{/events/new}">New Event</a>
-            
-            
         </div>
-        
-        <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+        <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
     </body>
 </html>

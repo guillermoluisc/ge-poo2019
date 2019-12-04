@@ -68,9 +68,13 @@ public class EventController {
     
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable ("id") Long id) throws Exception {
-        if(Objects.equals(sessionService.getCurrentUser().getId(), id)){
-            eventService.delete(id);
-            return "redirect:/events/myEvents";
+        Event event = eventService.find(id);
+        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){    // Controlo que sea el propio usuario 
+            if(!event.hasRegistrations()) {     // Controlo que no halla inscriptos
+                eventService.delete(id);
+                return "redirect:/events/myEvents";
+            }
+            throw new Exception("No se puede eliminar el evento porque posee inscripciones");
         }
         throw new Exception("Permiso denegado usuario invalido");
     }
@@ -78,7 +82,7 @@ public class EventController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model) throws Exception{
         Event event = eventService.find(id);
-        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){
+        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){  // Controlo que sea el propio usuario 
             model.addAttribute("event", event);
             return "events/edit";
         }
@@ -87,11 +91,18 @@ public class EventController {
     
    
     @PostMapping("/{id}/update")
-    public String update(@PathVariable Long id,@ModelAttribute Event event) throws Exception{
-        Long userId = eventService.find(id).getOwner().getId();
-        if(Objects.equals(sessionService.getCurrentUser().getId(), userId)){
-            eventService.update(id,event);
-            return "redirect:/events/myEvents";
+    public String update(@PathVariable Long id,@ModelAttribute Event event) throws Exception{ 
+        Event oldEvent = eventService.find(id);
+        if(Objects.equals(sessionService.getCurrentUser().getId(), oldEvent.getOwner().getId())){    // Controlo que sea el propio usuario 
+            if(event.getCapacity() >= oldEvent.cantidadRegistrations()){     // Controlo que la capacidad no sea menor a los inscriptos
+                if(oldEvent.hasRegistrations() && oldEvent.getCost() != event.getCost()){   // Controlo que no se pueda cambiar el precio si hay registraciones
+                    throw new Exception("No se puede cambiar el costo si ya hay inscriptos");
+                }else{
+                    eventService.update(id,event);
+                    return "redirect:/events/myEvents";
+                } 
+            }
+            throw new Exception("La capacidad no puede ser menor que la cantidad de inscriptos");
         }
         throw new Exception("Permiso denegado usuario invalido");
     }
@@ -99,7 +110,7 @@ public class EventController {
     @GetMapping("/{id}/eventDetails")
     public String detail(@PathVariable Long id,Model model) throws Exception{
         Event event = eventService.find(id);
-        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){
+        if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){  // Controlo que sea el propio usuario 
             model.addAttribute("event", event); 
             return "events/eventDetails";
         }
