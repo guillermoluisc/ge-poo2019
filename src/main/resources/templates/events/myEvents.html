@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
-<<<<<<< HEAD
+
         <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 table {
@@ -29,9 +29,9 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
-=======
+
         <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
->>>>>>> 6e434b367eeca71248be8350639f1390574ecda1
+
     </head>
     <body>
         <div class="container-fluid">
@@ -64,23 +64,22 @@ tr:nth-child(even) {
                         <td th:text="${event.isAvailableQuota()}"></td>
                         <td th:text="${event.privateEvent}"></td>
                         <td th:text="${event.isFree()}"></td>
-<<<<<<< HEAD
+
                         <td><br> <a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
                         <td><br> <a class="badge" th:href="@{/events/{id}/delete(id=${event.id})}">Delete</a></td>
                         
-=======
+
                         <td><a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
->>>>>>> 6e434b367eeca71248be8350639f1390574ecda1
+
                     </tr>
                 </tbody>
             </table>
             <a class="badge badge-primary" th:href="@{/events/new}">New Event</a>
-<<<<<<< HEAD
+
             <a class="badge badge-primary" th:href="@{/events}">Volver</a>
             
             
-=======
->>>>>>> 6e434b367eeca71248be8350639f1390574ecda1
+
         </div>
         <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
     </body>
