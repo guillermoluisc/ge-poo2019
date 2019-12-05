@@ -65,11 +65,11 @@ tr:nth-child(even) {
                         <td th:text="${event.privateEvent}"></td>
                         <td th:text="${event.isFree()}"></td>
 
-                        <td><br> <a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
-                        <td><br> <a class="badge" th:href="@{/events/{id}/delete(id=${event.id})}">Delete</a></td>
+                        <td> <a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
+                       
                         
 
-                        <td><a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
+                        
 
                     </tr>
                 </tbody>

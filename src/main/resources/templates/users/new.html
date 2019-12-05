@@ -17,7 +17,7 @@ and open the template in the editor. *1*
             <div>Por favor ingrese sus datos para poder registrarse</div>
                 <p></p>
             <form action="#" th:action="@{/users}" th:object="${user}" method="post">
-                Email:<input type="text" th:field="*{email}" /> <br>
+                Email:<input type="email" th:field="*{email}" /> <br>
                 Password:<input type="password" th:field="*{password}" /> <br>
                 Firs Name:<input type="text" th:field="*{firstName}" /> <br>
                 Last Name:<input type="text" th:field="*{lastName}" /> 

@@ -68,12 +68,6 @@ public class EventController {
     
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable ("id") Long id) throws Exception {
-<<<<<<< HEAD
-        Event e=eventService.find(id);
-        if(Objects.equals(sessionService.getCurrentUser().getId(), e.getOwner().getId())){
-            eventService.delete(id);
-            return "redirect:/events/myEvents";
-=======
         Event event = eventService.find(id);
         if(Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())){    // Controlo que sea el propio usuario 
             if(!event.hasRegistrations()) {     // Controlo que no halla inscriptos
@@ -81,7 +75,6 @@ public class EventController {
                 return "redirect:/events/myEvents";
             }
             throw new Exception("No se puede eliminar el evento porque posee inscripciones");
->>>>>>> 6e434b367eeca71248be8350639f1390574ecda1
         }
         throw new Exception("Permiso denegado usuario invalido");
     }
