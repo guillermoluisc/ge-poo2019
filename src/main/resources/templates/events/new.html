@@ -5,13 +5,35 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org">
+<center>
     <head>
-        <title>New Event</title>
+        <style type="text/css">
+            .badge{
+            text-decoration: none;
+            padding: 3px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: helvetica;
+            font-weight: 300;
+            font-size: 25px;
+            font-style: italic;
+            color:  #4b5e9e ;
+            background-color:  #8f9ccb;
+            border-radius: 15px;
+            border: 3px double #02308b;
+            }
+            .badge:hover{
+                opacity: 0.6;
+                text-decoration: none;
+            }
+        </style>
+        <h1>New Event</h1>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>New event</div>
+        <div>Describa aqui los datos necesarios del evento</div>
+                                        <p></p>
         <form action="#" th:action="@{/events}" th:object="${event}" method="post">
             Event Name:<input type="text" th:field="*{eventName}" /> <br>
             Event Date:<input type="date" th:field="*{eventDate}" /> <br>
@@ -21,11 +43,13 @@ and open the template in the editor.
             Capacity:<input type="text" th:field="*{capacity}" /> <br>
             Cost:<input type="text" th:field="*{cost}" /> <br>
             Private Event:<input type="checkbox" th:field="*{privateEvent}" />
+                                        <p></p>
             <button type="submit" name="newEvent">Create</button>
-           
+           <a class="badge" th:href="@{/events}">Volver</a>
            <!-- <a class="badge" th:href="@{/registrations/{id}/logOut(id=${event.id})}">LogOut</a>
             <button type="submit" name="logOut">Create</button>-->
             
         </form>
     </body>
+</center>
 </html>

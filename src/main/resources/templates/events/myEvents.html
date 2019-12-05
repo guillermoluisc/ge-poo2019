@@ -11,10 +11,31 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #4ddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
     </head>
     <body>
         <div class="container-fluid">
             <h1 >My Events</h1>
+
+
+
+
             <table class="table table-dark">
                 <thead>
                     <tr>
@@ -40,10 +61,13 @@ and open the template in the editor.
                         <td th:text="${event.privateEvent}"></td>
                         <td th:text="${event.isFree()}"></td>
                         <td><br> <a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
+                        <td><br> <a class="badge" th:href="@{/events/{id}/delete(id=${event.id})}">Delete</a></td>
+                        
                     </tr>
                 </tbody>
             </table>
             <a class="badge badge-primary" th:href="@{/events/new}">New Event</a>
+            <a class="badge badge-primary" th:href="@{/events}">Volver</a>
             
             
         </div>

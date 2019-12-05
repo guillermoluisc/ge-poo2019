@@ -6,15 +6,39 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Inicio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+
+
+
     <body>
-        <div> MAIN </div>
-        <div>
-        <a class="badge" th:href="@{/users/new}">New User</a>
-        </div>
-         <a class="badge" th:href="@{/login}">login</a>
+	<h1> <p style="text-align: center;"> Página Principal </p> </h1>
+        <h2> <p style="text-align: center;"> Bienvenido </p> </h2>
+         <center>
+            <style type="text/css">
+                .badge{
+                    text-decoration: none;
+                    padding: 10px;
+                    font-weight: 600;
+                    font-size: 20px;
+                    color: #ffffff;
+                    background-color: #1883ba;
+                    border-radius: 6px;
+                    border: 2px solid #0016b0;
+                }
+                .badge:hover{
+                    color: #1883ba;
+                    background-color: #ffffff;
+                }
+            </style>
+        
+            <p>
+                <a class="badge" th:href="@{/users/new}">New User</a>
+                <a class="badge" th:href="@{/login}">Login</a>
+ 
+            </p>   
+        </Center>
     </body>
 </html>

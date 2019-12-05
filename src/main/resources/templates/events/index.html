@@ -6,15 +6,48 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+<style type="text/css">
+  .badge{
+    text-decoration: none;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: helvetica;
+    font-weight: 300;
+    font-size: 25px;
+    font-style: italic;
+    color:  #4b5e9e ;
+    background-color:  #8f9ccb;
+    border-radius: 15px;
+    border: 3px double #02308b;
+  }
+  .badge:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }
+</style>
+
         <title>Events</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+
     </head>
     <body>
         <div class="container-fluid">
             <h1 >Event List</h1>
+            <h2 >Aquí puede ver los diferentes eventos</h2>
+
+
+
+
+          <a class="badge" th:href="@{/events/new}">New Event</a>
+          <a class="badge" th:href="@{/events/myEvents}">My Event</a>
+
+
             <table class="table table-dark">
                 <thead>
                     <tr>

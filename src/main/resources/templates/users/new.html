@@ -5,20 +5,29 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>New User</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>New user</div>
-        <form action="#" th:action="@{/users}" th:object="${user}" method="post">
-            Email:<input type="text" th:field="*{email}" /> <br>
-            
-            Password:<input type="password" th:field="*{password}" /> <br>
-            Firs Name:<input type="text" th:field="*{firstName}" /> <br>
-            Last Name:<input type="text" th:field="*{lastName}" /> 
-            <button type="submit" name="newUser">Create</button>
-        </form>
-    </body>
+    <center>
+        <head>
+
+             <h1> New User </h1>
+
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body>
+            <div>Por favor ingrese sus datos para poder registrarse</div>
+                <p></p>
+            <form action="#" th:action="@{/users}" th:object="${user}" method="post">
+                Email:<input type="text" th:field="*{email}" /> <br>
+                Password:<input type="password" th:field="*{password}" /> <br>
+                Firs Name:<input type="text" th:field="*{firstName}" /> <br>
+                Last Name:<input type="text" th:field="*{lastName}" /> 
+            <p>
+                <button type="submit" name="newUser">Create</button>
+            </p>   
+            </form>
+
+        </body>
+    </center>
 </html>
+
+

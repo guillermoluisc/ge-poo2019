@@ -68,7 +68,8 @@ public class EventController {
     
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable ("id") Long id) throws Exception {
-        if(Objects.equals(sessionService.getCurrentUser().getId(), id)){
+        Event e=eventService.find(id);
+        if(Objects.equals(sessionService.getCurrentUser().getId(), e.getOwner().getId())){
             eventService.delete(id);
             return "redirect:/events/myEvents";
         }
