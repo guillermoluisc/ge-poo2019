@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>Event Details</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
         <style>
 table {
   font-family: arial, sans-serif;
@@ -26,11 +27,15 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 </style>
+=======
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+>>>>>>> 6e434b367eeca71248be8350639f1390574ecda1
     </head>
     <body>
-        <div>Event Details</div>
-        
-         <table class="table table-dark">
+        <div class="container-fluid">
+            <h1 >Event Details</h1>
+            <table class="table table-dark">
                 <thead>
                     <tr>
                         <th>Event Name</th>
@@ -38,9 +43,9 @@ tr:nth-child(even) {
                         <th>Start Registrations</th>
                         <th>End Registrations</th>
                         <th>Lugar</th>
-                        <th>Available</th>
+                        <th>Capacity</th>
                         <th>Private Event</th>
-                        <th>Free</th>
+                        <th>Cost</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -60,8 +65,8 @@ tr:nth-child(even) {
                 <a class="badge badge-primary" th:href="@{/events}">Volver</a>
                     </tr>
                 </tbody>
-        </table>
-        
-        
+            </table>
+        </div>
+        <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
     </body>
 </html>
