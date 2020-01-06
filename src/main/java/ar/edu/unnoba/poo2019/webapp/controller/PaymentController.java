@@ -11,7 +11,6 @@ import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import ar.edu.unnoba.poo2019.webapp.service.PaymentService;
 import ar.edu.unnoba.poo2019.webapp.service.SessionService;
-import ar.edu.unnoba.poo2019.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,17 +28,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/payments")
 public class PaymentController {
     
-    
-    @Autowired
-    private UserService userService;
-    
     @Autowired
     private EventService eventService;
-     @Autowired
-    private SessionService sessionService;
     
+    @Autowired
+    private SessionService sessionService;
             
-       @Autowired
+    @Autowired
     private PaymentService paymentService;
     
     

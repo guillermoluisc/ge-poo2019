@@ -54,9 +54,9 @@ public class Payment implements Serializable {
 
     public Payment(long id, User user, Event event, String cardName, String cardNumber) {
         this.id = id;
-       this.event=event;
-       this.owner=user;
-        this.cardName = this.cardName;
+        this.event=event;
+        this.owner=user;
+        this.cardName = cardName;
         this.cardNumber = cardNumber;
     }
 

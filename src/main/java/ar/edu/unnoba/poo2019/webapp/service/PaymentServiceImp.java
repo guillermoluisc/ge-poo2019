@@ -7,11 +7,9 @@ package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Payment;
-import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.repository.PaymentRepository;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,20 +23,15 @@ public class PaymentServiceImp implements PaymentService {
 
     @Autowired
     private PaymentRepository paymentRepository;
-    
-    
+        
     @Autowired
     private RegistrationService registrationService;
     
-    @Autowired
-    private EventService eventService;
     
     @Override
     public List<Payment> users() {
         return paymentRepository.findAll();
     }
-
-    
 
     @Override
     public Payment find(Long id) {
@@ -59,6 +52,7 @@ public class PaymentServiceImp implements PaymentService {
     public void delete(Long id) {
         paymentRepository.deleteById(id);
     }
+    
     @Override
     public Payment findByEventAndUser(Event event, User user) {
         List<Payment> payments = paymentRepository.findByEventAndOwner(event,user);
@@ -79,7 +73,7 @@ public class PaymentServiceImp implements PaymentService {
             registrationService.create(payment.getEvent().getId(),payment.getOwner());   
             return payment;
         }else{
-            throw new Exception("Error, el evento es gratis o ya se pago por el evento");
+            throw new Exception("Error, ya se pago por el evento o el evento es gratis");
         }
         
     }
