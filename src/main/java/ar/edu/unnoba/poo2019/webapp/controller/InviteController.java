@@ -7,6 +7,7 @@ package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
+import ar.edu.unnoba.poo2019.webapp.service.InviteService;
 import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import ar.edu.unnoba.poo2019.webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author guillermo
  */
- @Controller
+@Controller
 @RequestMapping("/invites")
 public class InviteController {
-     @Autowired
+    
+    @Autowired
     private UserService userService;
     
     @Autowired
     private EventService eventService;
-     @Autowired
+    
+    @Autowired
+    private InviteService inviteService;
+    
+    @Autowired
     private SessionService sessionService;
      
      
-      @GetMapping("{eventId,userID")
+    @GetMapping("{eventId,userID")
     public String inviteNew(Model model,@PathVariable Long id){
         Invite i =new Invite();
         i.setEvent(eventService.find(id));

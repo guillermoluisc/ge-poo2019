@@ -26,7 +26,7 @@ public class InviteServiceImp implements InviteService {
     @Override
     public List<Invite> invites() {
         return inviteRepository.findAll();
-                }
+    }
 
     @Override
     public Invite create(Invite invite) {
