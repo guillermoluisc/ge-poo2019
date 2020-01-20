@@ -1,0 +1,49 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ar.edu.unnoba.poo2019.webapp.service.validation.event;
+
+import ar.edu.unnoba.poo2019.webapp.model.Event;
+import java.util.Date;
+import org.springframework.stereotype.Component;
+
+/**
+ *
+ * @author root
+ */
+@Component(value = "SimpleEventValidator")
+public class EventValidator implements IEventValidator {
+
+    @Override
+    public void validate(Event event) throws Exception {
+        if (event.getEventName().isEmpty()) {
+            throw new Exception("El evento no posee nombre");
+        }
+        if (event.getOwner() == null) {
+            throw new Exception("El evento no posee dueño");
+        }
+        Date today = new Date();
+        if (event.getEventDate() == null || event.getEventDate().before(today)) {
+            throw new Exception("La fecha del evento debe ser igual o posterior al dia de hoy");
+        }
+        if (event.getStartRegistrations() == null || event.getStartRegistrations().before(today) || event.getStartRegistrations().after(event.getEventDate())) { // Controlo que la fecha de inicio de inscripciones no sea nula, sea mayor o igaul a la fecha actual y menor o igual a la feche del evento.
+            throw new Exception("La fecha de comienzo de inscripciones debe estar entre hoy y el dia del evento.");
+        }
+        if (event.getEndRegistrations() == null || event.getEndRegistrations().before(event.getStartRegistrations()) || event.getEndRegistrations().after(event.getEventDate())) { // Controlo que la fecha de fin de inscripciones no sea nula, sea mayor o igaul que la de comienzo de incripciones y que sea menor o igaul que la fecha del evento.
+            throw new Exception("La fecha de fin de inscripciones debe estar entre el dia de comienzo de inscripciones y el dia del evento.");
+        }
+        if (event.getLugar().isEmpty()) {
+            throw new Exception("El evento no posee lugar.");
+        }
+        if (event.getCapacity() < 1) {
+            throw new Exception("La capacidad debe ser 1 o mas.");
+        }
+        if (event.getCost() < 0) {
+            throw new Exception("El costo del evento no puede ser negativo");
+        }
+
+    }
+
+}

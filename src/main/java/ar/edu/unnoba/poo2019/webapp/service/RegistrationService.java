@@ -17,16 +17,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface RegistrationService {
-    
+
     public List<Registration> registrations();
-    
+
     public void create(Long eventId) throws Exception;
-    
+
     public Registration find(Long id);
-    
-    public Registration update(Long id,Registration registration);
 
     public void delete(Long id);
-    
+
     public Registration findByEventAndUser(Event event, User user);
 }

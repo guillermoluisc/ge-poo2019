@@ -61,7 +61,7 @@ public class EventController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute Event event) {
+    public String create(@ModelAttribute Event event) throws Exception {
         eventService.create(event);
         return "redirect:/events/myEvents";
     }

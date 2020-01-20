@@ -7,8 +7,8 @@ package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.repository.EventRepository;
+import ar.edu.unnoba.poo2019.webapp.service.validation.event.EventValidator;
 import java.util.List;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,15 +25,18 @@ public class EventServiceImp implements EventService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private EventValidator eventValidator;
+
     @Override
     public List<Event> events() {
         return eventRepository.findAllEvents();
-
     }
 
     @Override
-    public Event create(Event event) {
+    public Event create(Event event) throws Exception {
         event.setOwner(sessionService.getCurrentUser()); // Guardo el usuario actual.
+        eventValidator.validate(event);
         return eventRepository.save(event);
     }
 
@@ -57,9 +60,10 @@ public class EventServiceImp implements EventService {
                 oldEvent.setEventDate(event.getEventDate());
                 oldEvent.setPrivateEvent(event.isPrivateEvent());
                 oldEvent.setLugar(event.getLugar());
+                eventValidator.validate(oldEvent);
                 return eventRepository.save(oldEvent);
             }
-        }else{
+        } else {
             throw new Exception("La capacidad no puede ser menor que la cantidad de inscriptos");
         }
     }
@@ -69,7 +73,7 @@ public class EventServiceImp implements EventService {
         Event event = this.find(id);
         if (!event.hasRegistrations()) {     // Controlo que no halla inscriptos
             eventRepository.deleteById(id);
-        }else{
+        } else {
             throw new Exception("No se puede eliminar el evento porque posee inscripciones");
         }
     }

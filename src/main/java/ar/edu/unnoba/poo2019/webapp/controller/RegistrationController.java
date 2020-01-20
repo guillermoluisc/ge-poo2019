@@ -6,10 +6,8 @@
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
-import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import ar.edu.unnoba.poo2019.webapp.service.RegistrationService;
-import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/registrations")
 public class RegistrationController {
-
-    
 
     @Autowired
     private RegistrationService registrationService;
@@ -55,7 +51,6 @@ public class RegistrationController {
     /**
      * @PostMapping public String create(@PathVariable Long id) throws
      * Exception{ User user = sessionService.getCurrentUser();
-     * registrationService.create(id, user); return null;
-    }*
+     * registrationService.create(id, user); return null; }*
      */
 }
