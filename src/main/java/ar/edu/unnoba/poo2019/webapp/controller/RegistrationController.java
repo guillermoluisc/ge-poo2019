@@ -24,43 +24,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/registrations")
 public class RegistrationController {
+
     
-    @Autowired
-    private SessionService sessionService;
-    
+
     @Autowired
     private RegistrationService registrationService;
-    
+
     @Autowired
     private EventService eventService;
-    
-    @GetMapping("/{id}/registrate") 
-    public String registrate(@PathVariable Long id, Model model){ // Ver si pasar el id o el evento desde la pagina de eventos
+
+    @GetMapping("/{id}/registrate")
+    public String registrate(@PathVariable Long id, Model model) {
         Event e = eventService.find(id);
         model.addAttribute("event", e);
         return "registrations/registrate";
     }
-    
+
     @GetMapping("/{id}/confirmRegistration")
-    public String confirmRegistration(@PathVariable Long id, Model model) throws Exception{
+    public String confirmRegistration(@PathVariable Long id, Model model) throws Exception {
         Event e = eventService.find(id);
-        User u = sessionService.getCurrentUser();
-        System.out.println(u.getEmail());
-        if(e.getCost() > 0){
-            
+        if (e.getCost() > 0) {
             return "redirect:/payments/{id}";
-        }else{ 
-            registrationService.create(id, u);
+        } else {
+            registrationService.create(id);
             return "registrations/confirmedRegistration";
         }
-        
+
     }
-    
-    /**@PostMapping
-    public String create(@PathVariable Long id) throws Exception{
-        User user = sessionService.getCurrentUser();
-        registrationService.create(id, user);
-        return null;
-    }**/
-    
+
+    /**
+     * @PostMapping public String create(@PathVariable Long id) throws
+     * Exception{ User user = sessionService.getCurrentUser();
+     * registrationService.create(id, user); return null;
+    }*
+     */
 }

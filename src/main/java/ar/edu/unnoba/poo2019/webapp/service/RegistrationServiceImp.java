@@ -33,6 +33,9 @@ public class RegistrationServiceImp implements RegistrationService{
     
         @Autowired
     private RegistrationValidator validator;
+        
+    @Autowired
+    private SessionService sessionService;
 
     @Override
     public List<Registration> registrations() {
@@ -43,7 +46,8 @@ public class RegistrationServiceImp implements RegistrationService{
 
     @Transactional
     @Override
-    public void create(Long eventId, User user) throws Exception{
+    public void create(Long eventId) throws Exception{
+        User user = sessionService.getCurrentUser();
         Event e = eventRepository.getOne(eventId);
         Registration reg = new Registration();
         reg.setEvent(e);

@@ -20,7 +20,7 @@ public interface RegistrationService {
     
     public List<Registration> registrations();
     
-    public void create(Long eventId, User user) throws Exception;
+    public void create(Long eventId) throws Exception;
     
     public Registration find(Long id);
     

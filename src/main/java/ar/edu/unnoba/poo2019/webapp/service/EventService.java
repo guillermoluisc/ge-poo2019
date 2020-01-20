@@ -24,8 +24,8 @@ public interface EventService {
     
     public Event find(Long id);
     
-    public Event update(Long id,Event event);
+    public Event update(Long id,Event event) throws Exception;
 
-    public void delete(Long id);
+    public void delete(Long id) throws Exception;
     
 }

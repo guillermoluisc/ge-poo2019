@@ -23,11 +23,10 @@ public class PaymentServiceImp implements PaymentService {
 
     @Autowired
     private PaymentRepository paymentRepository;
-        
+
     @Autowired
     private RegistrationService registrationService;
-    
-    
+
     @Override
     public List<Payment> users() {
         return paymentRepository.findAll();
@@ -35,12 +34,12 @@ public class PaymentServiceImp implements PaymentService {
 
     @Override
     public Payment find(Long id) {
-       return paymentRepository.findById(id).get();
+        return paymentRepository.findById(id).get();
     }
 
     @Override
     public Payment update(Long id, Payment payment) {
-        Payment p=paymentRepository.findById(id).get();
+        Payment p = paymentRepository.findById(id).get();
         p.setCardName(payment.getCardName());
         p.setCardNumber((payment.getCardNumber()));
         p.setOwner(payment.getOwner());
@@ -52,33 +51,29 @@ public class PaymentServiceImp implements PaymentService {
     public void delete(Long id) {
         paymentRepository.deleteById(id);
     }
-    
+
     @Override
     public Payment findByEventAndUser(Event event, User user) {
-        List<Payment> payments = paymentRepository.findByEventAndOwner(event,user);
-        if(payments.isEmpty())
+        List<Payment> payments = paymentRepository.findByEventAndOwner(event, user);
+        if (payments.isEmpty()) {
             return null;
-        else
+        } else {
             return payments.get(0);
+        }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Payment create(Payment payment) throws Exception{
-        System.out.println("create paymentService");
-        User user=payment.getOwner();
-        Event event=payment.getEvent();
-        if(event.getCost() > 0 && this.findByEventAndUser(event, user)==null){
+    public Payment create(Payment payment) throws Exception {
+        User user = payment.getOwner();
+        Event event = payment.getEvent();
+        if (event.getCost() > 0 && this.findByEventAndUser(event, user) == null) {
             paymentRepository.save(payment);
-            registrationService.create(payment.getEvent().getId(),payment.getOwner());   
+            registrationService.create(payment.getEvent().getId());
             return payment;
-        }else{
+        } else {
             throw new Exception("Error, ya se pago por el evento o el evento es gratis");
         }
-        
     }
 
- 
-
-    
 }
