@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>My Events</title>
+        <title>My Registrations</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
@@ -35,7 +35,7 @@ tr:nth-child(even) {
     </head>
     <body>
         <div class="container-fluid">
-            <h1 >My Events</h1>
+            <h1 >Mis Inscripciones</h1>
 
 
 
@@ -44,39 +44,26 @@ tr:nth-child(even) {
                 <thead>
                     <tr>
                         <th>Event Name</th>
-                        <th>Event Date</th>
-                        <th>Start Registrations</th>
-                        <th>End Registrations</th>
-                        <th>Lugar</th>
-                        <th>Available</th>
+                        <th>Event Date</th>                       
+                        <th>Lugar</th>                       
                         <th>Private Event</th>
                         <th>Free</th>
-                        <th></th>
-                        <th></th>
+                        
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="event : ${events}">
-                        <td th:text="${event.eventName}"></td>
-                        <td th:text="${event.eventDate}"></td>
-                        <td th:text="${event.startRegistrations}"></td>
-                        <td th:text="${event.endRegistrations}"></td>
-                        <td th:text="${event.lugar}"></td>
-                        <td th:text="${event.isAvailableQuota()}"></td>
-                        <td th:text="${event.privateEvent}"></td>
-                        <td th:text="${event.isFree()}"></td>
-
-                        <td> <a class="badge" th:href="@{/events/{id}/eventDetails(id=${event.id})}">Detail</a></td>
-                        <td> <a class="badge" th:href="@{/invites/{id}/invite(id=${event.id})}">Invite</a></td>
+                    <tr th:each="registration : ${registrations}">
+                        <td th:text="${registration.event.eventName}"></td>
+                        <td th:text="${registration.event.eventDate}"></td>
+                        <td th:text="${registration.event.lugar}"></td>
+                        <td th:text="${registration.event.privateEvent}"></td>
+                        <td th:text="${registration.event.isFree()}"></td>
                         
-
-                        
-
+                     
                     </tr>
                 </tbody>
             </table>
-            <a class="badge badge-primary" th:href="@{/events/new}">New Event</a>
-
             <a class="badge badge-primary" th:href="@{/events}">Volver</a>
             
             
@@ -85,3 +72,4 @@ tr:nth-child(even) {
         <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
     </body>
 </html>
+

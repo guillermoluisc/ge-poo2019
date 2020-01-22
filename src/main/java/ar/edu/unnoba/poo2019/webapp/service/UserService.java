@@ -18,7 +18,7 @@ public interface UserService {
     
     public List<User> users();
     
-    public User create(User user);
+    public User create(User user) throws Exception;
     
     public User find(Long id);
     

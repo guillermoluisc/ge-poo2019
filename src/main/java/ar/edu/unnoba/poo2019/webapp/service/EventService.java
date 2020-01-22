@@ -20,12 +20,12 @@ public interface EventService {
     
     public List<Event> findEventsByOwnerId(long ownerId);
     
-    public Event create(Event event);
+    public Event create(Event event) throws Exception;
     
     public Event find(Long id);
     
-    public Event update(Long id,Event event);
+    public Event update(Long id,Event event) throws Exception;
 
-    public void delete(Long id);
+    public void delete(Long id) throws Exception;
     
 }

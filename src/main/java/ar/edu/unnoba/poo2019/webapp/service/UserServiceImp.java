@@ -7,6 +7,7 @@ package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.repository.UserRepository;
+import ar.edu.unnoba.poo2019.webapp.service.validation.user.UserValidator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,13 +21,16 @@ import org.springframework.stereotype.Service;
  * @author jpgm
  */
 @Service
-public class UserServiceImp implements UserService, UserDetailsService{
-    
+public class UserServiceImp implements UserService, UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserValidator userValidator;
 
     @Override
     public List<User> users() {
@@ -34,7 +38,8 @@ public class UserServiceImp implements UserService, UserDetailsService{
     }
 
     @Override
-    public User create(User user) {
+    public User create(User user) throws Exception {
+        userValidator.validate(user);
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
@@ -46,16 +51,16 @@ public class UserServiceImp implements UserService, UserDetailsService{
 
     @Override
     public User update(Long id, User user) {
-            User u = userRepository.findById(id).get();
-            u.setFirstName(user.getFirstName());
-            u.setLastName(user.getLastName());
-            return userRepository.save(u);
-        }
-        
+        User u = userRepository.findById(id).get();
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        return userRepository.save(u);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username).get(0);
-        
+
     }
 
     @Override
@@ -72,7 +77,5 @@ public class UserServiceImp implements UserService, UserDetailsService{
     public boolean existe(String email) {
         return !userService.findByEmail(email).isEmpty();
     }
-    
-    
-    
+
 }

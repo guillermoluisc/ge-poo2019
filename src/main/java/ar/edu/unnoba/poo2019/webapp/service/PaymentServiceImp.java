@@ -9,6 +9,7 @@ import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Payment;
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.repository.PaymentRepository;
+import ar.edu.unnoba.poo2019.webapp.service.validation.payment.PaymentValidator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,34 +21,36 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class PaymentServiceImp implements PaymentService {
-
+    
     @Autowired
     private PaymentRepository paymentRepository;
-        
+    
     @Autowired
     private RegistrationService registrationService;
     
+    @Autowired
+    private PaymentValidator paymentValidator;
     
     @Override
     public List<Payment> users() {
         return paymentRepository.findAll();
     }
-
+    
     @Override
     public Payment find(Long id) {
-       return paymentRepository.findById(id).get();
+        return paymentRepository.findById(id).get();
     }
-
+    
     @Override
     public Payment update(Long id, Payment payment) {
-        Payment p=paymentRepository.findById(id).get();
+        Payment p = paymentRepository.findById(id).get();
         p.setCardName(payment.getCardName());
         p.setCardNumber((payment.getCardNumber()));
         p.setOwner(payment.getOwner());
         p.setEvent(payment.getEvent());
         return paymentRepository.save(p);
     }
-
+    
     @Override
     public void delete(Long id) {
         paymentRepository.deleteById(id);
@@ -55,30 +58,27 @@ public class PaymentServiceImp implements PaymentService {
     
     @Override
     public Payment findByEventAndUser(Event event, User user) {
-        List<Payment> payments = paymentRepository.findByEventAndOwner(event,user);
-        if(payments.isEmpty())
+        List<Payment> payments = paymentRepository.findByEventAndOwner(event, user);
+        if (payments.isEmpty()) {
             return null;
-        else
+        } else {
             return payments.get(0);
+        }
     }
-
+    
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Payment create(Payment payment) throws Exception{
-        System.out.println("create paymentService");
-        User user=payment.getOwner();
-        Event event=payment.getEvent();
-        if(event.getCost() > 0 && this.findByEventAndUser(event, user)==null){
+    public Payment create(Payment payment) throws Exception {
+        User user = payment.getOwner();
+        Event event = payment.getEvent();
+        if (event.getCost() > 0 && this.findByEventAndUser(event, user) == null) {
+            paymentValidator.validate(payment);
             paymentRepository.save(payment);
-            registrationService.create(payment.getEvent().getId(),payment.getOwner());   
+            registrationService.create(payment.getEvent().getId());
             return payment;
-        }else{
+        } else {
             throw new Exception("Error, ya se pago por el evento o el evento es gratis");
         }
-        
     }
-
- 
-
     
 }

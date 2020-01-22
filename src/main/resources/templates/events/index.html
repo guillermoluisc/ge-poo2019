@@ -4,16 +4,22 @@
 		<!-- meta charset="utf-8" con esto se declara la codificacion del documento. -->
 		<meta charset="utf-8">
 		<title>Eventos</title>
+		<link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet"> 
 		<style type="text/css">
+			    .texto-borde {
+     			 	-webkit-text-stroke: 2px black;
+      				color: transparent; 
+								}
+			
 			.borde{
-  				border: 1px solid;
-  				border-color:red;
-					}
-			.prueba{
+				size: 1px;
+			}
+			
+			.prb{
+				font-family: 'Abril Fatface', cursive;
    				text-align: center;
    				color: blue;
-   				font-family: serif;
-   				font-size: 20px;
+   				font-size: 45px;
    				font-weight: 900;
    				margin: 10px;
    					}
@@ -42,7 +48,7 @@
 				}
 				th{
 				  padding: 20px 15px;
-				  text-align: left;
+				  text-align: center;
 				  font-weight: 500;
 				  font-size: 12px;
 				  color: #fff;
@@ -50,7 +56,7 @@
 				}
 				td{
 				  padding: 15px;
-				  text-align: left;
+				  text-align: center;
 				  vertical-align:middle;
 				  font-weight: 300;
 				  font-size: 12px;
@@ -63,7 +69,8 @@
 
 				
 				body{
-					 background-image: url(https://wallpaperstock.net/abstract-red-wallpapers_37120_1366x768.jpg);
+					  background: -webkit-linear-gradient(left, #000000, #ffffff);
+  					  background: linear-gradient(to right, #9e4547, #000000);
 				  
 				}
 				section{
@@ -150,8 +157,8 @@ Estilo para barra lateral
 
 
 		 <div class = borde>
-       			<p class= prueba>Eventos</p>
-       			<p class=prueba>Aqui se ven los eventos</p>
+       			<p class= prb>Eventos</p>
+       			<p class=prb>Aqui se ven los eventos</p>
        	</div>
     </div>
 
@@ -180,14 +187,14 @@ Estilo para barra lateral
   	<table cellpadding="0" cellspacing="0" border="0">
       <tbody>
       	<tr th:each="event : ${events}">	
-            <td th:text="${event.eventName}"></td>
-            <td th:text="${event.eventDate}"></td>
-            <td th:text="${event.startRegistrations}"></td>
-          	<td th:text="${event.endRegistrations}"></td>
-            <td th:text="${event.lugar}"></td>
-            <td th:text="${event.isAvailableQuota()}"></td>
-            <td th:text="${event.privateEvent}"></td>
-            <td th:text="${event.isFree()}"></td>
+            <td>hola</td>
+            <td>hola</td>
+            <td>hola</td>
+            <td>hola</td>
+            <td>hola</td>
+            <td>hola</td>
+            <td>hola</td>
+            <td>hola</td>
             <td><a class="w3-bar-item w3-button w3-hover-blue" th:href="@{/registrations/{id}/registrate(id=${event.id})}">Registrate</a>
 			</td>
         </tr>

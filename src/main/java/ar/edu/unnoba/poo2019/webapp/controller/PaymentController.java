@@ -47,7 +47,6 @@ public class PaymentController {
     
     @GetMapping("/{id}")
     public String paymentNew(Model model,@PathVariable Long id){
-        System.out.println("GetMapping /new paymentController");
         model.addAttribute("event",eventService.find(id));
         model.addAttribute("payment", new Payment());
         return "payments/new";
@@ -56,7 +55,7 @@ public class PaymentController {
     @PostMapping("/{id}")
     public String create(@PathVariable Long id, @ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
         User u = sessionService.getCurrentUser();
-        Event e=eventService.find(id);
+        Event e = eventService.find(id);
         payment.setOwner(u);
         payment.setEvent(e);
         paymentService.create(payment);
