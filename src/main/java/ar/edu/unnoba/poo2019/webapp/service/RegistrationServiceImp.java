@@ -76,4 +76,10 @@ public class RegistrationServiceImp implements RegistrationService {
         }
     }
 
+    @Override
+    public List<Registration> findByUser(Long id) {
+        List<Registration> registrations = registrationRepository.findByUserId(id);
+        return registrations;
+    }
+
 }

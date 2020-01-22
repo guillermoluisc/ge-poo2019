@@ -6,8 +6,11 @@
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
+import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import ar.edu.unnoba.poo2019.webapp.service.RegistrationService;
+import ar.edu.unnoba.poo2019.webapp.service.SessionService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +31,18 @@ public class RegistrationController {
 
     @Autowired
     private EventService eventService;
+    
+    @Autowired
+    private SessionService sessionService;
 
+    @GetMapping("/myRegistrations")
+    public String registrate(Model model) {
+        Long id = sessionService.getCurrentUser().getId();
+        List<Registration> registrations = registrationService.findByUser(id);
+        model.addAttribute("registrations", registrations);
+        return "registrations/myRegistrations";
+    }
+    
     @GetMapping("/{id}/registrate")
     public String registrate(@PathVariable Long id, Model model) {
         Event e = eventService.find(id);
