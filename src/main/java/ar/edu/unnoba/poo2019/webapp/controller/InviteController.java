@@ -57,4 +57,12 @@ public class InviteController {
         return "invites/inviteUsers";
     }
 
+    @GetMapping("/myInvites")
+    public String invite(Model model) {
+        User user = sessionService.getCurrentUser();
+        List<Invite> invites = inviteService.findByUser(user);
+        model.addAttribute("invites", invites);
+        return "invites/myInvites";
+    }
+
 }

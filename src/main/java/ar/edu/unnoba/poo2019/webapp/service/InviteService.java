@@ -30,5 +30,5 @@ public interface InviteService {
     
     public Invite findByUserAndEvent(User user, Event event);
              
-    
+    public List<Invite> findByUser(User user);
 }

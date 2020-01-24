@@ -57,5 +57,10 @@ public class InviteServiceImp implements InviteService {
         return inviteRepository.findByUserAndEvent(user, event);
         
     }
+
+    @Override
+    public List<Invite> findByUser(User user) {
+        return inviteRepository.findByUser(user);
+    }
     
 }

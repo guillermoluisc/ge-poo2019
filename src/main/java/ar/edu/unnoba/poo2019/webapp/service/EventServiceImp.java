@@ -7,6 +7,7 @@ package ar.edu.unnoba.poo2019.webapp.service;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.repository.EventRepository;
+import ar.edu.unnoba.poo2019.webapp.repository.InviteRepository;
 import ar.edu.unnoba.poo2019.webapp.service.validation.event.EventValidator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class EventServiceImp implements EventService {
 
     @Autowired
     private EventRepository eventRepository;
+    
+    @Autowired
+    private InviteRepository inviteRepository;
 
     @Autowired
     private EventValidator eventValidator;
@@ -73,6 +77,7 @@ public class EventServiceImp implements EventService {
         Event event = this.find(id);
         if (!event.hasRegistrations()) {     // Controlo que no halla inscriptos
             eventRepository.deleteById(id);
+            //inviteRepository.deleteByEventId(id);
         } else {
             throw new Exception("No se puede eliminar el evento porque posee inscripciones");
         }

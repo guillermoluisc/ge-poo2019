@@ -157,7 +157,7 @@ Estilo para barra lateral
               <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
               <a href="/events/new">Nuevo Evento</a>
         <h5>Crea nuevos eventos definiendo difernetes parámetros.</h5>
-              <a th:href="@{/events}">Volver</a>
+        <a th:href="@{/events}">Volver</a>
         <h5>Volver a la pestaña de todos los eventos.</h5>
               <a href="/logout">Salir</a>
         <img src="https://drive.google.com/uc?id=1WFufuKPZPW6Nw51VjUSiuDBE2GNg_81Q" width="50"
@@ -190,6 +190,7 @@ Estilo para barra lateral
           <th>Gratis</th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
   </table>
@@ -197,7 +198,7 @@ Estilo para barra lateral
     <div class="tbl-content">
         <table cellpadding="0" cellspacing="0" border="0">
           <tbody>
-                    <tr th:each="event : ${events}">
+              <tr th:each="event : ${events}">
                         <td th:text="${event.eventName}"></td>
                         <td th:text="${event.eventDate}"></td>
                         <td th:text="${event.startRegistrations}"></td>
@@ -206,10 +207,12 @@ Estilo para barra lateral
                         <td th:text="${event.isAvailableQuota()}"></td>
                         <td th:text="${event.privateEvent}"></td>
                         <td th:text="${event.isFree()}"></td>
+                        
 
                         <td> <a th:href="@{/events/{id}/eventDetails(id=${event.id})}"class="button">Detalles</a></td>
                         <td> <a th:href="@{/invites/{id}/invite(id=${event.id})}" class="button">Invitar</a></td>
-                    </tr>
+                        <td> <a th:href="@{/events/{id}/delete(id=${event.id})}" class="button">Eliminiar</a></td>
+              </tr>
                 </tbody>
       </table>
     </div>
