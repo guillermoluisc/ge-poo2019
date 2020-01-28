@@ -17,18 +17,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface InviteService {
-    
+
     public List<Invite> invites();
-    
-    public Invite create(Invite invite);
-    
+
+    public Invite create(Invite invite) throws Exception;
+
     public Invite find(Long id);
-    
-    public Invite update(Long id,Invite invite);
+
+    public Invite update(Long id, Invite invite);
 
     public void delete(Long id);
-    
+
     public Invite findByUserAndEvent(User user, Event event);
-             
+
     public List<Invite> findByUser(User user);
 }

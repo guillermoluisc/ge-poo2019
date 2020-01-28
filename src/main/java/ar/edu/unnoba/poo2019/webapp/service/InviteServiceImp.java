@@ -9,6 +9,7 @@ import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.repository.InviteRepository;
+import ar.edu.unnoba.poo2019.webapp.service.validation.invite.InviteValidator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,18 @@ public class InviteServiceImp implements InviteService {
     @Autowired
     private InviteRepository inviteRepository;
     
+    @Autowired
+    private InviteValidator inviteValidator;
+    
+    
     @Override
     public List<Invite> invites() {
         return inviteRepository.findAll();
     }
 
     @Override
-    public Invite create(Invite invite) {
+    public Invite create(Invite invite) throws Exception {
+        inviteValidator.validate(invite);
         return inviteRepository.save(invite);
     }
 

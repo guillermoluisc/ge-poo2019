@@ -5,6 +5,7 @@
  */
 package ar.edu.unnoba.poo2019.webapp.controller;
 
+import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
 import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
@@ -41,34 +42,41 @@ public class InviteController {
     private SessionService sessionService;
 
     @GetMapping("/{eventId}/{userId}/sendInv")
-    public String sendInv(Model model, @PathVariable Long eventId, @PathVariable Long userId) {
-        Invite i = new Invite();
-        i.setEvent(eventService.find(eventId));
-        i.setUser(userService.find(userId));
-        inviteService.create(i);
-        return "redirect:/events/myEvents";
+    public String sendInv(Model model, @PathVariable Long eventId, @PathVariable Long userId) throws Exception {
+        Event event = eventService.find(eventId);
+        if (Objects.equals(event.getOwner().getId(), sessionService.getCurrentUser().getId())) {
+            Invite i = new Invite();
+            i.setEvent(event);
+            i.setUser(userService.find(userId));
+            inviteService.create(i);
+            return "redirect:/invites/{eventId}/invite";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @GetMapping("/{eventId}/invite")
-    public String invite(Model model, @PathVariable Long eventId) {
-        List<User> users = userService.users();
-        model.addAttribute("users", users);
-        model.addAttribute("eventId", eventId);
-        return "invites/inviteUsers";
+    public String invite(Model model, @PathVariable Long eventId) throws Exception {
+        if (Objects.equals(eventService.find(eventId).getOwner().getId(), sessionService.getCurrentUser().getId())) {
+            List<User> users = userService.users();
+            model.addAttribute("users", users);
+            model.addAttribute("eventId", eventId);
+            return "invites/inviteUsers";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @GetMapping("/myInvites")
     public String invite(Model model) {
         User user = sessionService.getCurrentUser();
         List<Invite> invites = inviteService.findByUser(user);
-        
+
         Invite i = invites.get(0);      // Para probar
         System.out.println(i.getEvent().getOwner().getFirstName());
-        
+
         model.addAttribute("invites", invites);
         return "invites/myInvites";
     }
-    
+
     @GetMapping("/{inviteId}/delete")
     public String delete(@PathVariable Long inviteId) throws Exception {
         Invite inv = inviteService.find(inviteId);

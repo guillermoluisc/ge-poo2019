@@ -23,42 +23,41 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * @author jpgm
  */
-
 @Entity
-@Table(name="users")
-public class User implements UserDetails{
-    
+@Table(name = "users")
+public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column
     private String email;
-    
-    @Column(name="first_name")
+
+    @Column(name = "first_name")
     private String firstName;
-    
-    @Column(name ="last_name")
+
+    @Column(name = "last_name")
     private String lastName;
-    
+
     @Column
     private String password;
-    
+
     @OneToMany(mappedBy = "owner")
     private List<Event> events;
-    
+
     @OneToMany(mappedBy = "user")
     private List<Invite> invites;
-    
+
     @OneToMany(mappedBy = "user")
     private List<Registration> registrations;
-    
 
-    /** Terminan los atributos*/
-    
-    
-    /**constructor*/
-    
+    /**
+     * Terminan los atributos
+     */
+    /**
+     * constructor
+     */
     public User(Long id, String email, String firstName, String lastName, String password) {
         this.id = id;
         this.email = email;
@@ -66,13 +65,13 @@ public class User implements UserDetails{
         this.lastName = lastName;
         this.password = password;
     }
-    
-    public User(){
+
+    public User() {
     }
 
-
-    /**fin de constructor*/
-    
+    /**
+     * fin de constructor
+     */
     public List<Event> getEvents() {
         return events;
     }
@@ -92,7 +91,6 @@ public class User implements UserDetails{
     public void setId(Long id) {
         this.id = id;
     }
-    
 
     public String getEmail() {
         return email;
@@ -156,5 +154,5 @@ public class User implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-    
+
 }
