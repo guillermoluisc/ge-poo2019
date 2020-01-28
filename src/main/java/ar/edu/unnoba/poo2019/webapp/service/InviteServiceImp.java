@@ -23,6 +23,9 @@ public class InviteServiceImp implements InviteService {
     @Autowired
     private InviteRepository inviteRepository;
     
+    @Autowired
+    private SessionService sessionService;
+    
     @Override
     public List<Invite> invites() {
         return inviteRepository.findAll();
@@ -30,6 +33,7 @@ public class InviteServiceImp implements InviteService {
 
     @Override
     public Invite create(Invite invite) {
+        invite.setOwner(sessionService.getCurrentUser());
         return inviteRepository.save(invite);
     }
 
