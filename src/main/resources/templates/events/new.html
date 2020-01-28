@@ -1,37 +1,19 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="es">
     <head>
-        <style type="text/css">
-            .badge{
-            text-decoration: none;
-            padding: 3px;
-            padding-left: 10px;
-            padding-right: 10px;
-            font-family: helvetica;
-            font-weight: 300;
-            font-size: 25px;
-            font-style: italic;
-            color:  #4b5e9e ;
-            background-color:  #8f9ccb;
-            border-radius: 15px;
-            border: 3px double #02308b;
-            }
-            .badge:hover{
-                opacity: 0.6;
-                text-decoration: none;
-            }
-        </style>
-        <h1>New Event</h1>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+      
     </head>
     
     
-    <body>
+        <body>
+            <div>
+                <h1>Nuvo Evento</h1><br>
+                
+            </div>
         <div>Describa aqui los datos necesarios del evento</div>
-                                        <p></p>
         <form action="#" th:action="@{/events}" th:object="${event}" method="post">
             Event Name:<input type="text" th:field="*{eventName}" /> <br>
             Event Date:<input type="date" th:field="*{eventDate}" /> <br>
@@ -46,6 +28,7 @@
            <a class="badge" th:href="@{/events}">Volver</a>
            <!-- <a class="badge" th:href="@{/registrations/{id}/logOut(id=${event.id})}">LogOut</a>
             <button type="submit" name="logOut">Create</button>-->
+      
             
         </form>
     </body>
