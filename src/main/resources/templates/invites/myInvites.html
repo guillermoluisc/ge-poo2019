@@ -174,7 +174,7 @@
                 }
             </script>
         </div>
-        
+
 
         <div class="tbl-header">
             <h1><img src="https://drive.google.com/uc?id=1WFufuKPZPW6Nw51VjUSiuDBE2GNg_81Q" width="100"
@@ -204,12 +204,11 @@
                         <td th:text="${invite.event.lugar}"></td>
                         <td th:text="${invite.event.privateEvent}"></td>
                         <td th:text="${invite.event.isFree()}"></td>
-                        <td th:text="${invite.user.email"></td>
-                        
-
+                        <!-- <td th:text="${invite.event.owner.firstName"></td>
+                        <td th:text="${invite.event.owner.lastName"></td> -->
 
                         <td> <a th:href="@{/registrations/{id}/registrate(id=${invite.event.id})}" class="button">Registrarse</a></td>
-                        <td> <a th:href="@{/events/{id}/delete(id=${invite.event.id})}" class="button">Eliminiar</a></td>
+                        <td> <a th:href="@{/invites/{id}/delete(id=${invite.id})}" class="button">Eliminiar</a></td>
                     </tr>
                 </tbody>
             </table>

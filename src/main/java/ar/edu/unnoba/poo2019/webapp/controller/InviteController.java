@@ -12,6 +12,7 @@ import ar.edu.unnoba.poo2019.webapp.service.InviteService;
 import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import ar.edu.unnoba.poo2019.webapp.service.UserService;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,8 +61,22 @@ public class InviteController {
     public String invite(Model model) {
         User user = sessionService.getCurrentUser();
         List<Invite> invites = inviteService.findByUser(user);
+        
+        Invite i = invites.get(0);      // Para probar
+        System.out.println(i.getEvent().getOwner().getFirstName());
+        
         model.addAttribute("invites", invites);
         return "invites/myInvites";
+    }
+    
+    @GetMapping("/{inviteId}/delete")
+    public String delete(@PathVariable Long inviteId) throws Exception {
+        Invite inv = inviteService.find(inviteId);
+        if (Objects.equals(sessionService.getCurrentUser().getId(), inv.getUser().getId())) {    // Controlo que sea el propio usuario 
+            inviteService.delete(inviteId);
+            return "redirect:/invites/myInvites";
+        }
+        throw new Exception("Permiso denegado usuario invalido");
     }
 
 }

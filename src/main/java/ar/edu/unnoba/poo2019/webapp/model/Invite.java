@@ -43,16 +43,11 @@ public class Invite {
     @JoinColumn(name = "event_id")
     private Event event;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
-    private User owner;
     
-    
-    public Invite(long id, User user, Event event, User owner) {
+    public Invite(long id, User user, Event event) {
         this.id = id;
         this.user = user;
         this.event = event;
-        this.owner = owner;
     }
 
     public Invite(){}
@@ -82,12 +77,4 @@ public class Invite {
         this.event = event;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-    
 }
