@@ -69,10 +69,6 @@ public class InviteController {
     public String invite(Model model) {
         User user = sessionService.getCurrentUser();
         List<Invite> invites = inviteService.findByUser(user);
-
-        Invite i = invites.get(0);      // Para probar
-        System.out.println(i.getEvent().getOwner().getFirstName());
-
         model.addAttribute("invites", invites);
         return "invites/myInvites";
     }

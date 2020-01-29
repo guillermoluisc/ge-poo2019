@@ -11,6 +11,7 @@ import ar.edu.unnoba.poo2019.webapp.model.User;
 import ar.edu.unnoba.poo2019.webapp.repository.EventRepository;
 import ar.edu.unnoba.poo2019.webapp.repository.RegistrationRepository;
 import ar.edu.unnoba.poo2019.webapp.service.validation.registration.RegistrationValidator;
+import ar.edu.unnoba.poo2019.webapp.service.validation.registration.ValidationDecorator;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -32,6 +33,9 @@ public class RegistrationServiceImp implements RegistrationService {
 
     @Autowired
     private RegistrationValidator validator;
+    
+    @Autowired
+    private ValidationDecorator validatorDecorator;
 
     @Autowired
     private SessionService sessionService;
@@ -53,6 +57,7 @@ public class RegistrationServiceImp implements RegistrationService {
         Date today = new Date();
         reg.setCreatedAt(today);
         validator.validate(reg);
+        validatorDecorator.validate(reg);
         registrationRepository.save(reg);
     }
 

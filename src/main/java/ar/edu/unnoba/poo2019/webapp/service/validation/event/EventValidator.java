@@ -6,6 +6,7 @@
 package ar.edu.unnoba.poo2019.webapp.service.validation.event;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
+import java.util.Calendar;
 import java.util.Date;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +25,16 @@ public class EventValidator implements IEventValidator {
         if (event.getOwner() == null) {
             throw new Exception("El evento no posee dueño");
         }
-        Date today = new Date();
+        
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        Date today = c.getTime();
+        
         if (event.getEventDate() == null || event.getEventDate().before(today)) {
-            throw new Exception("La fecha del evento debe ser igual o posterior al dia de hoy");
+            throw new Exception("La fecha del evento debe ser igual o posterior al dia de hoy.");
         }
         if (event.getStartRegistrations() == null || event.getStartRegistrations().before(today) || event.getStartRegistrations().after(event.getEventDate())) { // Controlo que la fecha de inicio de inscripciones no sea nula, sea mayor o igaul a la fecha actual y menor o igual a la feche del evento.
             throw new Exception("La fecha de comienzo de inscripciones debe estar entre hoy y el dia del evento.");
@@ -41,7 +49,7 @@ public class EventValidator implements IEventValidator {
             throw new Exception("La capacidad debe ser 1 o mas.");
         }
         if (event.getCost() < 0) {
-            throw new Exception("El costo del evento no puede ser negativo");
+            throw new Exception("El costo del evento no puede ser negativo.");
         }
 
     }
