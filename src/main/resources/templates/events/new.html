@@ -1,32 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <title>Nuevo Evento</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>  
+        <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css"  href="/css/style.css" media="screen"/> 
+        <link rel="stylesheet" type="text/css"  href="/css/new-edit.css" media="screen"/> 
+
     </head>
-        <body>
+    <body>
+
+        <div>
+            <h1><img src="https://drive.google.com/uc?id=1WFufuKPZPW6Nw51VjUSiuDBE2GNg_81Q" width="100"
+                     height="50" align="center"><br>Nuevo Evento</h1>
+            <h5>Aquí podrá crear sus eventos.</h5>   
+        </div>
+        <form  action="#" th:action="@{/events}" th:object="${event}" method="post" class="go-bottom">
+           <h2>Datos del evento</h2>
+
             <div>
-                <h1>Nuevo Evento</h1><br>
-                <h5>Aquí podrá crear sus eventos.</h5>   
+                <input   id="eventName" name="eventName" type="text" field="eventName" required/> 
+                <label for="name">Nombre del evento</label>
             </div>
-        <div>Describa aqui los datos necesarios del evento</div>
-        <form action="#" th:action="@{/events}" th:object="${event}" method="post">
-            Event Name:<input type="text" th:field="*{eventName}" /> <br>
-            Event Date:<input type="date" th:field="*{eventDate}" /> <br>
-            Start Registrations:<input type="date" th:field="*{startRegistrations}" /> <br>
-            End Registrations:<input type="date" th:field="*{endRegistrations}" /> <br>
-            Lugar:<input type="text" th:field="*{lugar}" /> <br>
-            Capacity:<input type="text" th:field="*{capacity}" /> <br>
-            Cost:<input type="text" th:field="*{cost}" /> <br>
-            Private Event:<input type="checkbox" th:field="*{privateEvent}" />
-                                        <p></p>
-            <button type="submit" name="newEvent">Create</button>
-           <a class="badge" th:href="@{/events}">Volver</a>
-           <!-- <a class="badge" th:href="@{/registrations/{id}/logOut(id=${event.id})}">LogOut</a>
-            <button type="submit" name="logOut">Create</button>-->
-      
-            
+            <div>
+                <input   id="lugar" name="lugar" type="text" th:field="*{lugar}" required/> 
+                <label for="lugar">Lugar del evento</label>
+            </div>
+            <div>
+                <input   id="capacity" name="capacity" type="text" th:field="*{capacity}" required/> 
+                <label for="capacity">Capacidad</label>
+            </div>
+            <div>
+                <input   id="cost" name="cost" type="text" th:field="*{cost}" required/> 
+                <label for="cost">Costo</label>
+            </div>
+
+        </form>
+         <form class="go-bottom" action="#" th:action="@{/events}" th:object="${event}" method="post">
+
+
+            <h2>Fechas</h2>
+            <div>	
+                <input   id="eventDate" name="eventDate" type="date" th:field="*{eventDate}" required/> 
+                <label for="eventDate">Fecha del evento</label>
+            </div>
+            <div>	
+                <input   id="startRegistrations" name="startRegistrations" type="date" th:field="*{startRegistrations}" required/> 
+                <label for="eventDate">Inicio registracion.</label>
+            </div>
+            <div>	
+                <input   id="endRegistrations" name="endRegistrations" type="date" th:field="*{endRegistrations}" required/> 
+                <label for="eventDate">Fin registracion.</label>
+            </div>
+            <div >	
+                <h2 align="center"> Evento privado</h2>
+                <input type="Checkbox" th:field="*{privateEvent}" />
+
+            </div>
+            <div>
+            <button class="button" type="submit" name="newEvent">Crear</button>
+            <a class="button" href="/events">Volver</a>
+        </div>
         </form>
     </body>
 </html>
