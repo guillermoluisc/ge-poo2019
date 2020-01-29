@@ -1,0 +1,38 @@
+
+h5{
+    font-family: 'Russo One', sans-serif;
+    font-size: 15px;
+    color: #988345;
+    text-align: center;
+
+}
+body{
+    background: #000000;
+}
+h1{
+    font-family: 'Russo One', sans-serif;
+    font-size: 30px;
+    color: #988345;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+
+}
+
+.button {
+    background-color: #988345;
+    border: none;
+    color: black;
+    padding: 9px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 2px 1px;
+    cursor: pointer;
+    border-radius: 0px 48px 0px 48px;
+    -moz-border-radius: 0px 48px 0px 48px;
+    -webkit-border-radius: 0px 48px 0px 48px;
+    border: 0px ridge #000000;
+}
