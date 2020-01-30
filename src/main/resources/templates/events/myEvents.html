@@ -4,201 +4,58 @@
         <!-- meta charset="utf-8" con esto se declara la codificacion del documento. -->
         <meta charset="utf-8">
         <title>Mis Eventos</title>
-    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
-
-
-    <style type="text/css">
-      .border{
-          border-style: outset;
-          border: 10px solid;
-          border-color:rgba(255,255,255,0.3);
-          
-          }
-      .enc{
-          text-align: center;
-          color: blue;
-          font-family: serif;
-          font-size: 20px;
-          font-weight: 900;
-          margin: 10px;
-            }
-            h5{
-          font-family: 'Russo One', sans-serif;
-          font-size: 15px;
-          color: #988345;
-          text-align: center;
-          
-        }
-
-        h1{
-          font-family: 'Russo One', sans-serif;
-          font-size: 30px;
-          color: #988345;
-          text-transform: uppercase;
-          font-weight: 300;
-          text-align: center;
-          margin-bottom: 15px;
-          
-        }
-        table{
-          width:100%;
-          table-layout: fixed;
-        }
-        .tbl-header{
-          
-         }
-        .tbl-content{
-          height:300px;
-          overflow-x:auto;
-          margin-top: 0px;
-          border: 10px;
-        }
-        th{
-          padding: 20px 15px;
-          text-align: left;
-          font-weight: 500;
-          font-size: 12px;
-          color: #fff;
-          text-transform: uppercase;
-        }
-        td{
-          padding: 15px;
-          text-align: left;
-          vertical-align:middle;
-          font-weight: 300;
-          font-size: 15px;
-          color: #ffffff;
-          border-bottom: solid 1px rgba(255,255,255,0.1);
-        }
-
-        /* demo styles */
-
-        
-        body{
-           background: -webkit-linear-gradient(left, rgba(93,82,81,1) 0%, rgba(61,61,61,1) 48%, rgba(41,41,41,1) 53%, rgba(0,0,0,1) 100%);  
-        }
-
-        section{
-          margin: 50px;
-        }
-        ::-webkit-scrollbar {
-            width: 6px;
-        } 
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-        } 
-        ::-webkit-scrollbar-thumb {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-        }
-/*
-Estilo para barra lateral
-*/
-          .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-          }
-
-          .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-          }
-
-          .sidenav a:hover {
-            color: #f1f1f1;
-          }
-
-          .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-          }
-
-          @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-            .sidenav a {font-size: 18px;}
-          }
-          .button {
-              background-color: #988345;
-              border: none;
-              color: black;
-              padding: 9px 16px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              font-size: 15px;
-              margin: 2px 1px;
-              cursor: pointer;
-              border-radius: 0px 48px 0px 48px;
-              -moz-border-radius: 0px 48px 0px 48px;
-              -webkit-border-radius: 0px 48px 0px 48px;
-              border: 0px ridge #000000;
-            }
-  
-    </style>
+        <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css"  href="/css/style.css" media="screen"/> 
+        <link rel="stylesheet" type="text/css"  href="/css/new-edit.css" media="screen"/> 
     </head>
 
     <body>
         <div>
             <div id="mySidenav" class="sidenav">
-              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-              <a href="/events/new">Nuevo Evento</a>
-        <h5>Crea nuevos eventos definiendo difernetes parámetros.</h5>
-        <a th:href="@{/events}">Volver</a>
-        <h5>Volver a la pestaña de todos los eventos.</h5>
-              <a href="/logout">Salir</a>
-        <img src="https://drive.google.com/uc?id=1WFufuKPZPW6Nw51VjUSiuDBE2GNg_81Q" width="50"
-     height="25" align="right">         
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="/events/new">Nuevo Evento</a>
+                <h5>Crea nuevos eventos definiendo difernetes parámetros.</h5>
+                <a th:href="@{/events}">Volver</a>
+                <h5>Volver a la pestaña de todos los eventos.</h5>
+                <a href="/logout">Salir</a>
+                <img src="/img/wagu_1-0.png" alt=""  width="50"
+                     height="25" align="right">        
             </div>
-        <span style="font-size:30px;cursor:pointer;color:#ffffff" onclick="openNav()">&#9776; Menú</span>
-        <script>
-            function openNav() {
-              document.getElementById("mySidenav").style.width = "250px";
-            }
+            <span style="font-size:30px;cursor:pointer;color:#ffffff" onclick="openNav()">&#9776; Menú</span>
+            <script>
+                function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+                }
 
-            function closeNav() {
-              document.getElementById("mySidenav").style.width = "0";
-            }
-        </script>
-    </div>
-    <div class="tbl-header">
-      <h1><img src="https://drive.google.com/uc?id=1WFufuKPZPW6Nw51VjUSiuDBE2GNg_81Q" width="100"
-     height="50" align="center"><br>Mis Eventos</br></h1>
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-        <tr>
-          <th>Nombre del Evento</th>
-          <th>Fecha del Evento</th>
-          <th>Inicio de Registro</th>
-          <th>Fin de Registo</th>
-          <th>Lugar</th>
-          <th>Disponibilidad</th>
-          <th>Evento Privado</th>
-          <th>Gratis</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-  </table>
-    </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
-          <tbody>
-              <tr th:each="event : ${events}">
+                function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                }
+            </script>
+        </div>
+        <div class="tbl-header">
+            <h1><img src="/img/wagu_1-0.png" alt="" width="100" height="50" align="center"/><br>Mis Eventos</br></h1>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>Nombre del Evento</th>
+                        <th>Fecha del Evento</th>
+                        <th>Inicio de Registro</th>
+                        <th>Fin de Registo</th>
+                        <th>Lugar</th>
+                        <th>Disponibilidad</th>
+                        <th>Evento Privado</th>
+                        <th>Gratis</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                    <tr th:each="event : ${events}">
                         <td th:text="${event.eventName}"></td>
                         <td th:text="${event.eventDate}"></td>
                         <td th:text="${event.startRegistrations}"></td>
@@ -207,14 +64,14 @@ Estilo para barra lateral
                         <td th:text="${event.isAvailableQuota()}"></td>
                         <td th:text="${event.privateEvent}"></td>
                         <td th:text="${event.isFree()}"></td>
-                        
+
 
                         <td> <a th:href="@{/events/{id}/eventDetails(id=${event.id})}"class="button">Detalles</a></td>
                         <td> <a th:href="@{/invites/{id}/invite(id=${event.id})}" class="button">Invitar</a></td>
                         <td> <a th:href="@{/events/{id}/delete(id=${event.id})}" class="button">Eliminiar</a></td>
-              </tr>
+                    </tr>
                 </tbody>
-      </table>
-    </div>
-</body>
+            </table>
+        </div>
+    </body>
 </html>

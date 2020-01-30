@@ -9,36 +9,39 @@ and open the template in the editor.
         <title>Inicio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">    
+        <link rel="stylesheet" type="text/css"  href="/css/style.css" media="screen"/> 
+        <link rel="stylesheet" type="text/css"  href="/css/new-edit.css" media="screen"/> 
+        <link rel="stylesheet" type="text/css"  href="/css/boton.css" media="screen"/> 
+
     </head>
 
 
 
     <body>
-	<h1> <p style="text-align: center;"> Página Principal </p> </h1>
-        <h2> <p style="text-align: center;"> Bienvenido </p> </h2>
-         <center>
-            <style type="text/css">
-                .badge{
-                    text-decoration: none;
-                    padding: 10px;
-                    font-weight: 600;
-                    font-size: 20px;
-                    color: #ffffff;
-                    background-color: #1883ba;
-                    border-radius: 6px;
-                    border: 2px solid #0016b0;
-                }
-                .badge:hover{
-                    color: #1883ba;
-                    background-color: #ffffff;
-                }
-            </style>
-        
-            <p>
-                <a class="badge" th:href="@{/users/new}">New User</a>
-                <a class="badge" th:href="@{/login}">Login</a>
+
+
+
+        <!-- Filter: https://css-tricks.com/gooey-effect/ -->
+        <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+    <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />    
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+    </defs>
+    </svg>
+
+    <h1>Página principal <br><img src="/img/wagu_1-0.png" alt="" width="500" height="250" align="center"/></h1>
+    <h5> Bienvenido  </h5>
+   
+    <div class="wrapper">
+        <h1><a class="button" th:href="@{/users/new}">Nuevo usuario</a></h1>
  
-            </p>   
-        </Center>
-    </body>
+    <div class="wrapper">
+        <h1><a class="button" th:href="@{/login}">Iniciar secion</a></h1>
+    </div>
+
+
+</body>
 </html>
