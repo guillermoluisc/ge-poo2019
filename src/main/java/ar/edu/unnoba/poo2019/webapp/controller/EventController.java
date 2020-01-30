@@ -110,8 +110,7 @@ public class EventController {
     public String detail(@PathVariable Long id, Model model) throws Exception {
         Event event = eventService.find(id);
         if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
-            List<Registration> registrations = event.getRegistrations();
-            System.out.println(registrations.get(0).getUser().getFirstName());
+            List<Registration> registrations = event.getRegistrations();         
             List<Invite> invites = inviteService.findByEvent(event);
             model.addAttribute("event", event);
             model.addAttribute("registrations", registrations);

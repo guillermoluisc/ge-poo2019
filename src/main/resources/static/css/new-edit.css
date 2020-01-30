@@ -11,9 +11,12 @@ h3 {
   box-sizing: border-box;
 }
 form {
-  width: 320px;
-  float: left;
-  margin: 20px;
+  
+ 
+ 
+   margin: 0 auto;
+    width: 400px;
+ 
 }
 form > div {
   position: relative;
