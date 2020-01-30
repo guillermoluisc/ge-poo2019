@@ -24,5 +24,7 @@ public interface InviteRepository extends JpaRepository<Invite, Long> {
     //public void deleteByEventId(long eventId);
 
     public List<Invite> findByUser(User user);
+
+    public List<Invite> findByEvent(Event event);
     
 }

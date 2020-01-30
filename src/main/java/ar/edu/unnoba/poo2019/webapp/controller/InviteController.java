@@ -76,7 +76,7 @@ public class InviteController {
     @GetMapping("/{inviteId}/delete")
     public String delete(@PathVariable Long inviteId) throws Exception {
         Invite inv = inviteService.find(inviteId);
-        if (Objects.equals(sessionService.getCurrentUser().getId(), inv.getUser().getId())) {    // Controlo que sea el propio usuario 
+        if ((sessionService.getCurrentUser().getId() == inv.getUser().getId()) || (sessionService.getCurrentUser().getId() == inv.getEvent().getOwner().getId())) {    // Controlo que sea el user de invite o el user que la creo (dueño del evento)
             inviteService.delete(inviteId);
             return "redirect:/invites/myInvites";
         }

@@ -80,6 +80,12 @@ public class RegistrationServiceImp implements RegistrationService {
             return registrations.get(0);
         }
     }
+    
+    @Override
+    public List<Registration> findByEvent(Event event) {
+        List<Registration> registrations = registrationRepository.findByEvent(event);
+        return registrations;
+    }
 
     @Override
     public List<Registration> findByUser(Long id) {

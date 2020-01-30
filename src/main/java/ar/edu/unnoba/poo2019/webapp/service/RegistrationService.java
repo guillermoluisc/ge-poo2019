@@ -27,6 +27,8 @@ public interface RegistrationService {
     public void delete(Long id);
 
     public Registration findByEventAndUser(Event event, User user);
+    
+    public List<Registration> findByEvent(Event event);
 
     public List<Registration> findByUser(Long id);
 }

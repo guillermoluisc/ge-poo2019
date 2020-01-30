@@ -41,7 +41,7 @@ public class Payment implements Serializable {
     @JoinColumn(name="event_id")
     private Event event;
     
-    @Column
+    @Column(name="card_name")
     private String cardName;
     
     @Column(name="card_number")

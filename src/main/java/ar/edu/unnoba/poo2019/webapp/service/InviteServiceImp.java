@@ -60,8 +60,12 @@ public class InviteServiceImp implements InviteService {
 
     @Override
     public Invite findByUserAndEvent(User user, Event event) {
-        return inviteRepository.findByUserAndEvent(user, event);
-        
+        return inviteRepository.findByUserAndEvent(user, event);   
+    }
+    
+    @Override
+    public List<Invite> findByEvent(Event event) {
+        return inviteRepository.findByEvent(event);   
     }
 
     @Override

@@ -8,7 +8,11 @@
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
+import ar.edu.unnoba.poo2019.webapp.model.Invite;
+import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
+import ar.edu.unnoba.poo2019.webapp.service.InviteService;
+import ar.edu.unnoba.poo2019.webapp.service.RegistrationService;
 import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +43,12 @@ public class EventController {
 
     @Autowired
     private SessionService sessionService;
+    
+    @Autowired
+    private RegistrationService registrationService;
+    
+    @Autowired
+    private InviteService inviteService;
 
     @GetMapping
     public String index(Model model) {
@@ -100,7 +110,12 @@ public class EventController {
     public String detail(@PathVariable Long id, Model model) throws Exception {
         Event event = eventService.find(id);
         if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
+            List<Registration> registrations = event.getRegistrations();
+            System.out.println(registrations.get(0).getUser().getFirstName());
+            List<Invite> invites = inviteService.findByEvent(event);
             model.addAttribute("event", event);
+            model.addAttribute("registrations", registrations);
+            model.addAttribute("invites", invites);
             return "events/eventDetails";
         }
         throw new Exception("Permiso denegado usuario invalido");
