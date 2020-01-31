@@ -52,7 +52,9 @@
         <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
 
         <div>
-            <h1 >Listado de Inscriptos</h1>
+            <h1>Listado de Inscriptos</h1>
+            
+            
             <table class="table table-dark">
                 <thead>
                     <tr>
@@ -63,9 +65,9 @@
                 </thead>
                 <tbody>
                     <tr th:each="registration : ${registrations}">
-                        <!--<td th:text="${registration.user.firstName}"></td>
+                        <td th:text="${registration.user.firstName}"</td>
                         <td th:text="${registration.user.lastName}"></td>
-                        <td th:text="${registration.user.firstName}"></td>-->
+                        <td th:text="${registration.user.email}"></td>
                         <td th:text="${registration.createdAt}"></td>
                     </tr>
                 </tbody>
