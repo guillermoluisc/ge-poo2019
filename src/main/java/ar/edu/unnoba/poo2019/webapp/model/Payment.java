@@ -29,22 +29,23 @@ cardNumber: String
 @Entity
 @Table(name="payments")
 
-@NamedQuery(name = "Payment.findPaymentsWhitRegistrations",
+/**@NamedQuery(name = "Payment.findPaymentsWhitRegistrations",
         query = "SELECT e FROM Event e WHERE e.owner.id =: ownerId"
-)
+)**/
 
-public class Payment implements Serializable {
+public class Payment implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+ 
   
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id", referencedColumnName = "id")
     private User owner;
     
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="event_id")
+    @JoinColumn(name="event_id", referencedColumnName = "id")
     private Event event;
     
     @Column(name="card_name")
