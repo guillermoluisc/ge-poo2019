@@ -115,7 +115,12 @@ public class EventController {
             model.addAttribute("event", event);
             model.addAttribute("registrations", registrations);
             model.addAttribute("invites", invites);
-            return "events/eventDetails";
+            if(event.getCost()>0){
+                
+                return "events/eventDetailPago";
+            }
+        
+            return "events/eventDetailsGratis";
         }
         throw new Exception("Permiso denegado usuario invalido");
     }

@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +28,11 @@ cardNumber: String
  */
 @Entity
 @Table(name="payments")
+
+@NamedQuery(name = "Payment.findPaymentsWhitRegistrations",
+        query = "SELECT e FROM Event e WHERE e.owner.id =: ownerId"
+)
+
 public class Payment implements Serializable {
     
     @Id
@@ -101,3 +107,8 @@ public class Payment implements Serializable {
     }
         
 }
+
+/**
+ select r.id, p.card_name, p.card_number from registrations r inner join payments p on r.user_id = p.user_id and r.event_id = p.event_id;
+
+ **/
