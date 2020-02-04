@@ -52,10 +52,10 @@ public class PaymentController {
         return "payments/new";
     }
     
-    @PostMapping("/{id}")
-    public String create(@PathVariable Long id, @ModelAttribute Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
+    @PostMapping("/{eventId}")
+    public String create(@PathVariable Long eventId, @ModelAttribute("payment") Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
         User u = sessionService.getCurrentUser();
-        Event e = eventService.find(id);
+        Event e = eventService.find(eventId);
         payment.setOwner(u);
         payment.setEvent(e);
         paymentService.create(payment);

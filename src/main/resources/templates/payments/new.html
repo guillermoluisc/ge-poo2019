@@ -24,7 +24,7 @@ and open the template in the editor.
             
         </div>
         
-        <form action="#" th:action="@{/payments/{id}(id=${event.id})}" th:object="${payment}" method="post">
+        <form action="#" th:action="@{/payments/{eventId}(eventId=${event.id})}" th:object="${payment}" method="post">
             Card Name:<input type="text" th:field="*{cardName}" /> <br>
             Card Number:<input type="text" th:field="*{cardNumber}" /> <br>
             <!--Cost:<input type="text" th:field="*{firstName}" /> <br>-->
