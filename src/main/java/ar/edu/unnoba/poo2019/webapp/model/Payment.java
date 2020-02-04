@@ -18,53 +18,38 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- *Payment​:
-id: Long
-registration: Registration
-card: String
-cardNumber: String
-
+ * Payment​: id: Long registration: Registration card: String cardNumber: String
+ *
  * @author guillermo
  */
 @Entity
-@Table(name="payments")
+@Table(name = "payments")
 
 @NamedQuery(name = "Payment.findPaymentsWhitRegistrations",
         query = "SELECT e FROM Event e WHERE e.owner.id =: ownerId"
 )
 
 public class Payment implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-  
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User owner;
-    
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="event_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
     private Event event;
-    
-    @Column(name="card_name")
+
+    @Column(name = "card_name")
     private String cardName;
-    
-    @Column(name="card_number")
+
+    @Column(name = "card_number")
     private String cardNumber;
-
     
-    
-    public Payment() {
-    }
 
-    public Payment(long id, User user, Event event, String cardName, String cardNumber) {
-        this.id = id;
-        this.event=event;
-        this.owner=user;
-        this.cardName = cardName;
-        this.cardNumber = cardNumber;
-    }
 
     public long getId() {
         return id;
@@ -105,7 +90,7 @@ public class Payment implements Serializable {
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
-        
+
 }
 
 /**
