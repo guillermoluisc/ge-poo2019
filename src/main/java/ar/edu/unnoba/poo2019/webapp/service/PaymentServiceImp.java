@@ -21,26 +21,26 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class PaymentServiceImp implements PaymentService {
-    
+
     @Autowired
     private PaymentRepository paymentRepository;
-    
+
     @Autowired
     private RegistrationService registrationService;
-    
+
     @Autowired
     private PaymentValidator paymentValidator;
-    
+
     @Override
     public List<Payment> users() {
         return paymentRepository.findAll();
     }
-    
+
     @Override
     public Payment find(Long id) {
         return paymentRepository.findById(id).get();
     }
-    
+
     @Override
     public Payment update(Long id, Payment payment) {
         Payment p = paymentRepository.findById(id).get();
@@ -50,12 +50,12 @@ public class PaymentServiceImp implements PaymentService {
         p.setEvent(payment.getEvent());
         return paymentRepository.save(p);
     }
-    
+
     @Override
     public void delete(Long id) {
         paymentRepository.deleteById(id);
     }
-    
+
     @Override
     public Payment findByEventAndUser(Event event, User user) {
         List<Payment> payments = paymentRepository.findByEventAndOwner(event, user);
@@ -65,7 +65,13 @@ public class PaymentServiceImp implements PaymentService {
             return payments.get(0);
         }
     }
-    
+
+    @Override
+    public List<Payment> findByEvent(Event event) {
+        List<Payment> payments = paymentRepository.findByEvent(event);
+        return payments;
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Payment create(Payment payment) throws Exception {
@@ -80,5 +86,5 @@ public class PaymentServiceImp implements PaymentService {
             throw new Exception("Error, ya se pago por el evento o el evento es gratis");
         }
     }
-    
+
 }

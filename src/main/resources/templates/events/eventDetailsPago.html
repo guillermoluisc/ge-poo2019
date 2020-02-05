@@ -69,13 +69,14 @@ and open the template in the editor.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="registration : ${registrations}"  th:each="payment : ${payments}">
-                        <td th:text="${registration.user.firstName}"></td>
-                        <td th:text="${registration.user.lastName}"></td>
-                        <td th:text="${registration.user.email}"></td>
-                        <td th:text="${payment.card"
-                       
-                        
+                    <tr th:each="payment : ${payments}">
+                        <td th:text="${payment.owner.firstName}"></td>
+                        <td th:text="${payment.owner.lastName}"></td>
+                        <td th:text="${payment.owner.email}"></td>
+                        <td th:text="${payment.cardName}"></td>
+                        <td th:text="${payment.cardNumber}"></td>    
+
+
                     </tr>
                 </tbody>
             </table>
@@ -105,6 +106,6 @@ and open the template in the editor.
 
             </table>        
         </div>
-
+        <a class="badge" th:href="@{/events/myEvents}">Volver</a>
     </body>
 </html>

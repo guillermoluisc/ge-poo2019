@@ -24,6 +24,8 @@ public interface PaymentService {
     
     public Payment findByEventAndUser(Event event, User user);
     
+    public List<Payment> findByEvent(Event event);
+    
     public Payment find(Long id);
     
     public Payment update(Long id,Payment payment);

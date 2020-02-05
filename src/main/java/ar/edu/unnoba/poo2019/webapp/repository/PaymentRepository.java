@@ -20,5 +20,7 @@ import org.springframework.stereotype.Repository;
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
     
     public List<Payment> findByEventAndOwner(Event event, User owner);
+
+    public List<Payment> findByEvent(Event event);
      
 }

@@ -9,9 +9,11 @@ package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
 import ar.edu.unnoba.poo2019.webapp.model.Invite;
+import ar.edu.unnoba.poo2019.webapp.model.Payment;
 import ar.edu.unnoba.poo2019.webapp.model.Registration;
 import ar.edu.unnoba.poo2019.webapp.service.EventService;
 import ar.edu.unnoba.poo2019.webapp.service.InviteService;
+import ar.edu.unnoba.poo2019.webapp.service.PaymentService;
 import ar.edu.unnoba.poo2019.webapp.service.RegistrationService;
 import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import java.text.SimpleDateFormat;
@@ -45,7 +47,7 @@ public class EventController {
     private SessionService sessionService;
     
     @Autowired
-    private RegistrationService registrationService;
+    private PaymentService paymentService;
     
     @Autowired
     private InviteService inviteService;
@@ -110,16 +112,17 @@ public class EventController {
     public String detail(@PathVariable Long id, Model model) throws Exception {
         Event event = eventService.find(id);
         if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
-            List<Registration> registrations = event.getRegistrations();
             List<Invite> invites = inviteService.findByEvent(event);
             model.addAttribute("event", event);
-            model.addAttribute("registrations", registrations);
             model.addAttribute("invites", invites);
+            
             if(event.getCost()>0){
-                
-                return "events/eventDetailPago";
+                List<Payment> payments = paymentService.findByEvent(event);
+                model.addAttribute("payments", payments);
+                return "events/eventDetailsPago";
             }
-        
+            List<Registration> registrations = event.getRegistrations();
+            model.addAttribute("registrations", registrations);
             return "events/eventDetailsGratis";
         }
         throw new Exception("Permiso denegado usuario invalido");
