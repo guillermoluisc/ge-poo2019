@@ -30,6 +30,28 @@ h1{
     margin-bottom: 15px;
 
 }
+
+h6{
+    font-family: 'Russo One', sans-serif;
+    font-size: 15px;
+    color: #988345;
+    text-transform: uppercase;
+    font-weight: 100px;
+    text-align: center;
+    margin: 10px;
+
+}
+
+h7{
+    font-family: 'Russo One', sans-serif;
+    font-size: 15px;
+    color: #988345;
+    text-transform: uppercase;
+    font-weight: 100px;
+    text-align: left;
+    margin: 10px;
+}
+
 table{
     width:100%;
     table-layout: fixed;
