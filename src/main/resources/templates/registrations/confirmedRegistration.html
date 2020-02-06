@@ -9,10 +9,16 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css"  href="/css/style.css" media="screen"/> 
+        <link rel="stylesheet" type="text/css"  href="/css/new-edit.css" media="screen"/> 
+
     </head>
     <body>
-        <div>La Inscripción se realizó correctamente</div>
-        <a class="badge" th:href="@{/events/myEvents}">volver</a>
+        <div>
+            <h1>La Inscripción se realizó correctamente </h1>
+        </div>
+        <a class="button" th:href="@{/events/myEvents}">volver</a>
          
     </body>
 </html>
