@@ -27,7 +27,7 @@ public class EventServiceImp implements EventService {
     private EventRepository eventRepository;
     
     @Autowired
-    private InviteRepository inviteRepository;
+    private InviteService inviteService;
 
     @Autowired
     private EventValidator eventValidator;
@@ -77,7 +77,7 @@ public class EventServiceImp implements EventService {
         Event event = this.find(id);
         if (!event.hasRegistrations()) {     // Controlo que no halla inscriptos
             eventRepository.deleteById(id);
-            //inviteRepository.deleteByEventId(id);
+            inviteService.deleteInvitesByEventId(id);
         } else {
             throw new Exception("No se puede eliminar el evento porque posee inscripciones");
         }

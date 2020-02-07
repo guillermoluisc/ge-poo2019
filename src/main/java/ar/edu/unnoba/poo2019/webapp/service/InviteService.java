@@ -33,4 +33,6 @@ public interface InviteService {
     public List<Invite> findByEvent(Event event);
 
     public List<Invite> findByUser(User user);
+
+    public void deleteInvitesByEventId(Long id);
 }

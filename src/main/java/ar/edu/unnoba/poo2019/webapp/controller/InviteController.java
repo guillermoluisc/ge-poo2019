@@ -14,6 +14,7 @@ import ar.edu.unnoba.poo2019.webapp.service.SessionService;
 import ar.edu.unnoba.poo2019.webapp.service.UserService;
 import java.util.List;
 import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,11 +75,12 @@ public class InviteController {
     }
 
     @GetMapping("/{inviteId}/delete")
-    public String delete(@PathVariable Long inviteId) throws Exception {
+    public String delete(@PathVariable Long inviteId, HttpServletRequest request) throws Exception {
         Invite inv = inviteService.find(inviteId);
         if ((sessionService.getCurrentUser().getId() == inv.getUser().getId()) || (sessionService.getCurrentUser().getId() == inv.getEvent().getOwner().getId())) {    // Controlo que sea el user de invite o el user que la creo (dueño del evento)
             inviteService.delete(inviteId);
-            return "redirect:/invites/myInvites";
+            String referer = request.getHeader("Referer");
+            return "redirect:" + referer;
         }
         throw new Exception("Permiso denegado usuario invalido");
     }

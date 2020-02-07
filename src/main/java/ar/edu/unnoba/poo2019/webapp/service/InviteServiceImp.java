@@ -54,7 +54,7 @@ public class InviteServiceImp implements InviteService {
 
     @Override
     public void delete(Long id) {
-    inviteRepository.deleteById(id);
+        inviteRepository.deleteById(id);
     
     }
 
@@ -71,6 +71,11 @@ public class InviteServiceImp implements InviteService {
     @Override
     public List<Invite> findByUser(User user) {
         return inviteRepository.findByUser(user);
+    }
+
+    @Override
+    public void deleteInvitesByEventId(Long id) {
+        inviteRepository.deleteInvitesByEventId(id);
     }
     
 }

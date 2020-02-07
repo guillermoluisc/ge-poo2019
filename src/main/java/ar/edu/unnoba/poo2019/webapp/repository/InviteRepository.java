@@ -20,11 +20,11 @@ import org.springframework.stereotype.Repository;
 public interface InviteRepository extends JpaRepository<Invite, Long> {
 
     public Invite findByUserAndEvent(User user, Event event);
-    
-    //public void deleteByEventId(long eventId);
 
     public List<Invite> findByUser(User user);
 
     public List<Invite> findByEvent(Event event);
+
+    public void deleteInvitesByEventId(Long id);
     
 }

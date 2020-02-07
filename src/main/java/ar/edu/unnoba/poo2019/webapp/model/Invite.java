@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -28,6 +29,10 @@ import javax.persistence.Table;
         query = "DELETE FROM Invite i WHERE i.event.id =: eventId"
         
 )*/
+@NamedNativeQuery(
+                name    =   "deleteInvitesByEventId",
+                query   =   "DELETE FROM invites WHERE event_id = ?"
+)
 
 public class Invite {
     
