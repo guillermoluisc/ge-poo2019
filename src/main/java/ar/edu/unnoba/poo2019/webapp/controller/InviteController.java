@@ -44,26 +44,36 @@ public class InviteController {
 
     @GetMapping("/{eventId}/{userId}/sendInv")
     public String sendInv(Model model, @PathVariable Long eventId, @PathVariable Long userId) throws Exception {
-        Event event = eventService.find(eventId);
-        if (Objects.equals(event.getOwner().getId(), sessionService.getCurrentUser().getId())) {
-            Invite i = new Invite();
-            i.setEvent(event);
-            i.setUser(userService.find(userId));
-            inviteService.create(i);
-            return "redirect:/invites/{eventId}/invite";
+        try {
+            Event event = eventService.find(eventId);
+            if (Objects.equals(event.getOwner().getId(), sessionService.getCurrentUser().getId())) {
+                Invite i = new Invite();
+                i.setEvent(event);
+                i.setUser(userService.find(userId));
+                inviteService.create(i);
+                return "redirect:/invites/{eventId}/invite";
+            }
+            throw new Exception("Permiso denegado usuario invalido");
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @GetMapping("/{eventId}/invite")
     public String invite(Model model, @PathVariable Long eventId) throws Exception {
-        if (Objects.equals(eventService.find(eventId).getOwner().getId(), sessionService.getCurrentUser().getId())) {
-            List<User> users = userService.users();
-            model.addAttribute("users", users);
-            model.addAttribute("eventId", eventId);
-            return "invites/inviteUsers";
+        try {
+            if (Objects.equals(eventService.find(eventId).getOwner().getId(), sessionService.getCurrentUser().getId())) {
+                List<User> users = userService.users();
+                model.addAttribute("users", users);
+                model.addAttribute("eventId", eventId);
+                return "invites/inviteUsers";
+            }
+            throw new Exception("Permiso denegado usuario invalido");
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @GetMapping("/myInvites")
@@ -71,18 +81,24 @@ public class InviteController {
         User user = sessionService.getCurrentUser();
         List<Invite> invites = inviteService.findByUser(user);
         model.addAttribute("invites", invites);
+        model.addAttribute("currentUser", sessionService.getCurrentUser());
         return "invites/myInvites";
     }
 
     @GetMapping("/{inviteId}/delete")
-    public String delete(@PathVariable Long inviteId, HttpServletRequest request) throws Exception {
-        Invite inv = inviteService.find(inviteId);
-        if ((sessionService.getCurrentUser().getId() == inv.getUser().getId()) || (sessionService.getCurrentUser().getId() == inv.getEvent().getOwner().getId())) {    // Controlo que sea el user de invite o el user que la creo (dueño del evento)
-            inviteService.delete(inviteId);
-            String referer = request.getHeader("Referer");
-            return "redirect:" + referer;
+    public String delete(Model model, @PathVariable Long inviteId, HttpServletRequest request) throws Exception {
+        try {
+            Invite inv = inviteService.find(inviteId);
+            if ((sessionService.getCurrentUser().getId() == inv.getUser().getId()) || (sessionService.getCurrentUser().getId() == inv.getEvent().getOwner().getId())) {    // Controlo que sea el user de invite o el user que la creo (dueño del evento)
+                inviteService.delete(inviteId);
+                String referer = request.getHeader("Referer");
+                return "redirect:" + referer;
+            }
+            throw new Exception("Permiso denegado usuario invalido");
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
 
 }

@@ -10,11 +10,307 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" type="text/css"  href="/css/style.css" media="screen"/> 
+        
+
+        <style>
+            .border{
+                border-style: outset;
+                border: 10px solid;
+                border-color:rgba(255,255,255,0.3);
+
+            }
+            .enc{
+                text-align: center;
+                color: blue;
+                font-family: serif;
+                font-size: 20px;
+                font-weight: 900;
+                margin: 10px;
+            }
+            h5{
+                font-family: 'Russo One', sans-serif;
+                font-size: 15px;
+                color: #988345;
+                text-align: center;
+
+            }
+
+            h1{
+                font-family: 'Russo One', sans-serif;
+                font-size: 30px;
+                color: #988345;
+                text-transform: uppercase;
+                font-weight: 300;
+                text-align: center;
+                margin-bottom: 15px;
+
+            }
+
+            h6{
+                font-family: 'Russo One', sans-serif;
+                font-size: 15px;
+                color: #988345;
+                text-transform: uppercase;
+                font-weight: 100px;
+                text-align: center;
+                margin: 10px;
+
+            }
+
+            h7{
+                font-family: 'Russo One', sans-serif;
+                font-size: 15px;
+                color: #988345;
+                text-transform: uppercase;
+                font-weight: 100px;
+                text-align: left;
+                margin: 10px;
+            }
+
+            table{
+                width:100%;
+                table-layout: fixed;
+            }
+            .tbl-header{
+
+            }
+            .tbl-content{
+                height:300px;
+                overflow-x:auto;
+                margin-top: 0px;
+                border: 10px;
+            }
+            th{
+                padding: 20px 15px;
+                text-align: left;
+                font-weight: 500;
+                font-size: 12px;
+                color: #fff;
+                text-transform: uppercase;
+            }
+            td{
+                padding: 15px;
+                text-align: left;
+                vertical-align:middle;
+                font-weight: 300;
+                font-size: 15px;
+                color: #ffffff;
+                border-bottom: solid 1px rgba(255,255,255,0.1);
+            }
+
+            /* demo styles */
+
+
+            body{
+                background: -webkit-linear-gradient(left, rgba(93,82,81,1) 0%, rgba(61,61,61,1) 48%, rgba(41,41,41,1) 53%, rgba(0,0,0,1) 100%);  
+            }
+
+            section{
+                margin: 50px;
+            }
+            ::-webkit-scrollbar {
+                width: 6px;
+            } 
+            ::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            } 
+            ::-webkit-scrollbar-thumb {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            }
+            /*
+            Estilo para barra lateral
+            */
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 60px;
+
+            }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+            .sidenav a:hover {
+                color: #f1f1f1;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+            .button {
+                background-color: #988345;
+                border: none;
+                color: black;
+                padding: 9px 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 15px;
+                margin: 2px 1px;
+                cursor: pointer;
+                border-radius: 0px 48px 0px 48px;
+                -moz-border-radius: 0px 48px 0px 48px;
+                -webkit-border-radius: 0px 48px 0px 48px;
+                border: 0px ridge #000000;
+            }
+
+
+
+            body { font: 400 1em/1.5 "Neuton"; color: #988345; text-align: center; margin: 0
+                       background: linear-gradient(to right, rgba(93,82,81,1) 0%, rgba(61,61,61,1) 48%, rgba(41,41,41,1) 53%, rgba(0,0,0,1) 100%);
+
+            }
+
+            p {
+                text-transform: uppercase;
+                letter-spacing: .5em;
+                display: inline-block;
+                border: 4px double rgba(255,255,255,.25);
+                border-width: 4px 0;
+                padding: 1.5em 0em;
+                position: absolute;
+
+                left: 50%;
+                width: 40em;
+                margin: 0 0 0 -20em;
+
+                span {
+
+                    font: 700 4em/1 "Oswald", sans-serif;
+                    letter-spacing: 0;
+                    padding: .25em 0 .325em;
+                    display: block;
+                    margin: 0 auto;
+                    text-shadow: 0 0 80px rgba(255,255,255,.5);
+
+                    /* Clip Background Image */
+
+                    background: url(http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png) repeat-y;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+
+                    /* Animate Background Image */
+
+                    -webkit-text-fill-color: transparent;
+                    -webkit-animation: aitf 80s linear infinite;
+
+                    /* Activate hardware acceleration for smoother animations */
+
+                    -webkit-transform: translate3d(0,0,0);
+                    -webkit-backface-visibility: hidden;
+
+                }
+            }
+
+            /* Animate Background Image */
+
+            @-webkit-keyframes aitf {
+                0% { background-position: 0% 50%; }
+                100% { background-position: 100% 50%; }
+            }
+            :root {
+                --bg: #1a1e24;
+                --color: #988345;
+                --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+            }
+
+            .wrapper {
+                padding: 1.5rem 0;
+                filter: url('#goo');
+            }
+
+            .button {
+                display: inline-block;
+                text-align: center;
+                background: var(--color);
+                color: var(--bg);
+                font-weight: bold;
+                padding: 1.18em 1.32em 1.03em;
+                line-height: 1;
+                border-radius: 1em;
+                position: relative;
+                min-width: 8.23em;
+                text-decoration: none;
+                font-family: var(--font);
+                font-size: 1.25rem;
+            }
+
+            .button:before,
+            .button:after {
+                width: 4.4em;
+                height: 2.95em;
+                position: absolute;
+                content: "";
+                display: inline-block;
+                background: var(--color);
+                border-radius: 50%;
+                transition: transform 0.3s ease;
+                transform: scale(0);
+                z-index: -1;
+            }
+
+            .button:before {
+                top: -25%;
+                left: 20%;
+            }
+
+            .button:after {
+                bottom: -25%;
+                right: 20%;
+            }
+
+            .button:hover:before,
+            .button:hover:after {
+                transform: none;
+            }
+
+
+
+        </style>
+
     </head>
     <body>
-        <div>
-            <span th:text="${error}"></span>  
+
+
+        <div>        
+            <h1><img src="https://drive.google.com/uc?id=1WFufuKPZPW6Nw51VjUSiuDBE2GNg_81Q" width="300"
+     height="150" ><br>Error</br></h1>
+            
+            <a class="button" href="javascript:history.back()">Atrás</a>
+            <br>
+            <br>
+            <p>
+                <span th:text="${error}">Error</span> 
+            </p>
+            <br>
         </div>
+
+
+
+
+
+
     </body>
 </html>

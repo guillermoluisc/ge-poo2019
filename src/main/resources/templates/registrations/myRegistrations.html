@@ -4,72 +4,93 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
     <head>
         <title>My Registrations</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap CSS -->
-
-        <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css">
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #4ddddd;
-  text-align: center;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-
-        <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
-
+        <meta charset="UTF-8">       
+        <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css"  href="/css/style.css" media="screen"/> 
+        <link rel="stylesheet" type="text/css"  href="/css/new-edit.css" media="screen"/> 
     </head>
+
+
+
     <body>
-        <div class="container-fluid">
-            <h1 >Mis Inscripciones</h1>
 
+        <div>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="/events">Eventos</a>
+                <h5>Página principal de eventos.</h5>
+                <a href="/events/new">Nuevo Evento</a>
+                <h5>Crea nuevos eventos definiendo difernetes parámetros.</h5>
+                <a href="/events/myEvents">Mis eventos</a>
+                <h5>Administra los eventos que has creado.</h5>
+                <a href="/invites/myInvites">Mis Invitaciones</a>
+                <h5>Pagina de mis invitaciones.</h5>
 
+                <a href="/logout">Salir</a>
+                <img src="/img/wagu_1-0.png" width="50" height="25" align="right">			
+            </div>
+            <span style="font-size:30px;cursor:pointer;color:#ffffff" onclick="openNav()">&#9776; Menú</span>
+            <script>
+                function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+                }
 
-
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th>Event Name</th>
-                        <th>Event Date</th>                       
-                        <th>Lugar</th>                       
-                        <th>Private Event</th>
-                        <th>Free</th>
-                        
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="registration : ${registrations}">
-                        <td th:text="${registration.event.eventName}"></td>
-                        <td th:text="${registration.event.eventDate}"></td>
-                        <td th:text="${registration.event.lugar}"></td>
-                        <td th:text="${registration.event.privateEvent}"></td>
-                        <td th:text="${registration.event.isFree()}"></td>
-                        
-                     
-                    </tr>
-                </tbody>
-            </table>
-            <a class="badge badge-primary" th:href="@{/events}">Volver</a>
+                function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                }
+            </script>
+        </div>
+<h1><img src="/img/wagu_1-0.png" width="150" height="75" align="center"><br>Mis inscripciones<br><h7> Usuario Actual:  </h7><h7 th:text="${currentUser.email}"></h7></h1>
+        <div>
             
-            
+            <div class="tbl-header">
+                
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th>Nombre del Evento</th>
+                            <th>Fecha del Evento</th>                       
+                            <th>Lugar</th>                       
+                            <th>Tipo de Evento</th>
+                            <th>Costo</th>
+
+
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr th:each="registration : ${registrations}">
+
+                            <td th:text="${registration.event.eventName}"></td>
+
+                            <td th:text="${registration.event.eventDate}"></td>
+                            <td th:text="${registration.event.lugar}"></td>
+                            <td th:text="${registration.event.privateEvent} == true ? 'Privado' :'Publico'"></td>
+                            <td th:text="${registration.event.isFree()} == true ? 'Gratis' : ${registration.event.getCost()}"></td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
 
         </div>
-        <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+        
+        
+        
+        
+        
+        
+        
     </body>
 </html>
 

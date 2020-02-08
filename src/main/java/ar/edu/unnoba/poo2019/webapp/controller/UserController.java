@@ -48,22 +48,34 @@ public class UserController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute User user) throws Exception {
-        userService.create(user);
-        return "redirect:/login";
+    public String create(Model model, @ModelAttribute User user) throws Exception {
+        try {
+            userService.create(user);
+            return "redirect:/login";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
+        }
     }
 
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable("id") Long id) throws Exception {
-        if (Objects.equals(sessionService.getCurrentUser().getId(), id)) {
-            userService.delete(id);
-            return "redirect:/users";
+    public String delete(Model model, @PathVariable("id") Long id) throws Exception {
+        try {
+
+            if (Objects.equals(sessionService.getCurrentUser().getId(), id)) {
+                userService.delete(id);
+                return "redirect:/users";
+            }
+            throw new Exception("Permiso denegado usuario invalido");
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model, Authentication authentication) throws Exception {
+        try{
         User sessionUser = (User) authentication.getPrincipal();
         if (Objects.equals(sessionUser.getId(), id)) {
             User user = userService.find(id);
@@ -72,14 +84,25 @@ public class UserController {
         }
         throw new Exception("Permiso denegado usuario invalido");
     }
+         catch (Exception e) {
+             model.addAttribute("error", e.getMessage());
+            return "/error/error";
+        }
+    }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable Long id, @ModelAttribute User user) throws Exception {
+    public String update(Model model, @PathVariable Long id, @ModelAttribute User user) throws Exception {
+        try{
         if (Objects.equals(sessionService.getCurrentUser().getId(), id)) {
             userService.update(id, user);
             return "redirect:/users";
         }
         throw new Exception("Permiso denegado usuario invalido");
+    }
+         catch (Exception e) {
+             model.addAttribute("error", e.getMessage());
+            return "/error/error";
+        }
     }
 
 }

@@ -4,30 +4,520 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor. *1*
 -->
-<html xmlns:th="http://www.thymeleaf.org">
-    <center>
+<html lang="es">
+    
         <head>
 
-             <h1> New User </h1>
 
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet"> 
+
+            <style>
+
+                .border{
+                    border-style: outset;
+                    border: 10px solid;
+                    border-color:rgba(255,255,255,0.3);
+
+                }
+                .enc{
+                    text-align: center;
+                    color: blue;
+                    font-family: serif;
+                    font-size: 20px;
+                    font-weight: 900;
+                    margin: 10px;
+                }
+                h5{
+                    font-family: 'Russo One', sans-serif;
+                    font-size: 15px;
+                    color: #988345;
+                    text-align: center;
+
+                }
+
+                h1{
+                    font-family: 'Russo One', sans-serif;
+                    font-size: 30px;
+                    color: #988345;
+                    text-transform: uppercase;
+                    font-weight: 300;
+                    text-align: center;
+                    margin-bottom: 15px;
+
+                }
+                table{
+                    width:100%;
+                    table-layout: fixed;
+                }
+                .tbl-header{
+
+                }
+                .tbl-content{
+                    height:300px;
+                    overflow-x:auto;
+                    margin-top: 0px;
+                    border: 10px;
+                }
+                th{
+                    padding: 20px 15px;
+                    text-align: left;
+                    font-weight: 500;
+                    font-size: 12px;
+                    color: #fff;
+                    text-transform: uppercase;
+                }
+                td{
+                    padding: 15px;
+                    text-align: left;
+                    vertical-align:middle;
+                    font-weight: 300;
+                    font-size: 15px;
+                    color: #ffffff;
+                    border-bottom: solid 1px rgba(255,255,255,0.1);
+                }
+
+                /* demo styles */
+
+
+                body{
+                    background: -webkit-linear-gradient(left, rgba(93,82,81,1) 0%, rgba(61,61,61,1) 48%, rgba(41,41,41,1) 53%, rgba(0,0,0,1) 100%);  
+                }
+
+                section{
+                    margin: 50px;
+                }
+                ::-webkit-scrollbar {
+                    width: 6px;
+                } 
+                ::-webkit-scrollbar-track {
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+                } 
+                ::-webkit-scrollbar-thumb {
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+                }
+                /*
+                Estilo para barra lateral
+                */
+                .sidenav {
+                    height: 100%;
+                    width: 0;
+                    position: fixed;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                    background-color: #111;
+                    overflow-x: hidden;
+                    transition: 0.5s;
+                    padding-top: 60px;
+
+                }
+
+                .sidenav a {
+                    padding: 8px 8px 8px 32px;
+                    text-decoration: none;
+                    font-size: 25px;
+                    color: #818181;
+                    display: block;
+                    transition: 0.3s;
+                }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+                .sidenav .closebtn {
+                    position: absolute;
+                    top: 0;
+                    right: 25px;
+                    font-size: 36px;
+                    margin-left: 50px;
+                }
+
+                @media screen and (max-height: 450px) {
+                    .sidenav {padding-top: 15px;}
+                    .sidenav a {font-size: 18px;}
+                }
+                .button {
+                    background-color: #988345;
+                    border: none;
+                    color: black;
+                    padding: 9px 16px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 15px;
+                    margin: 2px 1px;
+                    cursor: pointer;
+                    border-radius: 0px 48px 0px 48px;
+                    -moz-border-radius: 0px 48px 0px 48px;
+                    -webkit-border-radius: 0px 48px 0px 48px;
+                    border: 0px ridge #000000;
+                }
+
+                h3 {
+                    color: #5a5757;
+                    font-size: 12px;
+                    toop: 0;
+                    margin: 0;
+                }
+                * {
+                    box-sizing: border-box;
+                }
+                form {
+                    width: 320px;
+                    
+                    margin: 20px;
+                }
+                form > div {
+                    position: relative;
+                    overflow: hidden;
+                }
+                form input,
+                form textarea {
+                    width: 100%;
+                    border: 2px solid gray;
+                    background: none;
+                    position: relative;
+                    top: 0px;
+                    left: 0;
+                    z-index: 1;
+                    padding: 8px 0px;
+                    outline: 0;
+                    color: white;
+                }
+                form input:valid,
+                form textarea:valid {
+                    background: none;
+                }
+                form input:focus,
+                form textarea:focus {
+                    border-color: #988345;
+                }
+                form input:focus + label,
+                form textarea:focus + label {
+                    background: #988345;
+                    color: white;
+                    font-size: 70%;
+                    padding: 1px 6px;
+                    z-index: 2;
+                    text-transform: uppercase;
+                }
+                form label {
+                    -webkit-transition: right 0.2s, left 0.2s;
+                    transition: right 0.2s, left 0.2s;
+                    position: absolute;
+                    color: #988345;
+                    padding: 0px 80px;
+                }
+                form textarea {
+                    display: block;
+                    resize: vertical;
+                }
+                form.go-bottom input,
+                form.go-bottom textarea {
+                    padding: 12px 12px 12px 12px;
+                }
+                form.go-bottom label {
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                }
+                form.go-bottom input:focus,
+                form.go-bottom textarea:focus {
+                    padding: 4px 6px 20px 6px;
+                }
+                form.go-bottom input:focus + label,
+                form.go-bottom textarea:focus + label {
+                    top: 100%;
+                    margin-top: -16px;
+                }
+                form.go-right label {
+                    top: 2px;
+                    right: 100%;
+                    width: 100%;
+                    margin-right: -100%;
+                    bottom: 2px;
+                }
+                form.go-right input:focus + label,
+                form.go-right textarea:focus + label {
+                    right: 0;
+                    margin-right: 0;
+                    width: 40%;
+                    padding-top: 5px;
+                }
+                input[type="checkbox"] {
+                    background: #988345;
+                    -webkit-transform: scale(2);
+                    transform: scale(2);
+                    padding: 10px;
+                }
+                .checkboxtext {
+                    /* Checkbox text */
+                    background: #988345;
+                    font-size: 110%;
+                    display: inline;
+                }
+
+                :root {
+                    --bg: #1a1e24;
+                    --color: #988345;
+                    --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+                }
+
+                .wrapper {
+                    padding: 1.5rem 0;
+                    filter: url('#goo');
+                }
+
+                .button {
+                    display: inline-block;
+                    text-align: center;
+                    background: var(--color);
+                    color: var(--bg);
+                    font-weight: bold;
+                    padding: 1.18em 1.32em 1.03em;
+                    line-height: 1;
+                    border-radius: 1em;
+                    position: relative;
+                    min-width: 8.23em;
+                    text-decoration: none;
+                    font-family: var(--font);
+                    font-size: 1.25rem;
+                }
+
+                .button:before,
+                .button:after {
+                    width: 4.4em;
+                    height: 2.95em;
+                    position: absolute;
+                    content: "";
+                    display: inline-block;
+                    background: var(--color);
+                    border-radius: 50%;
+                    transition: transform 0.3s ease;
+                    transform: scale(0);
+                    z-index: -1;
+                }
+
+                .button:before {
+                    top: -25%;
+                    left: 20%;
+                }
+
+                .button:after {
+                    bottom: -25%;
+                    right: 20%;
+                }
+
+                .button:hover:before,
+                .button:hover:after {
+                    transform: none;
+                }
+
+                body{
+                    background: -webkit-linear-gradient(left, rgba(93,82,81,1) 0%, rgba(61,61,61,1) 48%, rgba(41,41,41,1) 53%, rgba(0,0,0,1) 100%);  
+                    text-align: center;
+                    align-content: center;
+                }
+                h3 {
+                    color: #5a5757;
+                    font-size: 12px;
+                    toop: 0;
+                    margin: 0;
+                }
+                * {
+                    box-sizing: border-box;
+                }
+                form {
+                    width: 320px;
+                    margin: 20px;
+                }
+                form > div {
+                    position: relative;
+                    overflow: hidden;
+                }
+                form input,
+                form textarea {
+                    width: 100%;
+                    border: 2px solid gray;
+                    background: none;
+                    position: relative;
+                    top: 0px;
+                    left: 0;
+                    z-index: 1;
+                    padding: 8px 0px;
+                    outline: 0;
+                    color: white;
+                }
+                form input:valid,
+                form textarea:valid {
+                    background: none;
+                }
+                form input:focus,
+                form textarea:focus {
+                    border-color: #988345;
+                }
+                form input:focus + label,
+                form textarea:focus + label {
+                    background: #988345;
+                    color: white;
+                    font-size: 70%;
+                    padding: 1px 6px;
+                    z-index: 2;
+                    text-transform: uppercase;
+                }
+                form label {
+                    -webkit-transition: right 0.2s, left 0.2s;
+                    transition: right 0.2s, left 0.2s;
+                    position: absolute;
+                    color: #988345;
+                    padding: 0px 80px;
+                }
+                form textarea {
+                    display: block;
+                    resize: vertical;
+                }
+                form.go-bottom input,
+                form.go-bottom textarea {
+                    padding: 12px 12px 12px 12px;
+                }
+                form.go-bottom label {
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                }
+                form.go-bottom input:focus,
+                form.go-bottom textarea:focus {
+                    padding: 4px 6px 20px 6px;
+                }
+                form.go-bottom input:focus + label,
+                form.go-bottom textarea:focus + label {
+                    top: 100%;
+                    margin-top: -16px;
+                }
+                form.go-right label {
+                    top: 2px;
+                    right: 100%;
+                    width: 100%;
+                    margin-right: -100%;
+                    bottom: 2px;
+                }
+                form.go-right input:focus + label,
+                form.go-right textarea:focus + label {
+                    right: 0;
+                    margin-right: 0;
+                    width: 40%;
+                    padding-top: 5px;
+                }
+                input[type="checkbox"] {
+                    background: #988345;
+                    -webkit-transform: scale(2);
+                    transform: scale(2);
+                    padding: 10px;
+                }
+                :root {
+                    --bg: #1a1e24;
+                    --color: #988345;
+                    --font: Montserrat, Roboto, Helvetica, Arial, sans-serif;
+                }
+
+                .wrapper {
+                    padding: 1.5rem 0;
+                    filter: url('#goo');
+                }
+
+                .button {
+                    display: inline-block;
+                    text-align: center;
+                    background: var(--color);
+                    color: var(--bg);
+                    font-weight: bold;
+                    padding: 1.18em 1.32em 1.03em;
+                    line-height: 1;
+                    border-radius: 1em;
+                    position: relative;
+                    min-width: 8.23em;
+                    text-decoration: none;
+                    font-family: var(--font);
+                    font-size: 1.25rem;
+                }
+
+                .button:before,
+                .button:after {
+                    width: 4.4em;
+                    height: 2.95em;
+                    position: absolute;
+                    content: "";
+                    display: inline-block;
+                    background: var(--color);
+                    border-radius: 50%;
+                    transition: transform 0.3s ease;
+                    transform: scale(0);
+                    z-index: -1;
+                }
+
+                .button:before {
+                    top: -25%;
+                    left: 20%;
+                }
+
+                .button:after {
+                    bottom: -25%;
+                    right: 20%;
+                }
+
+                .button:hover:before,
+                .button:hover:after {
+                    transform: none;
+                }
+
+
+            </style>
+
         </head>
-        <body>
-            <div>Por favor ingrese sus datos para poder registrarse</div>
-                <p></p>
-            <form action="#" th:action="@{/users}" th:object="${user}" method="post">
-                Email:<input type="email" th:field="*{email}" /> <br>
-                Password:<input type="password" th:field="*{password}" /> <br>
-                Firs Name:<input type="text" th:field="*{firstName}" /> <br>
-                Last Name:<input type="text" th:field="*{lastName}" /> 
-            <p>
-                <button type="submit" name="newUser">Create</button>
-            </p>   
-            </form>
 
-        </body>
-    </center>
+
+        <body>
+            <div>
+                <h1><img src="https://drive.google.com/uc?id=1WFufuKPZPW6Nw51VjUSiuDBE2GNg_81Q" width="300"
+                         height="150" ><br>Nuevo Usuario</h1>
+                <h5>Bienvenido aqui podra ingresar sus datos para poder pertenecer a nuestro sistema</h5>   
+            </div>
+
+        <center>
+            <form  action="#" th:action="@{/users}" th:object="${user}" method="post" class="go-bottom">
+                
+                <div>
+                    <input   id="email" name="email" type="email" th:field="*{email}" required/> 
+                    <label for="name">E-mail</label>
+                </div>
+                <div>
+                    <input   id="password" name="password" type="password" th:field="*{password}" required/> 
+                    <label for="name">Contraseña</label>
+                </div>
+                <div>
+                    <input   id="firstname" name="firstname" type="text" th:field="*{firstName}" required/> 
+                    <label for="name">Nombre completo</label>
+                </div>
+                <div>
+                    <input   id="lastname" name="lastname" type="text" th:field="*{lastName}" required/> 
+                    <label for="name">Apellido</label>
+                </div>
+
+                <p>
+                    <button class="button" type="submit" name="newUser">Crear</button>
+                </p>
+
+
+            </form>
+        </center>
+      
+    </body>
 </html>
 
 

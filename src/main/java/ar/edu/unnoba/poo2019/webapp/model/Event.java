@@ -28,7 +28,7 @@ import javax.persistence.Table;
 @Table(name="events")
 
 @NamedQuery(name = "Event.findEventsByOwnerId",
-        query = "SELECT e FROM Event e WHERE e.owner.id =: ownerId"
+        query = "SELECT e FROM Event e WHERE e.owner.id =: ownerId ORDER BY e.eventDate ASC"
         
 )
 

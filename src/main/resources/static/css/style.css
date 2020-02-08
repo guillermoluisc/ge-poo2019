@@ -48,10 +48,12 @@ h7{
     color: #988345;
     text-transform: uppercase;
     font-weight: 100px;
-    text-align: left;
+    text-align: right;
     margin: 10px;
 }
-
+derecha{
+     text-align: right;
+}
 table{
     width:100%;
     table-layout: fixed;

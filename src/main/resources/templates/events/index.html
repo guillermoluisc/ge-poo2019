@@ -20,6 +20,8 @@
                 <h5>Administra los eventos que has creado.</h5>
                 <a href="/invites/myInvites">Mis Invitaciones</a>
                 <h5>Pagina de mis invitaciones.</h5>
+                <a href="/registrations/myRegistrations">Mis inscripciones</a>
+                <h5>Página donde se muestran a que eventos estas registrado.</h5>
                 <a href="/logout">Salir</a>
                 <img src="/img/wagu_1-0.png" width="50" height="25" align="right">			
             </div>
@@ -34,14 +36,15 @@
                 }
             </script>
         </div>
-        <div> <!--correr a la derecha-->
-            <span> <h7> Usuario Actual </h7><h7 th:text="${currentUser.email}">
-                
-                </h7></span>
+            
+           
+        
+           
 
-        </div>
+         
+        
         <div class="tbl-header">
-            <h1><img src="/img/wagu_1-0.png" width="100" height="50" align="center"><br>Eventos</br></h1>
+            <h1><img src="/img/wagu_1-0.png" width="150" height="75" align="center"><br>Eventos<br><h7> Usuario Actual:  </h7><h7 th:text="${currentUser.email}"></h7></h1>
             <table cellpadding="0" cellspacing="0" border="0">
                 <thead>
                     <tr>

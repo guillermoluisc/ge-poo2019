@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
@@ -63,19 +62,27 @@ public class EventController {
     public String myEvents(Model model) {
         List<Event> events = eventService.findEventsByOwnerId(sessionService.getCurrentUser().getId());
         model.addAttribute("events", events);
+        model.addAttribute("currentUser", sessionService.getCurrentUser());
         return "events/myEvents";
     }
 
     @GetMapping("/new")
     public String eventNew(Model model) {
         model.addAttribute("event", new Event());
+        
         return "events/new";
     }
 
     @PostMapping
-    public String create(@ModelAttribute Event event) throws Exception {
-        eventService.create(event);
-        return "redirect:/events/myEvents";
+    public String create(@ModelAttribute Event event, Model model) throws Exception {
+        try {
+            eventService.create(event);
+            return "redirect:/events/myEvents";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
+        }
+
     }
 
     @GetMapping("/{id}/delete")
@@ -83,9 +90,13 @@ public class EventController {
         try {
             Event event = eventService.find(id);
             if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {    // Controlo que sea el propio usuario 
-                eventService.delete(id);
-                return "redirect:/events/myEvents";
+                if (inviteService.findByEvent(event).isEmpty()) {
+                    eventService.delete(id);
+                    return "redirect:/events/myEvents";
+                }
+                throw new Exception("No se puede Borrar por que el evento posee invitaciones");
             }
+
             throw new Exception("Permiso denegado usuario invalido");
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
@@ -109,40 +120,55 @@ public class EventController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable Long id, @ModelAttribute Event event) throws Exception {
-        Event oldEvent = eventService.find(id);
-        if (Objects.equals(sessionService.getCurrentUser().getId(), oldEvent.getOwner().getId())) {    // Controlo que sea el propio usuario 
-            eventService.update(id, event);
-            return "redirect:/events/myEvents";
+    public String update(Model model, @PathVariable Long id, @ModelAttribute Event event) throws Exception {
+        try {
+            Event oldEvent = eventService.find(id);
+            if (Objects.equals(sessionService.getCurrentUser().getId(), oldEvent.getOwner().getId())) {    // Controlo que sea el propio usuario 
+                eventService.update(id, event);
+                return "redirect:/events/myEvents";
+            }
+
+            throw new Exception("Permiso denegado usuario invalido");
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @GetMapping("/{id}/eventDetails")
     public String detail(@PathVariable Long id, Model model) throws Exception {
-        Event event = eventService.find(id);
-        if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
-            List<Invite> invites = inviteService.findByEvent(event);
-            model.addAttribute("event", event);
-            model.addAttribute("invites", invites);
+        try {
+            Event event = eventService.find(id);
+            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
+                List<Invite> invites = inviteService.findByEvent(event);
+                model.addAttribute("event", event);
+                model.addAttribute("invites", invites);
+                model.addAttribute("currentUser", sessionService.getCurrentUser());
 
-            if (event.getCost() > 0) {
-                List<Payment> payments = paymentService.findByEvent(event);
-                model.addAttribute("payments", payments);
-                return "events/eventDetailsPago";
+                if (event.getCost() > 0) {
+                    List<Payment> payments = paymentService.findByEvent(event);
+                    model.addAttribute("payments", payments);
+                    return "events/eventDetailsPago";
+                }
+                List<Registration> registrations = event.getRegistrations();
+                model.addAttribute("registrations", registrations);
+                return "events/eventDetailsGratis";
             }
-            List<Registration> registrations = event.getRegistrations();
-            model.addAttribute("registrations", registrations);
-            return "events/eventDetailsGratis";
+            throw new Exception("Permiso denegado usuario invalido");
+
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
-
-    // Ver si se puede poner en AppConfiguration o si se puede hacer otra cosa
-    @InitBinder
-    public void initBinder(final WebDataBinder binder) {
+        // Ver si se puede poner en AppConfiguration o si se puede hacer otra cosa
+        @InitBinder
+        public void initBinder
+        (final WebDataBinder binder
+        
+            ) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
+            binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        }
 
-}
+    }

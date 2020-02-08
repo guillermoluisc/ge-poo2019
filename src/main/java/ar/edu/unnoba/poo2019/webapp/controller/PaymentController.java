@@ -24,44 +24,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author guillermo
  */
-   @Controller
+@Controller
 @RequestMapping("/payments")
 public class PaymentController {
-    
+
     @Autowired
     private EventService eventService;
-    
+
     @Autowired
     private SessionService sessionService;
-            
+
     @Autowired
     private PaymentService paymentService;
-    
-    
-   /* @GetMapping
+
+    /* @GetMapping
     public String index(Model model){
         List<User> users = userService.users();
         model.addAttribute("users", users);
         return "users/index";
     }*/
-    
     @GetMapping("/{id}")
-    public String paymentNew(Model model,@PathVariable Long id){
-        model.addAttribute("event",eventService.find(id));
+    public String paymentNew(Model model, @PathVariable Long id) {
+        model.addAttribute("event", eventService.find(id));
         model.addAttribute("payment", new Payment());
         return "payments/new";
     }
-    
+
     @PostMapping("/{eventId}")
-    public String create(@PathVariable Long eventId, @ModelAttribute("payment") Payment payment) throws Exception{     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
-        User u = sessionService.getCurrentUser();
-        Event e = eventService.find(eventId);
-        payment.setOwner(u);
-        payment.setEvent(e);
-        paymentService.create(payment);
-        return "registrations/confirmedRegistration";
+    public String create(Model model, @PathVariable Long eventId, @ModelAttribute("payment") Payment payment) throws Exception {     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
+        try {
+            User u = sessionService.getCurrentUser();
+            Event e = eventService.find(eventId);
+            payment.setOwner(u);
+            payment.setEvent(e);
+            paymentService.create(payment);
+            return "registrations/confirmedRegistration";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
+        }
     }
-    
+
     /*@GetMapping("/{id}/delete")
     public String delete(@PathVariable ("id") Long id){
         userService.delete(id);
@@ -82,7 +85,4 @@ public class PaymentController {
         userService.update(id,user);
         return "redirect:/users";
     }*/
-    
 }
-
-    
