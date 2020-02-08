@@ -21,43 +21,42 @@ import javax.persistence.Table;
  * @author guillermo
  */
 /**
-*/
+ */
 @Entity
-@Table(name="invites")
+@Table(name = "invites")
 
 /*@NamedQuery(name = "Invite.deleteByEventId",
         query = "DELETE FROM Invite i WHERE i.event.id =: eventId"
         
 )*/
-@NamedNativeQuery(
-                name    =   "deleteInvitesByEventId",
-                query   =   "DELETE FROM invites WHERE event_id = ?"
-)
+/*@NamedQuery(
+        name = "deleteInvitesByEventId",
+        query = "DELETE FROM invites i WHERE i.event.id = :eventId"
+)*/
 
 public class Invite {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private Event event;
-    
-    
+
     public Invite(long id, User user, Event event) {
         this.id = id;
         this.user = user;
         this.event = event;
     }
 
-    public Invite(){}
-    
-    
+    public Invite() {
+    }
+
     public long getId() {
         return id;
     }

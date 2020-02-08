@@ -25,6 +25,6 @@ public interface InviteRepository extends JpaRepository<Invite, Long> {
 
     public List<Invite> findByEvent(Event event);
 
-    public void deleteInvitesByEventId(Long id);
+    //public void deleteInvitesByEventId(Long eventId);
     
 }

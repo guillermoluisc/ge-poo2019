@@ -76,8 +76,8 @@ public class EventServiceImp implements EventService {
     public void delete(Long id) throws Exception {
         Event event = this.find(id);
         if (!event.hasRegistrations()) {     // Controlo que no halla inscriptos
-            eventRepository.deleteById(id);
             inviteService.deleteInvitesByEventId(id);
+            eventRepository.deleteById(id);
         } else {
             throw new Exception("No se puede eliminar el evento porque posee inscripciones");
         }

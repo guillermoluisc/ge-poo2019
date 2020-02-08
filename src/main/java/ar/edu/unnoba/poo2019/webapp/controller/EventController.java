@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
- /*1*/
 package ar.edu.unnoba.poo2019.webapp.controller;
 
 import ar.edu.unnoba.poo2019.webapp.model.Event;
@@ -45,10 +44,10 @@ public class EventController {
 
     @Autowired
     private SessionService sessionService;
-    
+
     @Autowired
     private PaymentService paymentService;
-    
+
     @Autowired
     private InviteService inviteService;
 
@@ -56,6 +55,7 @@ public class EventController {
     public String index(Model model) {
         List<Event> events = eventService.events();
         model.addAttribute("events", events);
+        model.addAttribute("currentUser", sessionService.getCurrentUser());
         return "events/index";
     }
 
@@ -79,23 +79,33 @@ public class EventController {
     }
 
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable("id") Long id) throws Exception {
-        Event event = eventService.find(id);
-        if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {    // Controlo que sea el propio usuario 
-            eventService.delete(id);
-            return "redirect:/events/myEvents";
+    public String delete(Model model, @PathVariable("id") Long id) throws Exception {
+        try {
+            Event event = eventService.find(id);
+            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {    // Controlo que sea el propio usuario 
+                eventService.delete(id);
+                return "redirect:/events/myEvents";
+            }
+            throw new Exception("Permiso denegado usuario invalido");
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model) throws Exception {
-        Event event = eventService.find(id);
-        if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
-            model.addAttribute("event", event);
-            return "events/edit";
+        try {
+            Event event = eventService.find(id);
+            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
+                model.addAttribute("event", event);
+                return "events/edit";
+            }
+            throw new Exception("Permiso denegado usuario invalido");
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/error/error";
         }
-        throw new Exception("Permiso denegado usuario invalido");
     }
 
     @PostMapping("/{id}/update")
@@ -115,8 +125,8 @@ public class EventController {
             List<Invite> invites = inviteService.findByEvent(event);
             model.addAttribute("event", event);
             model.addAttribute("invites", invites);
-            
-            if(event.getCost()>0){
+
+            if (event.getCost() > 0) {
                 List<Payment> payments = paymentService.findByEvent(event);
                 model.addAttribute("payments", payments);
                 return "events/eventDetailsPago";

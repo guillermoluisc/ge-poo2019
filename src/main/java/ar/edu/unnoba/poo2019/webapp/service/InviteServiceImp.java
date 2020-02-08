@@ -75,7 +75,8 @@ public class InviteServiceImp implements InviteService {
 
     @Override
     public void deleteInvitesByEventId(Long id) {
-        inviteRepository.deleteInvitesByEventId(id);
+        System.out.println("quiero borrar");
+        //inviteRepository.deleteInvitesByEventId(id);
     }
     
 }
