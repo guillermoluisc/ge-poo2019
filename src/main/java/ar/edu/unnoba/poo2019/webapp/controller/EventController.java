@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author root
+ * Controlador del evento
  */
 @Controller
 @RequestMapping("/events")
@@ -49,7 +49,7 @@ public class EventController {
 
     @Autowired
     private InviteService inviteService;
-
+    /**Se agrega al modelo una lista con los eventos y el usuario actual para ser mostrados**/
     @GetMapping
     public String index(Model model) {
         List<Event> events = eventService.events();
@@ -57,7 +57,9 @@ public class EventController {
         model.addAttribute("currentUser", sessionService.getCurrentUser());
         return "events/index";
     }
-
+/**Se agrega al modelo una lista con los eventos 
+ * filtrados por el usuario que los creo (Owner)
+ * y el usuario actual para ser mostrados**/
     @GetMapping("/myEvents")
     public String myEvents(Model model) {
         List<Event> events = eventService.findEventsByOwnerId(sessionService.getCurrentUser().getId());
@@ -65,14 +67,15 @@ public class EventController {
         model.addAttribute("currentUser", sessionService.getCurrentUser());
         return "events/myEvents";
     }
-
+/**"redirecciona" a la creacion de un nuevo evento**/
     @GetMapping("/new")
     public String eventNew(Model model) {
         model.addAttribute("event", new Event());
         
         return "events/new";
     }
-
+/**Crea un nuevo evento**/
+    /**Post mapping para "insertar valores"**/
     @PostMapping
     public String create(@ModelAttribute Event event, Model model) throws Exception {
         try {
@@ -84,12 +87,14 @@ public class EventController {
         }
 
     }
-
+/**getmapping para obtener
+ En este caso no se podrá borrar un evento si (controla que el usuario 
+ creador sea el correcto) posee invitados, o si tiene inscriptos.**/
     @GetMapping("/{id}/delete")
     public String delete(Model model, @PathVariable("id") Long id) throws Exception {
         try {
             Event event = eventService.find(id);
-            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {    // Controlo que sea el propio usuario 
+            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {    
                 if (inviteService.findByEvent(event).isEmpty()) {
                     eventService.delete(id);
                     return "redirect:/events/myEvents";
@@ -103,12 +108,13 @@ public class EventController {
             return "/error/error";
         }
     }
-
+/*Aqui también se controla que usuario sea el correcto (sessionService) para poder editarlo
+    Agrega al modelo el evento para poder ser visto*/
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model) throws Exception {
         try {
             Event event = eventService.find(id);
-            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
+            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) { 
                 model.addAttribute("event", event);
                 return "events/edit";
             }
@@ -123,7 +129,7 @@ public class EventController {
     public String update(Model model, @PathVariable Long id, @ModelAttribute Event event) throws Exception {
         try {
             Event oldEvent = eventService.find(id);
-            if (Objects.equals(sessionService.getCurrentUser().getId(), oldEvent.getOwner().getId())) {    // Controlo que sea el propio usuario 
+            if (Objects.equals(sessionService.getCurrentUser().getId(), oldEvent.getOwner().getId())) {    
                 eventService.update(id, event);
                 return "redirect:/events/myEvents";
             }
@@ -134,12 +140,16 @@ public class EventController {
             return "/error/error";
         }
     }
-
+/*Aqui también se controla que usuario sea el correcto (sessionService) para poder 
+    ver los detalles.
+    Agrega al modelo una lista de invitaciones
+    un evento
+    un usuario (actual) */
     @GetMapping("/{id}/eventDetails")
     public String detail(@PathVariable Long id, Model model) throws Exception {
         try {
             Event event = eventService.find(id);
-            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  // Controlo que sea el propio usuario 
+            if (Objects.equals(sessionService.getCurrentUser().getId(), event.getOwner().getId())) {  
                 List<Invite> invites = inviteService.findByEvent(event);
                 model.addAttribute("event", event);
                 model.addAttribute("invites", invites);

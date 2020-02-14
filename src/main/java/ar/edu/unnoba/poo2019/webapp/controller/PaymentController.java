@@ -43,13 +43,15 @@ public class PaymentController {
         model.addAttribute("users", users);
         return "users/index";
     }*/
+    
+    /*Nuevo pago, agrega al modelo un eventom y un pago*/
     @GetMapping("/{id}")
     public String paymentNew(Model model, @PathVariable Long id) {
         model.addAttribute("event", eventService.find(id));
         model.addAttribute("payment", new Payment());
         return "payments/new";
     }
-
+/*Crea el pago y verifica los datos de regiistracion*/
     @PostMapping("/{eventId}")
     public String create(Model model, @PathVariable Long eventId, @ModelAttribute("payment") Payment payment) throws Exception {     // en vez de pasar un payment pasar event id y el user obtenerlo aca.
         try {

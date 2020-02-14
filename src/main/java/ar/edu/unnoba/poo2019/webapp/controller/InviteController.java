@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- *
- * @author guillermo
- */
+
 @Controller
 @RequestMapping("/invites")
 public class InviteController {
@@ -41,7 +38,8 @@ public class InviteController {
 
     @Autowired
     private SessionService sessionService;
-
+    /*Envio de invitaciones
+    Controla si el usuario es el correcto*/
     @GetMapping("/{eventId}/{userId}/sendInv")
     public String sendInv(Model model, @PathVariable Long eventId, @PathVariable Long userId) throws Exception {
         try {
@@ -59,7 +57,11 @@ public class InviteController {
             return "/error/error";
         }
     }
-
+/*Envio de invitaciones
+    Controla si el usuario es el correcto
+    Agrega al modelo una lista de usuarios para poder verlos e invitarlos
+    un usuario
+    un evento*/
     @GetMapping("/{eventId}/invite")
     public String invite(Model model, @PathVariable Long eventId) throws Exception {
         try {
@@ -75,7 +77,8 @@ public class InviteController {
             return "/error/error";
         }
     }
-
+/*Agrega al modelo una lista de invitaciones un usuario(actual)
+    para poder ver las invitaciones recividas*/
     @GetMapping("/myInvites")
     public String invite(Model model) {
         User user = sessionService.getCurrentUser();
@@ -84,13 +87,14 @@ public class InviteController {
         model.addAttribute("currentUser", sessionService.getCurrentUser());
         return "invites/myInvites";
     }
-
+/*Verifical si el usuario es el correcto, ademas de eliminar la invitacion en caso de serlo*/
     @GetMapping("/{inviteId}/delete")
     public String delete(Model model, @PathVariable Long inviteId, HttpServletRequest request) throws Exception {
         try {
             Invite inv = inviteService.find(inviteId);
             if ((sessionService.getCurrentUser().getId() == inv.getUser().getId()) || (sessionService.getCurrentUser().getId() == inv.getEvent().getOwner().getId())) {    // Controlo que sea el user de invite o el user que la creo (dueño del evento)
                 inviteService.delete(inviteId);
+                
                 String referer = request.getHeader("Referer");
                 return "redirect:" + referer;
             }
