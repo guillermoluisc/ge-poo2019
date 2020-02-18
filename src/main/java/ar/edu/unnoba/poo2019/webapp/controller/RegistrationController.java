@@ -84,9 +84,5 @@ public class RegistrationController {
         }
     }
 
-    /**
-     * @PostMapping public String create(@PathVariable Long id) throws
-     * Exception{ User user = sessionService.getCurrentUser();
-     * registrationService.create(id, user); return null; }*
-     */
+  
 }

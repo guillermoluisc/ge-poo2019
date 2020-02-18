@@ -37,12 +37,7 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    /* @GetMapping
-    public String index(Model model){
-        List<User> users = userService.users();
-        model.addAttribute("users", users);
-        return "users/index";
-    }*/
+
     
     /*Nuevo pago, agrega al modelo un eventom y un pago*/
     @GetMapping("/{id}")
@@ -67,24 +62,5 @@ public class PaymentController {
         }
     }
 
-    /*@GetMapping("/{id}/delete")
-    public String delete(@PathVariable ("id") Long id){
-        userService.delete(id);
-        return "redirect:/users";
-    }
-    
-    @GetMapping("/{id}/edit")
-    public String edit(@PathVariable Long id, Model model, Authentication authentication){
-        User sessionUser = (User)authentication.getPrincipal();
-        sessionUser.getEmail();
-        User user = userService.find(id);
-        model.addAttribute("user", user);
-        return "users/edit";
-    }
-    
-    @PostMapping("/{id}/update")
-    public String update(@PathVariable Long id,@ModelAttribute User user){
-        userService.update(id,user);
-        return "redirect:/users";
-    }*/
+ 
 }

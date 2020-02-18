@@ -171,8 +171,9 @@ public class EventController {
             return "/error/error";
         }
     }
-        // Ver si se puede poner en AppConfiguration o si se puede hacer otra cosa
-        @InitBinder
+        
+    /*Esto es para darle formato a la Fecha*/    
+    @InitBinder
         public void initBinder
         (final WebDataBinder binder
         
